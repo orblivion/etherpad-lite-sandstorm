@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -exuo pipefail
+
+here="$(dirname $0)"
+
+. "$here/config.sh"
+
+cd "$here/.."
+
+if [ ! -e etherpad-lite ]; then
+	git clone https://github.com/ether/etherpad-lite
+	cd etherpad-lite
+	git checkout "$base_revision"
+fi

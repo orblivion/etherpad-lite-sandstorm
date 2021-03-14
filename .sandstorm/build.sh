@@ -1,7 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-cd /opt/app/etherpad-lite
+cd /opt/app
+
+./scripts/checkout-etherpad
+./scripts/apply-patches
+
+export NODE_ENV=production
+
+cd etherpad-lite
 
 ./bin/installDeps.sh
 
