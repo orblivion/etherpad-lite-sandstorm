@@ -32,6 +32,7 @@ set -euo pipefail
 export HOME=/var
 export NODE_ENV=production
 
+mkdir -p /var/etherpad-lite-var
 rm -f /var/.ep_initialized
 
 cd /opt/app/etherpad-lite
