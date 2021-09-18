@@ -1,0 +1,40 @@
+From ff7859903d62993c834f03d3598990697c6297ab Mon Sep 17 00:00:00 2001
+From: Ian Denhardt <ian@zenhack.net>
+Date: Sat, 20 Mar 2021 22:38:12 -0400
+Subject: [PATCH 2/2] perf: Don't use npm to find plugin list
+
+This improves startup time substantially.
+---
+ src/static/js/pluginfw/plugins.js | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/src/static/js/pluginfw/plugins.js b/src/static/js/pluginfw/plugins.js
+index 74fbbafc..f4c08235 100644
+--- a/src/static/js/pluginfw/plugins.js
++++ b/src/static/js/pluginfw/plugins.js
+@@ -115,6 +115,22 @@ exports.update = async () => {
+ };
+ 
+ exports.getPackages = async () => {
++  // SANDSTORM EDIT: Don't query npm, that's really slow. Just
++  // use the same list the build system uses.
++  //
++  // TODO: consider prodding upstream about this.
++  const names = (await fs.readFile('/opt/app/plugins', 'utf-8'))
++    .split('\n')
++    .filter(line => line != "");
++  const result = {};
++  for(const name of names) {
++    result[name] = {
++      path: '/opt/app/etherpad-lite/node_modules/' + name,
++    };
++  }
++  return result;
++  // upstream implementation below.
++
+   logger.info('Running npm to get a list of installed plugins...');
+   // Notes:
+   //   * Do not pass `--prod` otherwise `npm ls` will fail if there is no `package.json`.
+-- 
+2.30.2
+
