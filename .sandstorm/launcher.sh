@@ -36,4 +36,4 @@ mkdir -p /var/plugins-initialized
 mkdir -p /var/etherpad-lite-var
 
 cd /opt/app/etherpad-lite
-exec node src/node/server.js
+./bin/run.sh
