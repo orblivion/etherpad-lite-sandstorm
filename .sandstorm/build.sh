@@ -20,21 +20,6 @@ cd etherpad-lite
 npm install @mapbox/node-pre-gyp
 npm install sqlite3
 
-#Install capnp
-# capnp is used for posting Sandstorm "activities"
-
-# As of Oct 2021: The npm package is out of date. The node14 branch of the git
-# repo is used on Sandstorm itself now. `npm install kenton/node-capnp#<ref>`
-# does not work as of now, so we install the way we do.
-
-# current tip of node14 branch. Using hash for reproducibility.
-CAPNP_HASH=ca17e686f267e1fcce20a2ed9583847b4528cd8f
-
-# Using hack from Kenton's Etherpad package, since building from git repo with
-# npm somehow breaks while this does not
-(cd node_modules && git clone https://github.com/kentonv/node-capnp.git capnp)
-(cd node_modules/capnp && git checkout $CAPNP_HASH && npm install)
-
 # Install plugins
 npm install $(cat ../plugins)
 
@@ -43,3 +28,22 @@ npm install $(cat ../plugins)
 for plugin in $(cat ../plugins); do
 	ln -sf /var/plugins-initialized/$plugin node_modules/$plugin/.ep_initialized
 done
+
+
+# Install capnp
+#
+# capnp is used for posting Sandstorm "activities"
+#
+# As of Oct 2021: The npm package is out of date. The node14 branch of the git
+# repo is used on Sandstorm itself now. `npm install kenton/node-capnp#<ref>`
+# does not work as of now, so we install the way we do.
+#
+# `npm install <something>` seems to delete anything it doesn't
+# recognize. So we have to do our hack installations after all our proper npm
+# installations.
+
+# current tip of node14 branch. Using hash for reproducibility.
+CAPNP_HASH=ca17e686f267e1fcce20a2ed9583847b4528cd8f
+
+(cd node_modules && git clone https://github.com/kentonv/node-capnp.git capnp)
+(cd node_modules/capnp && git checkout $CAPNP_HASH && npm install)
