@@ -1,5 +1,7 @@
 WIP update for etherpad for sandstorm.
 
+Much of this will have been taken from [Kenton's previous version](https://github.com/kentonv/etherpad-lite).
+
 # Raw packaging:
 
 **WARNING: Don't do this on your normal computer**. It will install things, etc. This is intended for people who prefer raw spk because they run QubesOS or something like that, where you can make throwaway VMs in your own way. Most people likely should use the vagrant-spk option.
