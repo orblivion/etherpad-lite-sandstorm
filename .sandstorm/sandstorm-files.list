@@ -5071,6 +5071,7 @@ opt/app/etherpad-lite/src/static/skins/colibris/src/plugins/comments.css
 opt/app/etherpad-lite/src/static/skins/colibris/src/plugins/font_color.css
 opt/app/etherpad-lite/src/static/skins/colibris/src/plugins/set_title_on_pad.css
 opt/app/etherpad-lite/src/static/skins/colibris/src/plugins/tables2.css
+opt/app/etherpad-lite/src/templates/export_html.html
 opt/app/etherpad-lite/src/templates/index.html
 opt/app/etherpad-lite/src/templates/pad.html
 opt/app/etherpad-lite/var

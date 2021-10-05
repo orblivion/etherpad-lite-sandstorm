@@ -6,6 +6,6 @@ WIP update for etherpad for sandstorm.
 
 Firstly, this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
 
-Run .sandstorm/setup.sh and .sandstorm/build.sh manually.
+Run `sudo .sandstorm/setup.sh` and `.sandstorm/build.sh` manually.
 
 Run spk dev within .sandstorm/ to run it.
