@@ -22,9 +22,10 @@ npm install sqlite3
 
 #Install capnp
 # capnp is used for posting Sandstorm "activities"
-# The npm package as of Oct 2021 is two years old, and node14 seems to have
-# been implemented a month ago.
-# TODO - Ask Kenton to publish node14 branch on npm?
+
+# As of Oct 2021: The npm package is out of date. The node14 branch of the git
+# repo is used on Sandstorm itself now. `npm install kenton/node-capnp#<ref>`
+# does not work as of now, so we install the way we do.
 
 # current tip of node14 branch. Using hash for reproducibility.
 CAPNP_HASH=ca17e686f267e1fcce20a2ed9583847b4528cd8f
