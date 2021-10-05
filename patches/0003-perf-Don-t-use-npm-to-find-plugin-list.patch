@@ -1,7 +1,7 @@
-From 0a33108d6fead1de0533d2a4cc82d9cf76d29bc1 Mon Sep 17 00:00:00 2001
+From 58f219f6cdb48dcfd19eab8a05fb286b5bf6df17 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
-Subject: [PATCH 3/3] perf: Don't use npm to find plugin list
+Subject: [PATCH 3/4] perf: Don't use npm to find plugin list
 
 This improves startup time substantially.
 ---
@@ -10,7 +10,7 @@ This improves startup time substantially.
  2 files changed, 27 insertions(+), 16 deletions(-)
 
 diff --git a/src/bin/run.sh b/src/bin/run.sh
-index 52349bfe..596f5f6d 100755
+index d36d2c68..ba6d15f5 100755
 --- a/src/bin/run.sh
 +++ b/src/bin/run.sh
 @@ -29,6 +29,9 @@ fi

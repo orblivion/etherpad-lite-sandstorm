@@ -1,0 +1,36 @@
+From 1b43cdd7765e194a6cc57ae8a6141c4d9b9b7a84 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 5 Oct 2021 12:01:22 -0400
+Subject: [PATCH 4/4] Set up the cache dir and capnp env like Kenton did
+
+Also warn if starting with sandstorm without the cache dir.
+---
+ src/bin/run.sh | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/src/bin/run.sh b/src/bin/run.sh
+index ba6d15f5..0bad9425 100755
+--- a/src/bin/run.sh
++++ b/src/bin/run.sh
+@@ -29,8 +29,16 @@ fi
+ # Prepare the environment
+ #src/bin/installDeps.sh "$@" || exit 1
+ 
+-# TODO - do this like Kenton does, eventually
+-mkdir -p cache
++# Clear the cache directory so that we can refill it if running outside Sandstorm.
++if [ "${SANDSTORM:-no}" = no ]; then
++  mkdir -p cache
++  # Load .capnp files from sandstorm installation. (In the Sandstorm sandbox, these are mapped
++  # to /usr/include.)
++  export NODE_PATH="/opt/sandstorm/latest/usr/include"
++elif [ ! -e cache ]; then
++  echo "ERROR: Must run once outside Sandstorm to populate minification cache" >&2
++  exit 1
++fi
+ 
+ # Move to the node folder and start
+ log "Starting Etherpad..."
+-- 
+2.20.1
+

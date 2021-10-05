@@ -1,7 +1,7 @@
-From d26e9e93bb92703427dc036a7767660caafc70e5 Mon Sep 17 00:00:00 2001
+From c110f0c9d848ed82f8f9fc8476ef65bf4eba4294 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:26:45 -0400
-Subject: [PATCH 2/3] Don't run installDeps on run.sh
+Subject: [PATCH 2/4] Don't run installDeps on run.sh
 
 Now we can use run.sh
 ---
@@ -9,7 +9,7 @@ Now we can use run.sh
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/bin/run.sh b/src/bin/run.sh
-index 4f6993ff..52349bfe 100755
+index b655e963..d36d2c68 100755
 --- a/src/bin/run.sh
 +++ b/src/bin/run.sh
 @@ -27,7 +27,7 @@ EOF
