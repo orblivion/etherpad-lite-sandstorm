@@ -17,4 +17,7 @@ curl -sL https://deb.nodesource.com/setup_14.x | bash -
 # Actually install node
 apt-get install -qq nodejs git-core g++
 
+# Capnp dependencies
+apt-get install -qq libcapnp-dev
+
 exit 0
