@@ -14,7 +14,7 @@ Secondly, your user should have write access (without requiring sudo) to /var/.
 
 Building: run `sudo .sandstorm/setup.sh` and `.sandstorm/build.sh` manually.
 
-Then run etherpad-lite once outside of sand Sandstorm to build the caching: run `.sandstorm/laundcher.sh` manually.
+Then run etherpad-lite once outside of sand Sandstorm to build the caching: run `.sandstorm/launcher.sh` manually.
 
 ## Run within Sandstorm
 
