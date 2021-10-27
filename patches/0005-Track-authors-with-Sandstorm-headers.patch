@@ -1,0 +1,44 @@
+From 35362e6c84b2b8c23ea0cca428c32b41bef22c3e Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 26 Oct 2021 21:11:38 -0400
+Subject: [PATCH 5/6] Track authors with Sandstorm headers
+
+* Logged in authors using x-sandstorm-user-id
+* Anonymous authors using x-sandstorm-tab-id
+---
+ src/node/handler/SocketIORouter.js | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/src/node/handler/SocketIORouter.js b/src/node/handler/SocketIORouter.js
+index cad53d17..e9e6ec00 100644
+--- a/src/node/handler/SocketIORouter.js
++++ b/src/node/handler/SocketIORouter.js
+@@ -65,6 +65,25 @@ exports.setSocketIO = (_socket) => {
+     }
+ 
+     client.on('message', async (message) => {
++      // SANDSTORM EDIT: Replace message.token with the user ID set by Sandstorm. Normally,
++      // message.token is simply a random string generated in the Etherpad client in order to
++      // identify the user. Unfortunately, since cookies are wiped between sessions on
++      // Sandstorm, this token is promptly lost. The user ID, on the other hand, will always
++      // be associated with this user, even if the document migrates to a new Sandstorm
++      // instance.
++      //
++      // Note: The X-Sandstorm-User-Id header comes from the Sandstorm proxy. It cannot
++      //   be forged. Don't freak out.
++      var sandstormUserId = client.request.headers["x-sandstorm-user-id"];
++      if (sandstormUserId) {
++        message.token = "u" + sandstormUserId;
++      } else {
++        // The user is not logged in. Use the user's tab ID as the token instead. This is,
++        // again, not forgeable, and uniquely identifies a single session.
++        message.token = "a" + client.request.headers["x-sandstorm-tab-id"];
++      }
++      // END SANDSTORM EDIT
++
+       if (message.protocolVersion && message.protocolVersion !== 2) {
+         messageLogger.warn(`Protocolversion header is not correct: ${JSON.stringify(message)}`);
+         return;
+-- 
+2.20.1
+

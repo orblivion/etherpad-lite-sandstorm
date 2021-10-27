@@ -1,7 +1,7 @@
-From 58f219f6cdb48dcfd19eab8a05fb286b5bf6df17 Mon Sep 17 00:00:00 2001
+From 3bb837d48875471b9136186ca1152ece824505f0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
-Subject: [PATCH 3/4] perf: Don't use npm to find plugin list
+Subject: [PATCH 3/6] perf: Don't use npm to find plugin list
 
 This improves startup time substantially.
 ---

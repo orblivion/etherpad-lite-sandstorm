@@ -1,0 +1,36 @@
+From d6a23604ea53074d731099dd0def7525818ec1bf Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 26 Oct 2021 21:33:40 -0400
+Subject: [PATCH 6/6] Automatically initialize author name from
+ x-sandstorm-username
+
+---
+ src/node/handler/PadMessageHandler.js | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index a1194ea9..1d3361a5 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -901,7 +901,17 @@ const handleClientReady = async (socket, message, authorID) => {
+   assert(authorID);
+   const value = await authorManager.getAuthor(authorID);
+   const authorColorId = value.colorId;
+-  const authorName = value.name;
++  let authorName = value.name;
++
++  const session = sessioninfos[socket.id];
++  const author = session.author;
++
++  // SANDSTORM EDIT: Initialize the author name from the Sandstorm display name.
++  if (!authorName) {
++    authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
++    authorManager.setAuthorName(author, authorName);
++  }
++  // END SANDSTORM EDIT
+ 
+   // load the pad-object from the database
+   const pad = await padManager.getPad(padIds.padId);
+-- 
+2.20.1
+
