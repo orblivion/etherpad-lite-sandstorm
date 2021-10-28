@@ -1,0 +1,58 @@
+From 96b917b2a1b0c8486e2f36c24d1d7e330543b19e Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Wed, 27 Oct 2021 20:53:20 -0400
+Subject: [PATCH 9/9] Set sandstorm ID from headers to db
+
+---
+ src/node/db/AuthorManager.js          | 15 +++++++++++++++
+ src/node/handler/PadMessageHandler.js |  8 ++++++++
+ 2 files changed, 23 insertions(+)
+
+diff --git a/src/node/db/AuthorManager.js b/src/node/db/AuthorManager.js
+index a146fe5f..497fc422 100644
+--- a/src/node/db/AuthorManager.js
++++ b/src/node/db/AuthorManager.js
+@@ -214,6 +214,21 @@ exports.setAuthorName = async (author, name) => await db.setSub(
+     `globalAuthor:${author}`, ['name'], name);
+ 
+ // SANDSTORM EDIT
++
++/**
++ * Returns the Sandstorm user ID of the author.
++ * @param {String} author The id of the author
++ */
++exports.getAuthorSandstormId = async (author) => await db.getSub(`globalAuthor:${author}`, ["sandstormId"]);
++
++/**
++ * Sets the Sandstorm user ID of the author
++ * @param {String} author The id of the author
++ * @param {String} sandstormId The Sandstorm user ID of the author
++ */
++exports.setAuthorSandstormId = async (author, sandstormId) => await db.setSub(
++  `globalAuthor:${author}`, ["sandstormId"], sandstormId);
++
+ /**
+  * Returns the avatar URL of the author.
+  * @param {String} author The id of the author
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index e1252649..f8051402 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -911,6 +911,14 @@ const handleClientReady = async (socket, message, authorID) => {
+   const author = session.author;
+ 
+   // SANDSTORM EDIT: Initialize the author name from the Sandstorm display name.
++
++  if (!value.sandstormId) {
++    const sandstormId = socket.client.request.headers["x-sandstorm-user-id"];
++    if (sandstormId) {
++      authorManager.setAuthorSandstormId(author, sandstormId);
++    }
++  }
++
+   if (!authorName) {
+     authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
+     authorManager.setAuthorName(author, authorName);
+-- 
+2.20.1
+
