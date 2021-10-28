@@ -1,7 +1,7 @@
 From 8417a9e097ed6349a72ea62fe67bfeb3e34b6211 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:26:45 -0400
-Subject: [PATCH 2/7] Don't run installDeps on run.sh
+Subject: [PATCH 2/8] Don't run installDeps on run.sh
 
 Now we can use run.sh
 ---
