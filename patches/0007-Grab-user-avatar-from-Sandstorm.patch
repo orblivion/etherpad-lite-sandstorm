@@ -1,0 +1,155 @@
+From 086ee1ca7906c800d9e7aee457969d054c44ba53 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Wed, 27 Oct 2021 19:54:00 -0400
+Subject: [PATCH 7/7] Grab user avatar from Sandstorm
+
+---
+ src/node/db/AuthorManager.js          | 16 ++++++++++++++++
+ src/node/handler/PadMessageHandler.js | 27 +++++++++++++++++++++++----
+ src/static/js/pad.js                  |  1 +
+ 3 files changed, 40 insertions(+), 4 deletions(-)
+
+diff --git a/src/node/db/AuthorManager.js b/src/node/db/AuthorManager.js
+index 2a354d42..a146fe5f 100644
+--- a/src/node/db/AuthorManager.js
++++ b/src/node/db/AuthorManager.js
+@@ -213,6 +213,22 @@ exports.getAuthorName = async (author) => await db.getSub(`globalAuthor:${author
+ exports.setAuthorName = async (author, name) => await db.setSub(
+     `globalAuthor:${author}`, ['name'], name);
+ 
++// SANDSTORM EDIT
++/**
++ * Returns the avatar URL of the author.
++ * @param {String} author The id of the author
++ */
++exports.getAuthorAvatarUrl = async (author) => await db.getSub(`globalAuthor:${author}`, ["avatarUrl"]);
++
++/**
++ * Sets the avatar URL of the author
++ * @param {String} author The id of the author
++ * @param {String} avatarUrl The URL of the user's avatar.
++ */
++exports.setAuthorAvatarUrl = async (author, avatarUrl) => await db.setSub(
++  `globalAuthor:${author}`, ["avatarUrl"], avatarUrl);
++// END SANDSTORM EDIT
++
+ /**
+  * Returns an array of all pads this author contributed to
+  * @param {String} author The id of the author
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index 1d3361a5..e1252649 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -145,8 +145,7 @@ exports.handleDisconnect = async (socket) => {
+                       ` authorID:${session.author}`}${
+       (user && user.username) ? ` username:${user.username}` : ''}`);
+ 
+-    // get the author color out of the db
+-    const color = await authorManager.getAuthorColorId(session.author);
++    const value = await authorManager.getAuthor(session.author);
+ 
+     // prepare the notification for the other users on the pad, that this user left
+     const messageToTheOtherUsers = {
+@@ -154,8 +153,9 @@ exports.handleDisconnect = async (socket) => {
+       data: {
+         type: 'USER_LEAVE',
+         userInfo: {
+-          colorId: color,
++          colorId: value.colorId,
+           userId: session.author,
++          avatarUrl: value.avatarUrl,
+         },
+       },
+     };
+@@ -497,6 +497,8 @@ const handleUserInfoUpdate = async (socket, message) => {
+ 
+   const padId = session.padId;
+ 
++  const authorAvatarUrl = await authorManager.getAuthorAvatarUrl(author);
++
+   const infoMsg = {
+     type: 'COLLABROOM',
+     data: {
+@@ -504,6 +506,7 @@ const handleUserInfoUpdate = async (socket, message) => {
+       type: 'USER_NEWINFO',
+       userInfo: {
+         userId: author,
++        avatarUrl: authorAvatarUrl || null,
+         // set a null name, when there is no name set. cause the client wants it null
+         name: message.data.userInfo.name || null,
+         colorId: message.data.userInfo.colorId,
+@@ -901,6 +904,7 @@ const handleClientReady = async (socket, message, authorID) => {
+   assert(authorID);
+   const value = await authorManager.getAuthor(authorID);
+   const authorColorId = value.colorId;
++  let authorAvatarUrl;
+   let authorName = value.name;
+ 
+   const session = sessioninfos[socket.id];
+@@ -911,6 +915,14 @@ const handleClientReady = async (socket, message, authorID) => {
+     authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
+     authorManager.setAuthorName(author, authorName);
+   }
++
++  authorAvatarUrl = socket.client.request.headers['x-sandstorm-user-picture'] || null;
++  if (authorAvatarUrl) {
++    authorAvatarUrl = decodeURIComponent(authorAvatarUrl);
++    if (value.avatarUrl !== authorAvatarUrl) {
++      authorManager.setAuthorAvatarUrl(author, authorAvatarUrl);
++    }
++  }
+   // END SANDSTORM EDIT
+ 
+   // load the pad-object from the database
+@@ -930,7 +942,11 @@ const handleClientReady = async (socket, message, authorID) => {
+           'This is possibly related to https://github.com/ether/etherpad-lite/issues/2802');
+     } else {
+       // Filter author attribs (e.g. don't send author's pads to all clients)
+-      historicalAuthorData[authorId] = {name: author.name, colorId: author.colorId};
++      historicalAuthorData[authorId] = {
++        name: author.name,
++        colorId: author.colorId,
++        avatarUrl: author.avatarUrl || null, // SANDSTORM EDIT
++      };
+     }
+   })));
+ 
+@@ -1073,6 +1089,7 @@ const handleClientReady = async (socket, message, authorID) => {
+       colorPalette: authorManager.getColorPalette(),
+       clientIp: '127.0.0.1',
+       userColor: authorColorId,
++      userAvatarUrl: authorAvatarUrl,   // SANDSTORM EDIT
+       padId: message.padId,
+       padOptions: settings.padOptions,
+       padShortcutEnabled: settings.padShortcutEnabled,
+@@ -1142,6 +1159,7 @@ const handleClientReady = async (socket, message, authorID) => {
+         colorId: authorColorId,
+         name: authorName,
+         userId: authorID,
++        avatarUrl: authorAvatarUrl,
+       },
+     },
+   });
+@@ -1180,6 +1198,7 @@ const handleClientReady = async (socket, message, authorID) => {
+           colorId: authorInfo.colorId,
+           name: authorInfo.name,
+           userId: authorId,
++          avatarUrl: authorAvatarUrl,
+         },
+       },
+     };
+diff --git a/src/static/js/pad.js b/src/static/js/pad.js
+index ec156eb4..a52351e6 100644
+--- a/src/static/js/pad.js
++++ b/src/static/js/pad.js
+@@ -460,6 +460,7 @@ const pad = {
+       name: clientVars.userName,
+       ip: pad.getClientIp(),
+       colorId: clientVars.userColor,
++      avatarUrl: clientVars.userAvatarUrl,
+     };
+ 
+     const postAceInit = () => {
+-- 
+2.20.1
+

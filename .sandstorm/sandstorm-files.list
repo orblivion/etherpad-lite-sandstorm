@@ -5887,6 +5887,8 @@ usr/lib/x86_64-linux-gnu/libnsl-2.28.so
 usr/lib/x86_64-linux-gnu/libnsl.so.1
 usr/lib/x86_64-linux-gnu/libnss_compat-2.28.so
 usr/lib/x86_64-linux-gnu/libnss_compat.so.2
+usr/lib/x86_64-linux-gnu/libnss_dns-2.28.so
+usr/lib/x86_64-linux-gnu/libnss_dns.so.2
 usr/lib/x86_64-linux-gnu/libnss_files-2.28.so
 usr/lib/x86_64-linux-gnu/libnss_files.so.2
 usr/lib/x86_64-linux-gnu/libnss_nis-2.28.so
@@ -5895,6 +5897,8 @@ usr/lib/x86_64-linux-gnu/libpcre.so.3
 usr/lib/x86_64-linux-gnu/libpcre.so.3.13.3
 usr/lib/x86_64-linux-gnu/libpthread-2.28.so
 usr/lib/x86_64-linux-gnu/libpthread.so.0
+usr/lib/x86_64-linux-gnu/libresolv-2.28.so
+usr/lib/x86_64-linux-gnu/libresolv.so.2
 usr/lib/x86_64-linux-gnu/libselinux.so.1
 usr/lib/x86_64-linux-gnu/libstdc++.so.6
 usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25

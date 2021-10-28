@@ -1,7 +1,7 @@
-From e9bfc505a8c5169f6d7107b13fe06653344b1226 Mon Sep 17 00:00:00 2001
+From 377e3949f52c924efe0e54f27ab11252b5160a86 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 5 Oct 2021 12:01:22 -0400
-Subject: [PATCH 4/6] Set up the cache dir and capnp env like Kenton did
+Subject: [PATCH 4/7] Set up the cache dir and capnp env like Kenton did
 
 Also warn if starting with sandstorm without the cache dir.
 ---
