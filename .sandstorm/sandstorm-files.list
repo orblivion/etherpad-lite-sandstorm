@@ -93,6 +93,9 @@ opt/app/etherpad-lite/node_modules/brace-expansion
 opt/app/etherpad-lite/node_modules/brace-expansion/README.md
 opt/app/etherpad-lite/node_modules/brace-expansion/index.js
 opt/app/etherpad-lite/node_modules/brace-expansion/package.json
+opt/app/etherpad-lite/node_modules/capnp/bin/linux-x64-v8-8.4/capnp.node
+opt/app/etherpad-lite/node_modules/capnp/package.json
+opt/app/etherpad-lite/node_modules/capnp/src/node-capnp/capnp.js
 opt/app/etherpad-lite/node_modules/caseless
 opt/app/etherpad-lite/node_modules/caseless/README.md
 opt/app/etherpad-lite/node_modules/caseless/package.json
@@ -1024,6 +1027,7 @@ opt/app/etherpad-lite/src/node/handler/APIHandler.js
 opt/app/etherpad-lite/src/node/handler/ExportHandler.js
 opt/app/etherpad-lite/src/node/handler/ImportHandler.js
 opt/app/etherpad-lite/src/node/handler/PadMessageHandler.js
+opt/app/etherpad-lite/src/node/handler/SandstormHandler.js
 opt/app/etherpad-lite/src/node/handler/SocketIORouter.js
 opt/app/etherpad-lite/src/node/hooks/express.js
 opt/app/etherpad-lite/src/node/hooks/express/admin.js
@@ -1285,6 +1289,7 @@ opt/app/etherpad-lite/src/node_modules/assert-plus/assert.js
 opt/app/etherpad-lite/src/node_modules/assert-plus/package.json
 opt/app/etherpad-lite/src/node_modules/async
 opt/app/etherpad-lite/src/node_modules/async-stacktrace
+opt/app/etherpad-lite/src/node_modules/async-stacktrace/ERR.js
 opt/app/etherpad-lite/src/node_modules/async-stacktrace/README.md
 opt/app/etherpad-lite/src/node_modules/async-stacktrace/package.json
 opt/app/etherpad-lite/src/node_modules/async/README.md
@@ -5090,6 +5095,14 @@ usr/bin/mkdir
 usr/bin/node
 usr/bin/npm
 usr/bin/sh
+usr/include
+usr/include/capnp/c++.capnp
+usr/include/sandstorm/activity.capnp
+usr/include/sandstorm/grain.capnp
+usr/include/sandstorm/identity.capnp
+usr/include/sandstorm/powerbox.capnp
+usr/include/sandstorm/sandstorm-http-bridge.capnp
+usr/include/sandstorm/util.capnp
 usr/lib/node_modules/npm/bin/npm-cli.js
 usr/lib/node_modules/npm/lib/build.js
 usr/lib/node_modules/npm/lib/ci.js
@@ -5878,9 +5891,14 @@ usr/lib/node_modules/npm/package.json
 usr/lib/x86_64-linux-gnu/ld-2.28.so
 usr/lib/x86_64-linux-gnu/libc-2.28.so
 usr/lib/x86_64-linux-gnu/libc.so.6
+usr/lib/x86_64-linux-gnu/libcapnp-0.7.0.so
+usr/lib/x86_64-linux-gnu/libcapnp-rpc-0.7.0.so
+usr/lib/x86_64-linux-gnu/libcapnpc-0.7.0.so
 usr/lib/x86_64-linux-gnu/libdl-2.28.so
 usr/lib/x86_64-linux-gnu/libdl.so.2
 usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+usr/lib/x86_64-linux-gnu/libkj-0.7.0.so
+usr/lib/x86_64-linux-gnu/libkj-async-0.7.0.so
 usr/lib/x86_64-linux-gnu/libm-2.28.so
 usr/lib/x86_64-linux-gnu/libm.so.6
 usr/lib/x86_64-linux-gnu/libnsl-2.28.so
@@ -5905,6 +5923,7 @@ usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
 usr/lib/x86_64-linux-gnu/libtinfo.so.6
 usr/lib/x86_64-linux-gnu/libtinfo.so.6.1
 usr/lib64/ld-linux-x86-64.so.2
+usr/local/include
 usr/share/zoneinfo/America/New_York
 usr/share/zoneinfo/Etc/GMT+0
 usr/share/zoneinfo/GMT

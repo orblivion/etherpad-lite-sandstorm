@@ -149,7 +149,10 @@ const pkgdef :Spk.PackageDefinition = (
         # You probably don't want the app pulling files from these places,
         # so we hide them. Note that /dev, /var, and /tmp are implicitly
         # hidden because Sandstorm itself provides them.
-      )
+      ),
+
+      ( sourcePath = "/opt/sandstorm/latest/usr/include",
+        packagePath = "usr/include" )
     ]
   ),
 
@@ -232,6 +235,21 @@ const pkgdef :Spk.PackageDefinition = (
   #  # comes in to your app's API, sandstorm-http-bridge will prefix the request's path with
   #  # this string, if specified.
   #),
+
+  bridgeConfig = (
+    viewInfo = (
+      eventTypes = [
+        (name = "edit", verbPhrase = (defaultText = "edited pad"),
+            notifySubscribers = false, autoSubscribeToGrain = true),
+        (name = "comment", verbPhrase = (defaultText = "added comment"),
+            notifySubscribers = true, autoSubscribeToThread = true),
+        (name = "reply", verbPhrase = (defaultText = "replied to comment"),
+            notifySubscribers = true, autoSubscribeToThread = true)
+      ]
+    ),
+
+    saveIdentityCaps = true
+  ),
 );
 
 const myCommand :Spk.Manifest.Command = (
