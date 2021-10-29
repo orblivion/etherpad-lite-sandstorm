@@ -239,14 +239,19 @@ const pkgdef :Spk.PackageDefinition = (
   bridgeConfig = (
     viewInfo = (
       permissions = [(name = "modify", title = (defaultText = "modify"),
-                      description = (defaultText = "allows modifying the document"))],
+                      description = (defaultText = "allows modifying the document")),
+                     (name = "comment", title = (defaultText = "comment"),
+                      description = (defaultText = "allows adding comments"))],
       roles = [(title = (defaultText = "editor"),
-                permissions = [true],
+                permissions = [true, true],
                 verbPhrase = (defaultText = "can edit"),
                 default = true),
-               (title = (defaultText = "reader"),
-                permissions = [false],
-                verbPhrase = (defaultText = "can read"))],
+               (title = (defaultText = "viewer"),
+                permissions = [false, false],
+                verbPhrase = (defaultText = "can view")),
+               (title = (defaultText = "commenter"),
+                permissions = [false, true],
+                verbPhrase = (defaultText = "can comment"))],
       eventTypes = [
         (name = "edit", verbPhrase = (defaultText = "edited pad"),
             notifySubscribers = false, autoSubscribeToGrain = true),
@@ -257,8 +262,8 @@ const pkgdef :Spk.PackageDefinition = (
       ],
     ),
 
-    saveIdentityCaps = true
-  ),
+    saveIdentityCaps = true,
+  )
 );
 
 const myCommand :Spk.Manifest.Command = (

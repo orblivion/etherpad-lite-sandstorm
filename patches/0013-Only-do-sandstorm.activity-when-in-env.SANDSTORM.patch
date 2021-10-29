@@ -1,0 +1,28 @@
+From fd3e24dd67a8916c1126a5ea8560d749897601ea Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 28 Oct 2021 21:52:04 -0400
+Subject: [PATCH 13/14] Only do sandstorm.activity when in env.SANDSTORM
+
+(TODO - squash me into the other commit)
+---
+ src/node/handler/PadMessageHandler.js | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index 644427f1..1693fc93 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -274,7 +274,9 @@ exports.handleMessage = async (socket, message) => {
+       stats.counter('pendingEdits').inc();
+       padChannels.emit(message.padId, {socket, message}); // add to pad queue
+       // SANDSTORM EDIT
+-      sandstorm.activity(socket.client.request.headers["x-sandstorm-session-id"], "edit");
++      if (process.env.SANDSTORM) {
++        sandstorm.activity(socket.client.request.headers["x-sandstorm-session-id"], "edit");
++      }
+     } else if (message.data.type === 'USERINFO_UPDATE') {
+       await handleUserInfoUpdate(socket, message);
+     } else if (message.data.type === 'CHAT_MESSAGE') {
+-- 
+2.20.1
+
