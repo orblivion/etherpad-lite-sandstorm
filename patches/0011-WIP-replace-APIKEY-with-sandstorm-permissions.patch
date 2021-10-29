@@ -1,0 +1,112 @@
+From 6b65342b7624d1567dfa0677ad701662c9ba9815 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 28 Oct 2021 20:53:36 -0400
+Subject: [PATCH 11/12] WIP - replace APIKEY with sandstorm permissions?
+
+Not even sure how to test this.
+---
+ src/node/handler/APIHandler.js | 67 ++++++++++++++++++++++++----------
+ 1 file changed, 48 insertions(+), 19 deletions(-)
+
+diff --git a/src/node/handler/APIHandler.js b/src/node/handler/APIHandler.js
+index 6bc6e537..1aa073c6 100644
+--- a/src/node/handler/APIHandler.js
++++ b/src/node/handler/APIHandler.js
+@@ -30,20 +30,6 @@ const createHTTPError = require('http-errors');
+ 
+ const apiHandlerLogger = log4js.getLogger('APIHandler');
+ 
+-// ensure we have an apikey
+-let apikey = null;
+-const apikeyFilename = absolutePaths.makeAbsolute(argv.apikey || './APIKEY.txt');
+-
+-try {
+-  apikey = fs.readFileSync(apikeyFilename, 'utf8');
+-  apiHandlerLogger.info(`Api key file read from: "${apikeyFilename}"`);
+-} catch (e) {
+-  apiHandlerLogger.info(
+-      `Api key file "${apikeyFilename}" not found.  Creating with random contents.`);
+-  apikey = randomString(32);
+-  fs.writeFileSync(apikeyFilename, apikey, 'utf8');
+-}
+-
+ // a list of all functions
+ const version = {};
+ 
+@@ -134,6 +120,30 @@ version['1.2.15'] = Object.assign({}, version['1.2.14'],
+     {copyPadWithoutHistory: ['sourceID', 'destinationID', 'force']}
+ );
+ 
++var requiredSandstormPermissions = {
++  // Permissions needed for each command. There is no explicit "read" permission but [] means
++  // "basic permission to open the grain", which suits our needs.
++  //
++  // Commands that aren't listed cannot be used on Sandstorm.
++
++  getText: [],
++  getHTML: [],
++
++  // NOTE: Kenton's version had this, but elsewhere in the file it's getRevisionsCount. It
++  // seems to be a misspelling. Since this probable didn't do anything, I'm just going to
++  // leave it commented out in case it comes up in a way that we didn't expect.
++  // getRevisionCount: [],
++
++  getLastEdited: [],
++  padUsersCount: [],
++
++  // TODO(someday): We should support editing through the API too, but the edits ought to be
++  //   attributed to the author. Etherpad's API currently doesn't seem to be designed for this;
++  //   it's instead intended to be full-control.
++//  setText: ["modify"],
++//  getHTML: ["modify"],
++};
++
+ // set the latest available API version here
+ exports.latestApiVersion = '1.2.15';
+ 
+@@ -158,12 +168,32 @@ exports.handle = async function (apiVersion, functionName, fields, req, res) {
+     throw new createHTTPError.NotFound('no such function');
+   }
+ 
+-  // check the api key!
+-  fields.apikey = fields.apikey || fields.api_key;
++  // SANDSTORM EDIT
++  var permissions = requiredSandstormPermissions[functionName];
++  if (!permissions)
++  {
++    throw new createHTTPError.NotFound('function not available on Sandstorm');
++    return;
++  }
+ 
+-  if (fields.apikey !== apikey.trim()) {
+-    throw new createHTTPError.Unauthorized('no or wrong API Key');
++  var hasSandstormPermissions = (req.headers["x-sandstorm-permissions"] || "")
++      .split(",").map(x => x.trim()).filter(x => x);
++  console.log(permissions, hasSandstormPermissions);
++
++  for (var i = 0; i < permissions.length; i++) {
++    var satisfied = false;
++    for (var j = 0; j < hasSandstormPermissions.length; j++) {
++      if (permissions[i] === hasSandstormPermissions[i]) {
++        satisfied = true;
++        break;
++      }
++    }
++    if (!satisfied) {
++      throw new createHTTPError.Unauthorized('insufficient permissions');
++      return;
++    }
+   }
++  // END SANDSTORM EDIT
+ 
+   // sanitize any padIDs before continuing
+   if (fields.padID) {
+@@ -184,5 +214,4 @@ exports.handle = async function (apiVersion, functionName, fields, req, res) {
+ };
+ 
+ exports.exportedForTestingOnly = {
+-  apiKey: apikey,
+ };
+-- 
+2.20.1
+

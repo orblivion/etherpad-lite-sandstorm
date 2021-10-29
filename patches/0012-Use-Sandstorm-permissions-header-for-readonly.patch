@@ -1,0 +1,43 @@
+From fa31152cd63a67db3eaf40fe04e4c4a65750a043 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 28 Oct 2021 21:30:02 -0400
+Subject: [PATCH 12/12] Use Sandstorm permissions header for readonly
+
+---
+ src/node/handler/PadMessageHandler.js | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index 5e1445ac..644427f1 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -983,8 +983,16 @@ const handleClientReady = async (socket, message, authorID) => {
+   // Save in sessioninfos that this session belonges to this pad
+   sessionInfo.padId = padIds.padId;
+   sessionInfo.readOnlyPadId = padIds.readOnlyPadId;
++
++  // SANDSTORM EDIT
++  var hasSandstormPermissions = decodeURIComponent(socket.client.request.headers["x-sandstorm-permissions"])
++      .split(",");
++  var sandstormReadonly = hasSandstormPermissions.indexOf("modify") === -1;
++  // Not sure what webaccess.userCanModify is, but it seems to work fine, and at worst it will
++  // err on being too restrictive, so I'll keep it.
+   sessionInfo.readonly =
+-      padIds.readonly || !webaccess.userCanModify(message.padId, socket.client.request);
++      sandstormReadonly || !webaccess.userCanModify(message.padId, socket.client.request);
++  // END SANDSTORM EDIT
+ 
+   const {session: {user} = {}} = socket.client.request;
+   accessLogger.info(`${`[${pad.head > 0 ? 'ENTER' : 'CREATE'}]` +
+@@ -1111,7 +1119,7 @@ const handleClientReady = async (socket, message, authorID) => {
+       chatHead: pad.chatHead,
+       numConnectedUsers: roomSockets.length,
+       readOnlyId: padIds.readOnlyPadId,
+-      readonly: sessionInfo.readonly,
++      readonly: sessionInfo.readonly, // SANDSTORM EDIT - as etherpad changes, make sure this continues to be something that we set via x-sandstorm-permissions header
+       serverTimestamp: Date.now(),
+       userId: authorID,
+       abiwordAvailable: settings.abiwordAvailable(),
+-- 
+2.20.1
+

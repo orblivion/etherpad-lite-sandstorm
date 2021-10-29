@@ -238,6 +238,15 @@ const pkgdef :Spk.PackageDefinition = (
 
   bridgeConfig = (
     viewInfo = (
+      permissions = [(name = "modify", title = (defaultText = "modify"),
+                      description = (defaultText = "allows modifying the document"))],
+      roles = [(title = (defaultText = "editor"),
+                permissions = [true],
+                verbPhrase = (defaultText = "can edit"),
+                default = true),
+               (title = (defaultText = "reader"),
+                permissions = [false],
+                verbPhrase = (defaultText = "can read"))],
       eventTypes = [
         (name = "edit", verbPhrase = (defaultText = "edited pad"),
             notifySubscribers = false, autoSubscribeToGrain = true),
@@ -245,7 +254,7 @@ const pkgdef :Spk.PackageDefinition = (
             notifySubscribers = true, autoSubscribeToThread = true),
         (name = "reply", verbPhrase = (defaultText = "replied to comment"),
             notifySubscribers = true, autoSubscribeToThread = true)
-      ]
+      ],
     ),
 
     saveIdentityCaps = true
