@@ -1,7 +1,7 @@
-From 5671caa74d9d59968bcd58bbab9caaa7765e2b51 Mon Sep 17 00:00:00 2001
+From 44695de4294b1d2951745545b9efd0da021be04c Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:11:38 -0400
-Subject: [PATCH 05/14] Track authors with Sandstorm headers
+Subject: [PATCH 05/13] Track authors with Sandstorm headers
 
 * Logged in authors using x-sandstorm-user-id
 * Anonymous authors using x-sandstorm-tab-id
