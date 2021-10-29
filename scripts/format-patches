@@ -10,4 +10,4 @@ cd "$here/../etherpad-lite"
 
 git format-patch \
 	--output-directory ../patches \
-	"$base_revision"
+	"$etherpad_base_revision"

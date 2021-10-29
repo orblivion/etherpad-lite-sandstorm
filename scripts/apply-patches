@@ -8,5 +8,5 @@ here="$(dirname $0)"
 
 cd "$here/../etherpad-lite"
 
-git checkout "$base_revision"
+git checkout "$etherpad_base_revision"
 git am ../patches/*.patch
