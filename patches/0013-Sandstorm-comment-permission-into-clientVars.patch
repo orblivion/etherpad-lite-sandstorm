@@ -1,7 +1,7 @@
-From 3d2b3e1f473a43e46b396912480314abfa24eee7 Mon Sep 17 00:00:00 2001
+From 87c1c4ad987a526a19314dd0da043391ca8ee459 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 28 Oct 2021 21:53:23 -0400
-Subject: [PATCH 14/14] Sandstorm comment permission into clientVars
+Subject: [PATCH 13/13] Sandstorm comment permission into clientVars
 
 (TODO - squash me into the readonly one thing I think. And/or actually, set the clientvars for canComment properly within that plugin.)
 ---

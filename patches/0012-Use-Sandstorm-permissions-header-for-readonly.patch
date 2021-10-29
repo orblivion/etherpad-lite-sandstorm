@@ -1,17 +1,17 @@
-From fa31152cd63a67db3eaf40fe04e4c4a65750a043 Mon Sep 17 00:00:00 2001
+From 2c290bb2b20024c1f6e2aed7e9974e541d0a8fa3 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 28 Oct 2021 21:30:02 -0400
-Subject: [PATCH 12/14] Use Sandstorm permissions header for readonly
+Subject: [PATCH 12/13] Use Sandstorm permissions header for readonly
 
 ---
  src/node/handler/PadMessageHandler.js | 12 ++++++++++--
  1 file changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index 5e1445ac..644427f1 100644
+index 04fdbf59..1693fc93 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
-@@ -983,8 +983,16 @@ const handleClientReady = async (socket, message, authorID) => {
+@@ -985,8 +985,16 @@ const handleClientReady = async (socket, message, authorID) => {
    // Save in sessioninfos that this session belonges to this pad
    sessionInfo.padId = padIds.padId;
    sessionInfo.readOnlyPadId = padIds.readOnlyPadId;
@@ -29,7 +29,7 @@ index 5e1445ac..644427f1 100644
  
    const {session: {user} = {}} = socket.client.request;
    accessLogger.info(`${`[${pad.head > 0 ? 'ENTER' : 'CREATE'}]` +
-@@ -1111,7 +1119,7 @@ const handleClientReady = async (socket, message, authorID) => {
+@@ -1113,7 +1121,7 @@ const handleClientReady = async (socket, message, authorID) => {
        chatHead: pad.chatHead,
        numConnectedUsers: roomSockets.length,
        readOnlyId: padIds.readOnlyPadId,

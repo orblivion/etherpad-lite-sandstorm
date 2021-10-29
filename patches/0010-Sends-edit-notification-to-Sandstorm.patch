@@ -1,17 +1,17 @@
-From 528c0577244691c8ddfb469c3994e16a1e93f4a3 Mon Sep 17 00:00:00 2001
+From 5c06be69e53a82ce32791c674b6eb159de5fc07a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 21:24:10 -0400
-Subject: [PATCH 10/14] Sends "edit" notification to Sandstorm
+Subject: [PATCH 10/13] Sends "edit" notification to Sandstorm
 
 Requires change in pkgdef
 ---
- src/node/handler/PadMessageHandler.js |  3 ++
+ src/node/handler/PadMessageHandler.js |  5 +++
  src/node/handler/SandstormHandler.js  | 63 +++++++++++++++++++++++++++
- 2 files changed, 66 insertions(+)
+ 2 files changed, 68 insertions(+)
  create mode 100644 src/node/handler/SandstormHandler.js
 
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index f8051402..5e1445ac 100644
+index f8051402..04fdbf59 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
 @@ -39,6 +39,7 @@ const assert = require('assert').strict;
@@ -22,12 +22,14 @@ index f8051402..5e1445ac 100644
  
  let rateLimiter;
  
-@@ -272,6 +273,8 @@ exports.handleMessage = async (socket, message) => {
+@@ -272,6 +273,10 @@ exports.handleMessage = async (socket, message) => {
      } else if (message.data.type === 'USER_CHANGES') {
        stats.counter('pendingEdits').inc();
        padChannels.emit(message.padId, {socket, message}); // add to pad queue
 +      // SANDSTORM EDIT
-+      sandstorm.activity(socket.client.request.headers["x-sandstorm-session-id"], "edit");
++      if (process.env.SANDSTORM) {
++        sandstorm.activity(socket.client.request.headers["x-sandstorm-session-id"], "edit");
++      }
      } else if (message.data.type === 'USERINFO_UPDATE') {
        await handleUserInfoUpdate(socket, message);
      } else if (message.data.type === 'CHAT_MESSAGE') {

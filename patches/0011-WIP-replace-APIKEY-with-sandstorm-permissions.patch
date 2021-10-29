@@ -1,7 +1,7 @@
-From 6b65342b7624d1567dfa0677ad701662c9ba9815 Mon Sep 17 00:00:00 2001
+From 87fab57f1a61e564e145f17a3a73c23c4436bc82 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 28 Oct 2021 20:53:36 -0400
-Subject: [PATCH 11/14] WIP - replace APIKEY with sandstorm permissions?
+Subject: [PATCH 11/13] WIP - replace APIKEY with sandstorm permissions?
 
 Not even sure how to test this.
 ---
