@@ -1,0 +1,26 @@
+From 2de878f0f4962efc5b68e4d252e1585a710f0bfb Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Fri, 29 Oct 2021 12:52:17 -0400
+Subject: [PATCH 14/14] Make sure session key is unique per-grain
+
+---
+ src/node/utils/Settings.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/node/utils/Settings.js b/src/node/utils/Settings.js
+index 40576c34..d0e282fd 100644
+--- a/src/node/utils/Settings.js
++++ b/src/node/utils/Settings.js
+@@ -777,7 +777,8 @@ exports.reloadSettings = () => {
+   }
+ 
+   if (!exports.sessionKey) {
+-    const sessionkeyFilename = absolutePaths.makeAbsolute(argv.sessionkey || './SESSIONKEY.txt');
++    // SANDSTORM EDIT - put in /var/ so it's different per-grain
++    const sessionkeyFilename = absolutePaths.makeAbsolute(argv.sessionkey || '/var/SESSIONKEY.txt');
+     try {
+       exports.sessionKey = fs.readFileSync(sessionkeyFilename, 'utf8');
+       console.info(`Session key loaded from: ${sessionkeyFilename}`);
+-- 
+2.20.1
+

@@ -32,7 +32,6 @@ opt/app/.sandstorm/launcher.sh
 opt/app/etherpad-lite
 opt/app/etherpad-lite/.git
 opt/app/etherpad-lite/.git/HEAD
-opt/app/etherpad-lite/SESSIONKEY.txt
 opt/app/etherpad-lite/bin
 opt/app/etherpad-lite/cache/plugin-dependencies-obj
 opt/app/etherpad-lite/node_modules

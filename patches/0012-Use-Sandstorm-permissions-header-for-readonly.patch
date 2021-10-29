@@ -1,7 +1,7 @@
 From 2c290bb2b20024c1f6e2aed7e9974e541d0a8fa3 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 28 Oct 2021 21:30:02 -0400
-Subject: [PATCH 12/13] Use Sandstorm permissions header for readonly
+Subject: [PATCH 12/14] Use Sandstorm permissions header for readonly
 
 ---
  src/node/handler/PadMessageHandler.js | 12 ++++++++++--
