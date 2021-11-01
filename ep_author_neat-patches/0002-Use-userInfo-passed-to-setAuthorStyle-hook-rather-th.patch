@@ -1,0 +1,61 @@
+From 7f34e75a3438733ec0509380064fb123af65606a Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Mon, 14 Nov 2016 18:34:04 -0800
+Subject: [PATCH 02/10] Use userInfo passed to setAuthorStyle() hook rather
+ than scrape it from the DOM.
+
+Requires changes on Etherpad side to send this info -- originally committed as a675091 although future rebases may change the commit ID.
+---
+ static/js/index.js | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index b3a5dda..5a56010 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -170,7 +170,7 @@ function aceSetAuthorStyle(name, context){
+       return 1;
+     }
+     authorClass = getAuthorClassName(author);
+-    authorName = authorNameAndColorFromAuthorId(author).name;
++    authorName = authorNameAndColorFromAuthorId(author, info.userInfo).name;
+     x$ = dynamicCSS.selectorStyle(".authorColors.focus span." + authorClass);
+     x$.borderBottom = "2px solid " + color;
+     y$ = parentDynamicCSS.selectorStyle(authorSelector);
+@@ -188,7 +188,7 @@ function aceSetAuthorStyle(name, context){
+   }
+   return 1;
+ }
+-authorNameAndColorFromAuthorId = function(authorId){
++authorNameAndColorFromAuthorId = function(authorId, userInfo){
+   var myAuthorId, authorObj;
+   myAuthorId = pad.myUserInfo.userId;
+   if (myAuthorId === authorId) {
+@@ -197,6 +197,17 @@ authorNameAndColorFromAuthorId = function(authorId){
+       color: pad.myUserInfo.colorId
+     };
+   }
++
++  if (userInfo) {
++    return {
++      name: userInfo.name,
++      color: userInfo.colorId
++    };
++  }
++
++  // Fall back to old terrible code to extract user name from DOM and other places.
++  // This only happens if Etherpad does not have the change to pass the full userInfo into
++  // the setAuthorStyle() hook.
+   authorObj = {};
+   $('#otheruserstable > tbody > tr').each(function(){
+     var x$;
+@@ -272,4 +283,4 @@ if (!isStyleFuncSupported) {
+ }
+ RegExp.escape = function(text){
+   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+-};
+\ No newline at end of file
++};
+-- 
+2.20.1
+

@@ -1,0 +1,26 @@
+From 48fa498d53f84cc16992d5139cd590f94738f3f6 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Wed, 16 Nov 2016 16:12:12 -0800
+Subject: [PATCH 07/10] Make authorship bars continuous through blank lines.
+
+---
+ static/js/index.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 6d89c21..53be7a8 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -104,6 +104,9 @@ function authorViewUpdate($node, lineNumber, prevAuthor, authorClass){
+       }
+     }
+   }
++  if (authorClass == 'none') {
++    authorClass = prevAuthor;
++  }
+   if (prevAuthor === authorClass) {
+     $authorContainer.addClass('concise');
+   } else {
+-- 
+2.20.1
+

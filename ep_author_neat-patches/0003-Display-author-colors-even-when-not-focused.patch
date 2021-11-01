@@ -1,0 +1,55 @@
+From 4835313835d0b30af5440f1f9d57dea9ef90e182 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Mon, 14 Nov 2016 18:44:21 -0800
+Subject: [PATCH 03/10] Display author colors even when not focused.
+
+It's really weird that these disappear when out-of-focus.
+---
+ static/js/index.js | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 5a56010..833f735 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -13,14 +13,6 @@ function postAceInit(hook_name, arg$){
+     $doc = $(ace.ace_getDocument());
+     $body = $doc.find('body');
+     x$ = $body.get(0).ownerDocument;
+-    x$.addEventListener('focus', function(){
+-      $sidedivinner.addClass('authorColors');
+-      return $body.addClass('focus');
+-    }, true);
+-    x$.addEventListener('blur', function(){
+-      $sidedivinner.removeClass('authorColors');
+-      return $body.removeClass('focus');
+-    }, true);
+     return x$;
+   });
+ }
+@@ -171,11 +163,11 @@ function aceSetAuthorStyle(name, context){
+     }
+     authorClass = getAuthorClassName(author);
+     authorName = authorNameAndColorFromAuthorId(author, info.userInfo).name;
+-    x$ = dynamicCSS.selectorStyle(".authorColors.focus span." + authorClass);
++    x$ = dynamicCSS.selectorStyle(".authorColors span." + authorClass);
+     x$.borderBottom = "2px solid " + color;
+     y$ = parentDynamicCSS.selectorStyle(authorSelector);
+     y$.borderBottom = "2px solid " + color;
+-    z$ = dynamicCSS.selectorStyle(".authorColors.focus .primary-" + authorClass + " ." + authorClass);
++    z$ = dynamicCSS.selectorStyle(".authorColors .primary-" + authorClass + " ." + authorClass);
+     z$.borderBottom = '0px';
+     z1$ = outerDynamicCSS.selectorStyle("#sidedivinner.authorColors > div.primary-" + authorClass);
+     z1$.borderRight = "solid 5px " + color;
+@@ -183,7 +175,7 @@ function aceSetAuthorStyle(name, context){
+     z2$ = outerDynamicCSS.selectorStyle("#sidedivinner > div.primary-" + authorClass + "::before");
+     z2$.content = "'" + authorName + "'";
+   } else {
+-    dynamicCSS.removeSelectorStyle(".authorColors.focus span." + authorClass);
++    dynamicCSS.removeSelectorStyle(".authorColors span." + authorClass);
+     parentDynamicCSS.removeSelectorStyle(authorSelector);
+   }
+   return 1;
+-- 
+2.20.1
+

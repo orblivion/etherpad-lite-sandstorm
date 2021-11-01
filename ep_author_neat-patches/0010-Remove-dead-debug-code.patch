@@ -1,0 +1,24 @@
+From e9308ad290ab85c2bccc5bfa618d9e22adaf08fc Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Wed, 16 Nov 2016 16:14:28 -0800
+Subject: [PATCH 10/10] Remove dead debug code.
+
+---
+ static/js/index.js | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 5857278..612ded9 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -199,7 +199,6 @@ function aceSetAuthorStyle(name, context){
+     z2$ = outerDynamicCSS.selectorStyle("#sidedivinner > div.primary-" + authorClass + "::before");
+     z2$.content = "' '";
+     if (info.userInfo && info.userInfo.avatarUrl) {
+-      if (!info.userInfo.avatarUrl) console.log("hmm", info);
+       z2$.backgroundRepeat = "no-repeat";
+       z2$.backgroundSize = "contain";
+       z2$.backgroundImage = "url('" + info.userInfo.avatarUrl + "')";
+-- 
+2.20.1
+

@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
 
+#rm ../ep_comments_page-patches/*.patch
+#rm ../etherpad-lite-patches/*.patch
+#rm ../ep_author_neat-patches/*.patch
+
 set -exuo pipefail
 
-here="$(dirname $0)"
+here="$(realpath $(dirname $0))"
 
 . "$here/config.sh"
 
 cd "$here/../etherpad-lite"
 
 git format-patch \
-	--output-directory ../patches \
+	--output-directory ../etherpad-lite-patches \
 	"$etherpad_base_revision"
+
+cd "$here/../ep_author_neat"
+
+git format-patch \
+	--output-directory ../ep_author_neat-patches \
+	"$ep_author_neat_base_revision"
+
+# No patches yet
+#cd "$here/../ep_comments_page"
+#
+#git format-patch \
+#	--output-directory ../ep_comments_page-patches \
+#	"$ep_ep_comments_page_base_revision"

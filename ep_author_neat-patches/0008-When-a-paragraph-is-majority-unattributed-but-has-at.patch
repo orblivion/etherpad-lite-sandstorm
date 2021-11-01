@@ -1,0 +1,40 @@
+From e9cb942457c676e93a24f44d9e2e4f01fe99b178 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Wed, 16 Nov 2016 16:13:31 -0800
+Subject: [PATCH 08/10] When a paragraph is majority-unattributed but has at
+ least one attributed author, don't make that author the paragraph's primary
+ author.
+
+---
+ static/js/index.js | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 53be7a8..45306e4 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -20,16 +20,18 @@ function derivePrimaryAuthor($node){
+   var byAuthor, mPA, authorClass, author, value;
+   byAuthor = {};
+   $node.find('span').each(function(){
+-    var $this, i$, ref$, len$, spanclass, results$ = [];
++    var $this, i$, ref$, len$, spanclass;
+     $this = $(this);
+     for (i$ = 0, len$ = (ref$ = allClasses($this)).length; i$ < len$; ++i$) {
+       spanclass = ref$[i$];
+       if (/^author/.exec(spanclass)) {
+         byAuthor[spanclass] == null && (byAuthor[spanclass] = 0);
+-        results$.push(byAuthor[spanclass] += $this.text().length);
++        byAuthor[spanclass] += $this.text().length;
++        return;
+       }
+     }
+-    return results$;
++    byAuthor["null"] == null && (byAuthor["null"] = 0);
++    byAuthor["null"] += $this.text().length;
+   });
+   mPA = 0;
+   authorClass = null;
+-- 
+2.20.1
+

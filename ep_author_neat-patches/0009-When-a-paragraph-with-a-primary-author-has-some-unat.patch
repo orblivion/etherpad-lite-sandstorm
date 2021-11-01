@@ -1,0 +1,30 @@
+From 558f3d4eb5564eba79de7d9260c10c73e8667eb4 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Wed, 16 Nov 2016 16:14:07 -0800
+Subject: [PATCH 09/10] When a paragraph with a primary author has some
+ unattributed text, underline that text in gray to show that it's not from the
+ primary author.
+
+---
+ static/js/index.js | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 45306e4..5857278 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -188,7 +188,10 @@ function aceSetAuthorStyle(name, context){
+     x$.borderBottom = "2px solid " + color;
+     y$ = parentDynamicCSS.selectorStyle(authorSelector);
+     y$.borderBottom = "2px solid " + color;
+-    z$ = dynamicCSS.selectorStyle(".authorColors .primary-" + authorClass + " ." + authorClass);
++    // Default gray underline for no-author.
++    dynamicCSS.selectorStyle(".authorColors .primary-" + authorClass + " span")
++        .borderBottom = '2px solid #ddd';
++    z$ = dynamicCSS.selectorStyle(".authorColors .primary-" + authorClass + " span." + authorClass);
+     z$.borderBottom = '0px';
+     z1$ = outerDynamicCSS.selectorStyle("#sidedivinner.authorColors > div.primary-" + authorClass);
+     z1$.borderRight = "solid 5px " + color;
+-- 
+2.20.1
+

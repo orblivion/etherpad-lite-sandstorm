@@ -1,0 +1,29 @@
+From 3e64d4d65479957edbfe6c4e273792f8ff560572 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Wed, 16 Nov 2016 16:11:05 -0800
+Subject: [PATCH 06/10] Give authorship sidebar a static width so that it's
+ less jumpy on load.
+
+Also give it a padding-bottom which prevents cutting off the bottom of the last line's author's avatar.
+---
+ static/js/index.js | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 46cdc4f..6d89c21 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -145,7 +145,9 @@ getAuthorClassName = function(author){
+ };
+ function outerInit(outerDynamicCSS){
+   var x$, y$, z$, z1$;
+-  outerDynamicCSS.selectorStyle('#sidedivinner').paddingBottom = "16px";
++  var sidediv = outerDynamicCSS.selectorStyle('#sidedivinner');
++  sidediv.paddingBottom = "16px";
++  sidediv.minWidth = "46px";
+   x$ = outerDynamicCSS.selectorStyle('#sidedivinner > div.primary-author-none');
+   x$.borderRight = 'solid 0px ';
+   x$.paddingRight = '5px';
+-- 
+2.20.1
+

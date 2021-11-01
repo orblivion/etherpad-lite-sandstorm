@@ -1,0 +1,52 @@
+From 71182536eecfa863070b5cfd18e5fc6de1729620 Mon Sep 17 00:00:00 2001
+From: Kenton Varda <kenton@sandstorm.io>
+Date: Mon, 14 Nov 2016 19:18:57 -0800
+Subject: [PATCH 04/10] Don't flicker underlines while typing.
+
+---
+ static/js/index.js | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 833f735..784d705 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -63,14 +63,17 @@ function toggleAuthor($node, prefix, authorClass){
+   return true;
+ }
+ function updateDomline($node){
+-  var lineNumber, authorClass;
+-  lineNumber = $node.index() + 1;
+-  if (!lineNumber) {
+-    return false;
+-  }
+-  authorClass = $node.text().length > 0 ? derivePrimaryAuthor($node) : "none";
++  var authorClass = $node.text().length > 0 ? derivePrimaryAuthor($node) : "none";
+   toggleAuthor($node, "primary", authorClass);
+-  return authorViewUpdate($node, lineNumber, null, authorClass);
++
++  setTimeout(function () {
++    var lineNumber;
++    lineNumber = $node.index() + 1;
++    if (!lineNumber) {
++      return false;
++    }
++    authorViewUpdate($node, lineNumber, null, authorClass);
++  }, 200);
+ }
+ function extractAuthor($node){
+   var ref$, a, ref1$;
+@@ -225,9 +228,7 @@ authorNameAndColorFromAuthorId = function(authorId, userInfo){
+ authorLines = {};
+ out$.acePostWriteDomLineHTML = acePostWriteDomLineHTML;
+ function acePostWriteDomLineHTML(hook_name, args, cb){
+-  return setTimeout(function(){
+-    return updateDomline($(args.node));
+-  }, 200);
++  updateDomline($(args.node));
+ }
+ out$.aceEditEvent = aceEditEvent;
+ function aceEditEvent(hook_name, context, cb){
+-- 
+2.20.1
+
