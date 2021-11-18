@@ -1,4 +1,4 @@
-From 6ec3f02d92dc240437e377adce175a6fc204a07f Mon Sep 17 00:00:00 2001
+From 6932f009ec8e30cc8d6605fe651b8cb8fa8b6ef0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:33:40 -0400
 Subject: [PATCH 06/13] Automatically initialize author name from

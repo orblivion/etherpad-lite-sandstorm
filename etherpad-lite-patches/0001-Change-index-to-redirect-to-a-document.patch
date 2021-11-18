@@ -1,4 +1,4 @@
-From 8db6dfbcb3034d850f598318d82a24c2dc8152bb Mon Sep 17 00:00:00 2001
+From a8a182fa7ac3f622a05021e3a4615438e926cfbb Mon Sep 17 00:00:00 2001
 From: Jason Paryani <github@jparyani.com>
 Date: Wed, 11 Jun 2014 14:48:50 -0700
 Subject: [PATCH 01/13] Change index to redirect to a document
