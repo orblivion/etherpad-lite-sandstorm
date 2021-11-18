@@ -1,7 +1,7 @@
-From b300e3339d5e47cb78fa8230c354eba80de3faa8 Mon Sep 17 00:00:00 2001
+From 96a6f8573fce669ab818101501e5e42e7a401606 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 20:58:41 -0800
-Subject: [PATCH 05/10] Show avatar in sidebar rather than name. Show name on
+Subject: [PATCH 05/12] Show avatar in sidebar rather than name. Show name on
  hover.
 
 ---

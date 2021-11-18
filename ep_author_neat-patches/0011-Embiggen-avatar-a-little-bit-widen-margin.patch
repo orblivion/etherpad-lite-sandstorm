@@ -1,0 +1,37 @@
+From 7401f04daf97f67141f5d2f7acd02e0df48f77c4 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sun, 31 Oct 2021 20:53:13 -0400
+Subject: [PATCH 11/12] Embiggen avatar a little bit, widen margin
+
+For some reason it was smaller upon upgrading Etherpad, so I'm just compensating here.
+---
+ static/js/index.js | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 612ded9..5e46915 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -152,7 +152,7 @@ function outerInit(outerDynamicCSS){
+   var x$, y$, z$, z1$;
+   var sidediv = outerDynamicCSS.selectorStyle('#sidedivinner');
+   sidediv.paddingBottom = "16px";
+-  sidediv.minWidth = "46px";
++  sidediv.minWidth = "80px";
+   x$ = outerDynamicCSS.selectorStyle('#sidedivinner > div.primary-author-none');
+   x$.borderRight = 'solid 0px ';
+   x$.paddingRight = '5px';
+@@ -203,8 +203,8 @@ function aceSetAuthorStyle(name, context){
+       z2$.backgroundSize = "contain";
+       z2$.backgroundImage = "url('" + info.userInfo.avatarUrl + "')";
+       z2$.display = "block";
+-      z2$.width = "32px";
+-      z2$.height = "32px";
++      z2$.width = "40px";
++      z2$.height = "40px";
+       z2$.position = "relative";
+       z2$.top = "-8px";
+       z2$.color = "transparent";
+-- 
+2.20.1
+

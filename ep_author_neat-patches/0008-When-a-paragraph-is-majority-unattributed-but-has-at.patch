@@ -1,7 +1,7 @@
-From e9cb942457c676e93a24f44d9e2e4f01fe99b178 Mon Sep 17 00:00:00 2001
+From 7064665656e31850f45f7b867234e075ae97a15d Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:13:31 -0800
-Subject: [PATCH 08/10] When a paragraph is majority-unattributed but has at
+Subject: [PATCH 08/12] When a paragraph is majority-unattributed but has at
  least one attributed author, don't make that author the paragraph's primary
  author.
 

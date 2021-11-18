@@ -1,7 +1,7 @@
-From 3e64d4d65479957edbfe6c4e273792f8ff560572 Mon Sep 17 00:00:00 2001
+From 98aaa8109f0d384bc0836dc56da9d1d0c8e33e61 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:11:05 -0800
-Subject: [PATCH 06/10] Give authorship sidebar a static width so that it's
+Subject: [PATCH 06/12] Give authorship sidebar a static width so that it's
  less jumpy on load.
 
 Also give it a padding-bottom which prevents cutting off the bottom of the last line's author's avatar.

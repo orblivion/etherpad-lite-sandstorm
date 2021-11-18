@@ -1,0 +1,39 @@
+From fd2cca3657a3fc03ba745d52ee3e9d9fc5e79845 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sun, 31 Oct 2021 22:31:09 -0400
+Subject: [PATCH 12/12] Reposition
+
+First it required playing with the "position" attribute. Secondly, it required only making the avatar styling apply to the first line of the highlight. I'm not sure why it wasn't doing this before.
+---
+ static/js/index.js | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 5e46915..86fd053 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -196,7 +196,11 @@ function aceSetAuthorStyle(name, context){
+     z1$ = outerDynamicCSS.selectorStyle("#sidedivinner.authorColors > div.primary-" + authorClass);
+     z1$.borderRight = "solid 5px " + color;
+     z1$.paddingRight = '5px';
+-    z2$ = outerDynamicCSS.selectorStyle("#sidedivinner > div.primary-" + authorClass + "::before");
++    z1$.position = 'relative';
++    // Not totally sure what's going on, but it looks like .concise is not applied to the first line
++    // that is attributed to the given author. Before I needed to change position attribute of z1$
++    // and z2$, :not(.concise) was not needed in this selector.
++    z2$ = outerDynamicCSS.selectorStyle("#sidedivinner > div.primary-" + authorClass + ":not(.concise)::before");
+     z2$.content = "' '";
+     if (info.userInfo && info.userInfo.avatarUrl) {
+       z2$.backgroundRepeat = "no-repeat";
+@@ -205,7 +209,7 @@ function aceSetAuthorStyle(name, context){
+       z2$.display = "block";
+       z2$.width = "40px";
+       z2$.height = "40px";
+-      z2$.position = "relative";
++      z2$.position = "absolute";
+       z2$.top = "-8px";
+       z2$.color = "transparent";
+       z2$.border = "2px solid " + color;
+-- 
+2.20.1
+

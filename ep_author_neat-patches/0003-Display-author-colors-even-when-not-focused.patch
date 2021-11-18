@@ -1,7 +1,7 @@
-From 4835313835d0b30af5440f1f9d57dea9ef90e182 Mon Sep 17 00:00:00 2001
+From 6f8dada89dadc418cd9aa38ddc64c77309b125e0 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 18:44:21 -0800
-Subject: [PATCH 03/10] Display author colors even when not focused.
+Subject: [PATCH 03/12] Display author colors even when not focused.
 
 It's really weird that these disappear when out-of-focus.
 ---

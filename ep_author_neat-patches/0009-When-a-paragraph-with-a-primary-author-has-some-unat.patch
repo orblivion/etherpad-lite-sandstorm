@@ -1,7 +1,7 @@
-From 558f3d4eb5564eba79de7d9260c10c73e8667eb4 Mon Sep 17 00:00:00 2001
+From 774069a00dbb953f63954ae2c9a831e8aaa1d6bb Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:14:07 -0800
-Subject: [PATCH 09/10] When a paragraph with a primary author has some
+Subject: [PATCH 09/12] When a paragraph with a primary author has some
  unattributed text, underline that text in gray to show that it's not from the
  primary author.
 

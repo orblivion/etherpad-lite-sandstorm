@@ -1,7 +1,7 @@
-From e9308ad290ab85c2bccc5bfa618d9e22adaf08fc Mon Sep 17 00:00:00 2001
+From f773e7ee59e0776b53e700b77870b4a037540d37 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:14:28 -0800
-Subject: [PATCH 10/10] Remove dead debug code.
+Subject: [PATCH 10/12] Remove dead debug code.
 
 ---
  static/js/index.js | 1 -

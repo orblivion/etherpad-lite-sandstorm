@@ -1,7 +1,7 @@
-From 71182536eecfa863070b5cfd18e5fc6de1729620 Mon Sep 17 00:00:00 2001
+From d2bd667ab9d017aa9d7ee4b82315977cb526397f Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 19:18:57 -0800
-Subject: [PATCH 04/10] Don't flicker underlines while typing.
+Subject: [PATCH 04/12] Don't flicker underlines while typing.
 
 ---
  static/js/index.js | 21 +++++++++++----------

@@ -1,7 +1,7 @@
-From 7f34e75a3438733ec0509380064fb123af65606a Mon Sep 17 00:00:00 2001
+From c1a6425bde5aae98425fa438f992154978f9a3f7 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 18:34:04 -0800
-Subject: [PATCH 02/10] Use userInfo passed to setAuthorStyle() hook rather
+Subject: [PATCH 02/12] Use userInfo passed to setAuthorStyle() hook rather
  than scrape it from the DOM.
 
 Requires changes on Etherpad side to send this info -- originally committed as a675091 although future rebases may change the commit ID.

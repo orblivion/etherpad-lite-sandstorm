@@ -1,7 +1,7 @@
-From 48fa498d53f84cc16992d5139cd590f94738f3f6 Mon Sep 17 00:00:00 2001
+From 2b040933a3d6c85ed84b4ee8f9b6f61049ed7a7e Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:12:12 -0800
-Subject: [PATCH 07/10] Make authorship bars continuous through blank lines.
+Subject: [PATCH 07/12] Make authorship bars continuous through blank lines.
 
 ---
  static/js/index.js | 3 +++
