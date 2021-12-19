@@ -1,0 +1,35 @@
+From ff944556f52a2c2d2b690bb7605ef3ccdb11b084 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sat, 20 Nov 2021 13:15:46 -0500
+Subject: [PATCH 14/15] Add sandstormPermissions to clientVars
+
+---
+ src/node/handler/PadMessageHandler.js | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
+index be721d2c..0f770c43 100644
+--- a/src/node/handler/PadMessageHandler.js
++++ b/src/node/handler/PadMessageHandler.js
+@@ -1076,6 +1076,10 @@ const handleClientReady = async (socket, message, authorID) => {
+       return;
+     }
+ 
++    const sandstormPermissions = process.env.SANDSTORM
++      ? decodeURIComponent(socket.client.request.headers["x-sandstorm-permissions"]).split(",")
++      : ["modify", "comment"];
++
+     // Warning: never ever send padIds.padId to the client. If the
+     // client is read only you would open a security hole 1 swedish
+     // mile wide...
+@@ -1114,6 +1118,7 @@ const handleClientReady = async (socket, message, authorID) => {
+       numConnectedUsers: roomSockets.length,
+       readOnlyId: padIds.readOnlyPadId,
+       readonly: sessionInfo.readonly,
++      sandstormPermissions,
+       serverTimestamp: Date.now(),
+       userId: authorID,
+       abiwordAvailable: settings.abiwordAvailable(),
+-- 
+2.20.1
+

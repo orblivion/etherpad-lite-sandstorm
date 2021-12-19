@@ -1,7 +1,7 @@
-From ffbb63c7c54deb4d9df67409c2bf1566e6116c7d Mon Sep 17 00:00:00 2001
+From 8c5fb6a37cf0c62ca372d04204cb959fcd4458e0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 29 Oct 2021 14:34:20 -0400
-Subject: [PATCH 12/13] Disable API
+Subject: [PATCH 12/15] Disable API
 
 ---
  src/node/handler/APIHandler.js | 29 +++++++++--------------------
