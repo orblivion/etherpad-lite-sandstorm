@@ -16,8 +16,7 @@ cd "$here/../ep_author_neat"
 git checkout "$ep_author_neat_base_revision"
 git am ../ep_author_neat-patches/*.patch
 
-# no patches yet
-#cd "$here/../ep_comments_page"
-#
-#git checkout "$ep_comments_page_base_revision"
-#git am ../ep_comments_page-patches/*.patch
+cd "$here/../ep_comments_page"
+
+git checkout "$ep_comments_page_base_revision"
+git am ../ep_comments_page-patches/*.patch

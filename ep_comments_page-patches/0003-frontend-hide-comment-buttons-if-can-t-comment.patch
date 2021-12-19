@@ -1,0 +1,36 @@
+From e0aee62176120f50b47d925f069bdb22692ce9e2 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sun, 21 Nov 2021 16:08:54 -0500
+Subject: [PATCH 3/6] frontend: hide comment buttons if can't comment
+
+---
+ static/js/index.js | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/static/js/index.js b/static/js/index.js
+index 7c0f6fd..f1ad4d4 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -62,6 +62,19 @@ const EpComments = function (context) {
+   this.shouldCollectComment = false;
+   this.init();
+   this.preCommentMarker = preCommentMark.init(this.ace);
++
++  if(clientVars.sandstormPermissions !== undefined){
++    // It appears this is the Sandstorm version of EtherPad. Check if the user
++    // has permission to comment.
++    if(clientVars.sandstormPermissions.indexOf("comment") === -1){
++      // The user does not have permission to comment. OK, hide the comment
++      // button and the ability to reply to comments.
++      $(document.head).contents().append(
++          "<style>.toolbar ul li.addComment{display:none;}</style>");
++      this.padInner.append(
++          "<style>.new-comment{display:none;}</style>");
++    }
++  }
+ };
+ 
+ // Init Etherpad plugin comment pads
+-- 
+2.20.1
+

@@ -1,0 +1,298 @@
+From 4c63d5d3e2b5872b526bd6d60b9f470f0df98b30 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Fri, 26 Nov 2021 17:24:51 -0500
+Subject: [PATCH 5/6] Click to show, mouseover to highlight, urls.
+
+---
+ static/css/comment.css    | 18 +++++++-
+ static/js/commentBoxes.js | 55 ++++++++++++++++++++---
+ static/js/index.js        | 91 ++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 146 insertions(+), 18 deletions(-)
+
+diff --git a/static/css/comment.css b/static/css/comment.css
+index 6cd37a3..0dede0b 100644
+--- a/static/css/comment.css
++++ b/static/css/comment.css
+@@ -65,8 +65,22 @@ input.error, textarea.error {
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+-  padding: 0 10px;
+   background-color: #eeeeed;
++
++  /*
++  Upstream does mouseover to expand. This Sandstorm fork does mouseover to highlight,
++  click to expand. This means that un-expanded mouseover needs to look nicer and more
++  in line with expanded. This involves trading the padding for more margin so the
++  borders move while keeping the text in place.
++  */
++  padding: 0 0px;
++  margin-left: 10px;
++  border-radius: 5px;
++}
++
++/* Mouseover to highlight for non-expanded comment */
++.sidebar-comment.highlighted .compact-display-content {
++  background-color: white !important;
+ }
+ 
+ /* COMMENT FULL (when mouse hover) */
+@@ -207,4 +221,4 @@ input.error, textarea.error {
+ /* OTHER */
+ .hidden {
+   display: none;
+-}
+\ No newline at end of file
++}
+diff --git a/static/js/commentBoxes.js b/static/js/commentBoxes.js
+index b0571be..1fca329 100644
+--- a/static/js/commentBoxes.js
++++ b/static/js/commentBoxes.js
+@@ -15,12 +15,27 @@ const showComment = (commentId, e) => {
+   const commentElm = getCommentsContainer().find(`#${commentId}`);
+   commentElm.show();
+ 
+-  highlightComment(commentId, e);
++  highlightComment(commentId, e, false);
+ };
+ 
+-const hideComment = (commentId, hideCommentTitle) => {
++// If `ifNotExpanded` is `true`, only unhighlight if not already expanded
++//
++// NOTE to packagers- don't forget to look for new places that this function
++// is called and update them accordingly if need be.
++const hideComment = (commentId, hideCommentTitle, ifNotExpanded) => {
+   const commentElm = getCommentsContainer().find(`#${commentId}`);
++
++  if (ifNotExpanded && commentElm.hasClass('full-display')) {
++    return
++  }
++
++  // We're un-expanding a comment, set the url path
++  if (!ifNotExpanded && commentElm.hasClass('full-display')) {
++    window.parent.postMessage({"setPath": "/"}, "*");
++  }
++
+   commentElm.removeClass('full-display');
++  commentElm.removeClass('highlighted');
+ 
+   // hide even the comment title
+   if (hideCommentTitle) commentElm.hide();
+@@ -33,23 +48,46 @@ const hideComment = (commentId, hideCommentTitle) => {
+ 
+ const hideAllComments = () => {
+   getCommentsContainer().find('.sidebar-comment').removeClass('full-display');
++  getCommentsContainer().find('.sidebar-comment').removeClass('highlighted');
+   getPadOuter().find('.comment-modal').removeClass('popup-show');
++
++  // Sandstorm: Set URL.
++  window.parent.postMessage({"setPath": "/"}, "*");
+ };
+ 
+-const highlightComment = (commentId, e, editorComment) => {
++// The (current, as of this writing) upstream version of this function
++// highlights AND expands the comment. The sandstorm function will always
++// highlight, but only expand if `expand` is set to `true`.
++//
++// NOTE to packagers- don't forget to look for new places that this function
++// is called and update them accordingly if need be.
++const highlightComment = (commentId, e, expand, editorComment) => {
+   const container = getCommentsContainer();
+   const commentElm = container.find(`#${commentId}`);
++  if (!commentElm) return;  // probably obsolete URL.
+   const inner = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]');
+ 
+   if (container.is(':visible')) {
+     // hide all other comments
+     container.find('.sidebar-comment').each(function () {
++      // We can remove highlighted and comment-style if we're clicking
+       inner.contents().find('head .comment-style').remove();
+-      $(this).removeClass('full-display');
++      $(this).removeClass('highlighted');
++
++      // We don't want to remove full-display from other comments if we're just doing mouseover.
++      // We also don't want to remove full-display from this same comment if we're right about
++      // to add it back.
++      if ($(this).attr('id') !== commentId && expand) {
++        $(this).removeClass('full-display');
++      }
+     });
+ 
+-    // Then highlight new comment
+-    commentElm.addClass('full-display');
++    // Then highlight or expand new comment
++    if(expand) {
++      commentElm.addClass('full-display');
++    } else {
++      commentElm.addClass('highlighted');
++    }
+     // now if we apply a class such as mouseover to the editor it will go shitty
+     // so what we need to do is add CSS for the specific ID to the document...
+     // It's fucked up but that's how we do it..
+@@ -94,6 +132,11 @@ const highlightComment = (commentId, e, editorComment) => {
+       top: `${targetTop + editorCommentHeight}px`,
+     });
+   }
++
++  // Sandstorm: Set URL.
++  if(expand) {
++    window.parent.postMessage({"setPath": "/#comment/" + commentId}, "*");
++  }
+ };
+ 
+ // Adjust position of the comment detail on the container, to be on the same
+diff --git a/static/js/index.js b/static/js/index.js
+index f1ad4d4..02da6da 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -101,6 +101,30 @@ EpComments.prototype.init = async function () {
+   this.commentRepliesListen();
+   this.commentListen();
+ 
++  // Open the comment indicated in the URL on page load.
++  var hash = document.location.hash;
++  if (hash != "") {
++    if (hash[0] == "#") hash = hash.slice(1);
++    if (hash.lastIndexOf("comment/", 0) === 0) {
++      // this.container isn't visible right away, and highlightComment fails
++      // (since we're not passing in an `e`; see the function definition)
++      // until it is. We'll loop around until it's visible, and give up after
++      // 2 second (which is pretty generous)
++      let showHashCommentIntervalAttempts = 20
++      let showHashCommentInterval = setInterval(() => {
++        if (this.container.is(':visible')) {
++          commentBoxes.highlightComment(hash.slice(8), undefined, true);
++          clearInterval(showHashCommentInterval);
++        } else {
++          showHashCommentIntervalAttempts -= 1;
++          if (showHashCommentIntervalAttempts <= 0) {
++            clearInterval(showHashCommentInterval);
++          }
++        }
++      }, 100)
++    }
++  }
++
+   // Init add push event
+   this.pushComment('add', (commentId, comment) => {
+     this.setComment(commentId, comment);
+@@ -472,15 +496,45 @@ EpComments.prototype.collectComments = function (callback) {
+ 
+   // HOVER SIDEBAR COMMENT
+   let hideCommentTimer;
++  // I bet we don't even need the hideCommentTimer in the Sandstorm edit. In upstream,
++  // mouseout will un-expand the comment, which could be jarring if you do it by accident.
++  // The time is there to prevent that. In the Sandstorm edit, however, we mouseout will
++  // only unhighlight, which isn't a big deal.
++  //
++  // However, in the interest of a smaller diff we'll just make the timer much shorter.
++  // It feels awkward to unhighlight when the timeout is a full second.
+   this.container.on('mouseover', '.sidebar-comment', (e) => {
+     // highlight comment
+     clearTimeout(hideCommentTimer);
+-    commentBoxes.highlightComment(e.currentTarget.id, e);
++    commentBoxes.highlightComment(e.currentTarget.id, e, false);
+   }).on('mouseout', '.sidebar-comment', (e) => {
+     // do not hide directly the comment, because sometime the mouse get out accidently
+     hideCommentTimer = setTimeout(() => {
+-      commentBoxes.hideComment(e.currentTarget.id);
+-    }, 1000);
++      commentBoxes.hideComment(e.currentTarget.id, false, true);
++    }, 100);
++  });
++
++  this.container.parent().on('click', '.sidebar-comment', (e) => {
++    // A note on using `parent()` in the selector:
++    //
++    // If a user clicks on an edit-comment or delete-comment button, this handler is
++    // called *after* the edit-comment and delete-comment button handlers. This is
++    // because the buttons are contained inside .sidebar-comment. This is good,
++    // because we need to call stopPropagation() here.
++    //
++    // The reason we have to use `parent()` here is that the button handlers do the same.
++    // If we don't use `parent()` here, the propagation error gets screwed up such that
++    // this handler is called *before* the button handlers. This means that if a user
++    // clicks on a button, we would call stopPropagation() here, which would stop the
++    // button handlers from being called.
++
++    // expand comment
++    commentBoxes.highlightComment(e.currentTarget.id, e, true);
++
++    // Skip the general padOuter.click handler below
++    // (we just showed this comment, don't want to hide it)
++    // (Not sure why the e.dontUnhighlightComments trick doesn't work here)
++    e.stopPropagation();
+   });
+ 
+   // HOVER OR CLICK THE COMMENTED TEXT IN THE EDITOR
+@@ -489,14 +543,18 @@ EpComments.prototype.collectComments = function (callback) {
+     if (container.is(':visible')) { // not on mobile
+       clearTimeout(hideCommentTimer);
+       const commentId = self.commentIdOf(e);
+-      commentBoxes.highlightComment(commentId, e, $(this));
++      commentBoxes.highlightComment(commentId, e, false, $(this));
+     }
+   });
+ 
+   // click event
+   this.padInner.contents().on('click', '.comment', function (e) {
+     const commentId = self.commentIdOf(e);
+-    commentBoxes.highlightComment(commentId, e, $(this));
++    commentBoxes.highlightComment(commentId, e, true, $(this));
++
++    // Effectively skip the general padInner.click handler below
++    // (we just showed this comment, don't want to hide it)
++    e.dontUnhighlightComments = true;
+   });
+ 
+   this.padInner.contents().on('mouseleave', '.comment', (e) => {
+@@ -504,10 +562,20 @@ EpComments.prototype.collectComments = function (callback) {
+     // only closes comment if it was not opened by a click on the icon
+     if (!commentOpenedByClickOnIcon && container.is(':visible')) {
+       hideCommentTimer = setTimeout(() => {
+-        self.closeOpenedComment(e);
+-      }, 1000);
++        self.closeOpenedComment(e, true);
++      }, 100);
++    }
++  });
++
++  // Click anywhere else closes comments.
++  this.padInner.contents().on("click", function(e){
++    if (!e.dontUnhighlightComments) {
++      commentBoxes.hideAllComments();
+     }
+   });
++  this.padOuter.contents().on("click", function(e){
++    commentBoxes.hideAllComments();
++  });
+ 
+   this.addListenersToCloseOpenedComment();
+ 
+@@ -529,9 +597,12 @@ EpComments.prototype.addListenersToCloseOpenedComment = function () {
+ };
+ 
+ // Close comment that is opened
+-EpComments.prototype.closeOpenedComment = function (e) {
++
++// NOTE to packagers- don't forget to look for new places that this function
++// is called and update them accordingly if need be.
++EpComments.prototype.closeOpenedComment = function (e, unhighlightOnly) {
+   const commentId = this.commentIdOf(e);
+-  commentBoxes.hideComment(commentId);
++  commentBoxes.hideComment(commentId, false, unhighlightOnly);
+ };
+ 
+ // Close comment if event target was outside of comment or on a comment icon
+@@ -540,7 +611,7 @@ EpComments.prototype.closeOpenedCommentIfNotOnSelectedElements = function (e) {
+   // any of the comment icons
+   if (commentIcons.shouldNotCloseComment(e) || commentBoxes.shouldNotCloseComment(e)) return;
+   // All clear, can close the comment
+-  this.closeOpenedComment(e);
++  this.closeOpenedComment(e, false);
+ };
+ 
+ // Collect Comments and link text content to the comments div
+-- 
+2.20.1
+

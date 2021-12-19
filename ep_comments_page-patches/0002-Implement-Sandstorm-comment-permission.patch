@@ -1,0 +1,52 @@
+From 71ee9d3e54b7e0955cdc707c42de02ef1192da42 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sun, 21 Nov 2021 16:08:38 -0500
+Subject: [PATCH 2/6] Implement Sandstorm comment permission
+
+---
+ index.js | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/index.js b/index.js
+index 9c3f63c..500dc80 100644
+--- a/index.js
++++ b/index.js
+@@ -26,11 +26,23 @@ exports.padCopy = async (hookName, context) => {
+   ]);
+ };
+ 
++function sandstormCanComment(client) {
++  var sandstormPermissions =
++    client.request.headers["x-sandstorm-permissions"];
++  if(sandstormPermissions === undefined) {
++    return false;
++  }
++  return sandstormPermissions.split(",").indexOf("comment") !== -1;
++}
++
+ exports.handleMessageSecurity = (hookName, context, callback) => {
+   const {message: {data: {apool: {numToAttrib} = {}} = {}} = {}} = context;
+   if (numToAttrib && numToAttrib[0] && numToAttrib[0][0] === 'comment') {
+     // Comment change, allow it to override readonly security model!!
+-    return callback(true);
++    // SANDSTORM EDIT
++    if (sandstormCanComment(context.client)) {
++      return callback(true);
++    }
+   }
+   return callback();
+ };
+@@ -114,6 +126,10 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('addCommentReply', handler(async (data) => {
++      // SANDSTORM EDIT
++      if (!sandstormCanComment(socket.client)){
++        return
++      }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       const [replyId, reply] = await commentManager.addCommentReply(padId, data);
+       reply.replyId = replyId;
+-- 
+2.20.1
+

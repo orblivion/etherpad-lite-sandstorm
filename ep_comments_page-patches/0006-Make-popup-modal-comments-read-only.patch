@@ -1,0 +1,80 @@
+From 28e4f2fba9fe471108a7817c8e9109769c98860d Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 16 Dec 2021 13:33:27 -0500
+Subject: [PATCH 6/6] Make popup modal comments read-only
+
+This is basically the mobile interface. No buttons, no replying. Clicking the comment will dismiss it.
+
+This only applies to existing comments. You can still add new comments.
+---
+ static/css/comment.css | 30 ++++++++++++++++++++++++++++++
+ static/js/index.js     | 12 ++++++++++++
+ 2 files changed, 42 insertions(+)
+
+diff --git a/static/css/comment.css b/static/css/comment.css
+index 0dede0b..deddf33 100644
+--- a/static/css/comment.css
++++ b/static/css/comment.css
+@@ -195,6 +195,36 @@ input.error, textarea.error {
+   display: none !important;
+ }
+ 
++/*
++The Sandstorm changes to the interface work on the side bar. They don't seem to
++work on the popup modal. They didn't work in the previous version of the Etherpad
++app, so we're going to put it off for now here as well. Just hide all of the
++buttons.
++*/
++
++.comment-modal .buttonicon, .comment-modal input, .comment-modal form.new-comment {
++  display: none;
++}
++
++/*
++  One more pesky button to remove:
++
++  As of this writing, you can find these selectors implementing showing the edit
++  button when you hover over comment replies:
++
++  .sidebar-comment-reply:hover:not(.editing) .comment-edit
++  .sidebar-comment-reply:hover:not(.editing) .comment-edit:hover
++
++  So here, we're undoing this when for .comment-modal
++*/
++
++.comment-modal .sidebar-comment-reply:hover:not(.editing) .comment-edit {
++  display: none;
++}
++.comment-modal .sidebar-comment-reply:hover:not(.editing) .comment-edit:hover {
++  display: none;
++}
++
+ /* MODAL FOR MOBILES */
+ .comment-modal {
+   bottom: auto !important;
+diff --git a/static/js/index.js b/static/js/index.js
+index 02da6da..911abcb 100644
+--- a/static/js/index.js
++++ b/static/js/index.js
+@@ -528,6 +528,18 @@ EpComments.prototype.collectComments = function (callback) {
+     // clicks on a button, we would call stopPropagation() here, which would stop the
+     // button handlers from being called.
+ 
++    // The Sandstorm changes to the interface work on the side bar. They don't seem to
++    // work on the popup modal. They didn't work in the previous version of the Etherpad
++    // app, so we're going to put it off for now here as well. So, if the user clicks
++    // on the comment, we want to just hide it.
++    //
++    // Conveniently, the click handler we added below will hide all comments on click.
++    // All we need to do is *not* stop propagation. We also don't want to do anything
++    // else. So we'll just return now.
++    if (e.currentTarget.parentElement.parentElement.classList.contains('comment-modal')) {
++      return;
++    }
++
+     // expand comment
+     commentBoxes.highlightComment(e.currentTarget.id, e, true);
+ 
+-- 
+2.20.1
+

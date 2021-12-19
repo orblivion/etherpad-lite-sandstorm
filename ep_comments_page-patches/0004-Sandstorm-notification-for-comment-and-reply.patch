@@ -1,0 +1,81 @@
+From ea89c1c3f4ad9c3e3647bb73201722b1661530be Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Sun, 21 Nov 2021 16:33:54 -0500
+Subject: [PATCH 4/6] Sandstorm notification for comment and reply
+
+---
+ commentManager.js | 17 +++++++++++++++--
+ index.js          |  6 ++++--
+ 2 files changed, 19 insertions(+), 4 deletions(-)
+
+diff --git a/commentManager.js b/commentManager.js
+index 1f707e3..9a9decf 100644
+--- a/commentManager.js
++++ b/commentManager.js
+@@ -8,6 +8,9 @@ const shared = require('./static/js/shared');
+ 
+ const logger = log4js.getLogger('ep_comments_page');
+ 
++const sandstorm = require('ep_etherpad-lite/node/handler/SandstormHandler.js');
++const padManager = require("ep_etherpad-lite/node/db/PadManager");
++
+ exports.getComments = async (padId) => {
+   // Not sure if we will encouter race conditions here..  Be careful.
+ 
+@@ -36,8 +39,13 @@ exports.deleteComments = async (padId) => {
+   await db.remove(`comments:${padId}`);
+ };
+ 
+-exports.addComment = async (padId, data) => {
++exports.addComment = async (padId, sessionId, data) => {
+   const [commentIds, comments] = await exports.bulkAddComments(padId, [data]);
++  // SANDSTORM EDIT
++  const path = "#comment/" + commentIds[0];
++  sandstorm.activity(sessionId, "comment", path, path, "comment: " + commentIds[0],
++                     comments[0].text);
++  // END SANDSTORM EDIT
+   return [commentIds[0], comments[0]];
+ };
+ 
+@@ -96,8 +104,13 @@ exports.deleteCommentReplies = async (padId) => {
+   await db.remove(`comment-replies:${padId}`);
+ };
+ 
+-exports.addCommentReply = async (padId, data) => {
++exports.addCommentReply = async (padId, sessionId, data) => {
+   const [replyIds, replies] = await exports.bulkAddCommentReplies(padId, [data]);
++  // SANDSTORM EDIT
++  var path = "#comment/" + data.commentId;
++  sandstorm.activity(sessionId, "reply", path, path, "comment: " + data.commentId,
++                     replies[0].text);
++  // END SANDSTORM EDIT
+   return [replyIds[0], replies[0]];
+ };
+ 
+diff --git a/index.js b/index.js
+index 500dc80..13fe6a4 100644
+--- a/index.js
++++ b/index.js
+@@ -75,7 +75,8 @@ exports.socketio = (hookName, args, cb) => {
+     socket.on('addComment', handler(async (data) => {
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       const content = data.comment;
+-      const [commentId, comment] = await commentManager.addComment(padId, content);
++      const sessionId = socket.client.request.headers["x-sandstorm-session-id"];
++      const [commentId, comment] = await commentManager.addComment(padId, sessionId, content);
+       if (commentId != null && comment != null) {
+         socket.broadcast.to(padId).emit('pushAddComment', commentId, comment);
+         return [commentId, comment];
+@@ -131,7 +132,8 @@ exports.socketio = (hookName, args, cb) => {
+         return
+       }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+-      const [replyId, reply] = await commentManager.addCommentReply(padId, data);
++      const sessionId = socket.client.request.headers["x-sandstorm-session-id"];
++      const [replyId, reply] = await commentManager.addCommentReply(padId, sessionId, data);
+       reply.replyId = replyId;
+       socket.broadcast.to(padId).emit('pushAddCommentReply', replyId, reply);
+       return [replyId, reply];
+-- 
+2.20.1
+
