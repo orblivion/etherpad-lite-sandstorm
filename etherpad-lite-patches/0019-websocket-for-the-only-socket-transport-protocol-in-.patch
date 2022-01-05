@@ -1,7 +1,7 @@
 From d12d89d918afb26f44e9592b58d1cca7d2f50349 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:25:42 -0500
-Subject: [PATCH 19/20] websocket for the only socket transport protocol in
+Subject: [PATCH 19/21] websocket for the only socket transport protocol in
  settings.json
 
 This was done in the previous version of the app, I'm not even sure why but it still works.

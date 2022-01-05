@@ -1,5 +1,7 @@
 WIP update for etherpad for sandstorm.
 
+NOTE: If you change the list of installed plugins, make sure to update the defaultPadText in settings.json
+
 Much of this will have been taken from [Kenton's previous version](https://github.com/kentonv/etherpad-lite).
 
 # Raw packaging:

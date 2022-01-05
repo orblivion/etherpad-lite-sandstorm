@@ -1,0 +1,25 @@
+From dda02d937c1e8f04bfcc3193c0d621e25a9a6ebe Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 4 Jan 2022 20:58:18 -0500
+Subject: [PATCH 21/21] Put installed plugins in default text
+
+---
+ settings.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/settings.json b/settings.json
+index 86bfffba..f0fd59ec 100644
+--- a/settings.json
++++ b/settings.json
+@@ -222,7 +222,7 @@
+   /*
+    * The default text of a pad
+    */
+-  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n",
++  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n\nThis version of Etherpad includes the following plugins: ep_align ep_author_neat ep_comments_page ep_font_color ep_font_family ep_font_size ep_headings2 ep_print ep_spellcheck ep_sticky_attributes ep_subscript_and_superscript\n",
+ 
+   /*
+    * Default Pad behavior.
+-- 
+2.20.1
+
