@@ -1,0 +1,30 @@
+From 406b501996a050bf68f127a52593140009798c61 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 4 Jan 2022 19:41:54 -0500
+Subject: [PATCH 18/20] Don't minify during requests.
+
+---
+ settings.json | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/settings.json b/settings.json
+index 2d7f119a..2d79ab9e 100644
+--- a/settings.json
++++ b/settings.json
+@@ -296,7 +296,12 @@
+    * This will improve the loading performance massively, but makes it difficult
+    * to debug the javascript/css
+    */
+-  "minify": true,
++
++  /*
++     SANDSTORM: This is not helpful in the sandstorm environment unless we minify
++     things ahead of time and commit the result instead.
++  */
++  "minify": false,
+ 
+   /*
+    * How long may clients use served javascript code (in seconds)?
+-- 
+2.20.1
+

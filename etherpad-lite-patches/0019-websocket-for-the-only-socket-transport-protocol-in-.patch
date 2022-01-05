@@ -1,0 +1,27 @@
+From d12d89d918afb26f44e9592b58d1cca7d2f50349 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 4 Jan 2022 20:25:42 -0500
+Subject: [PATCH 19/20] websocket for the only socket transport protocol in
+ settings.json
+
+This was done in the previous version of the app, I'm not even sure why but it still works.
+---
+ settings.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/settings.json b/settings.json
+index 2d79ab9e..c5d2b816 100644
+--- a/settings.json
++++ b/settings.json
+@@ -480,7 +480,7 @@
+   /*
+    * Restrict socket.io transport methods
+    */
+-  "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],
++  "socketTransportProtocols" : ["websocket"],
+ 
+   "socketIo": {
+     /*
+-- 
+2.20.1
+
