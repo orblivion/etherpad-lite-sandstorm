@@ -1,7 +1,7 @@
-From 37697957663bb0dcc7ca791888260054003b8309 Mon Sep 17 00:00:00 2001
+From e9d0d673bc5af4524612a698a6af538ff422dd05 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 21:24:10 -0400
-Subject: [PATCH 10/21] Sends "edit" notification to Sandstorm
+Subject: [PATCH 10/22] Sends "edit" notification to Sandstorm
 
 Requires change in pkgdef
 ---

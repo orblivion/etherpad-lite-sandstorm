@@ -1,0 +1,28 @@
+From 6ea7da101d40ddaea0a6b496ce3c2d3abe0aac70 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Tue, 4 Jan 2022 22:17:44 -0500
+Subject: [PATCH 22/22] Use sqlite instead of dirty, in settings.json
+
+---
+ settings.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/settings.json b/settings.json
+index f0fd59ec..1d2479d0 100644
+--- a/settings.json
++++ b/settings.json
+@@ -196,9 +196,9 @@
+    * https://www.npmjs.com/package/ueberdb2
+    */
+ 
+-  "dbType": "dirty",
++  "dbType": "sqlite",
+   "dbSettings": {
+-    "filename": "var/dirty.db"
++    "filename": "var/sqlite.db"
+   },
+ 
+   /*
+-- 
+2.20.1
+
