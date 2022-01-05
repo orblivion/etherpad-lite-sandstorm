@@ -1,4 +1,4 @@
-From 86cf3dcac0dd8e8d33704cd46e95d83da5f5faf9 Mon Sep 17 00:00:00 2001
+From c74129ab79b18637e0b1383e2e774ae66b93147f Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:58:18 -0500
 Subject: [PATCH 21/22] Put installed plugins in default text
@@ -8,7 +8,7 @@ Subject: [PATCH 21/22] Put installed plugins in default text
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/settings.json b/settings.json
-index 86bfffba..f0fd59ec 100644
+index 561ee8f8..02511ff2 100644
 --- a/settings.json
 +++ b/settings.json
 @@ -222,7 +222,7 @@

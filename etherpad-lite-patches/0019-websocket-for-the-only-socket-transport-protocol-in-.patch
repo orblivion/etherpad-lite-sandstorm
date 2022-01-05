@@ -1,4 +1,4 @@
-From fd7c7850fb651baac445f833492691acaf732597 Mon Sep 17 00:00:00 2001
+From f7de7c16e304ebc2e490cd26a586c1b6c56ac713 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:25:42 -0500
 Subject: [PATCH 19/22] websocket for the only socket transport protocol in
@@ -6,16 +6,27 @@ Subject: [PATCH 19/22] websocket for the only socket transport protocol in
 
 This was done in the previous version of the app, I'm not even sure why but it still works.
 ---
- settings.json | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ settings.json | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/settings.json b/settings.json
-index 2d79ab9e..c5d2b816 100644
+index 2d79ab9e..22bc1c98 100644
 --- a/settings.json
 +++ b/settings.json
-@@ -480,7 +480,7 @@
+@@ -479,8 +479,18 @@
+ 
    /*
     * Restrict socket.io transport methods
++
++     SANDSTORM EDIT: Actually not sure if/why this is necessary, but Kenton's
++     version of the app did this.
++
++     https://github.com/kentonv/etherpad-lite/commit/162c607f1adda7586bd12d2b7254fbeb2dac1c09
++
++     (This commit is for settings.json.template but the same setting is in the settings.json
++     in the same repository. I'm pointing to this commit because it's more specific to this
++     setting.)
++
     */
 -  "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],
 +  "socketTransportProtocols" : ["websocket"],

@@ -1,4 +1,4 @@
-From 71dd7ad0e0ea1372ae4c6ddd7d65d574ff342af7 Mon Sep 17 00:00:00 2001
+From edde4a95be9c4f4e23278d06e8af4dfb6e7df770 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 18 Dec 2021 21:38:44 -0500
 Subject: [PATCH 15/22] Set SameSite=Lax for cookies.

@@ -1,4 +1,4 @@
-From 4d73aa01c817b1ac3bfe2fbd033a625dc071a6ab Mon Sep 17 00:00:00 2001
+From 19a108b269e1e2114ce5a59147bc428a15a52ab9 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 29 Oct 2021 15:28:53 -0400
 Subject: [PATCH 13/22] Use Sandstorm permissions header for readonly

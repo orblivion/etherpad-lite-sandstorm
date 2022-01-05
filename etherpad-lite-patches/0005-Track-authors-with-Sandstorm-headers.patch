@@ -1,4 +1,4 @@
-From 3d27f1a5cde53b918920649e0b86194909f0ff02 Mon Sep 17 00:00:00 2001
+From f2574bd91520ddb07e525628365ce580c1a76674 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:11:38 -0400
 Subject: [PATCH 05/22] Track authors with Sandstorm headers

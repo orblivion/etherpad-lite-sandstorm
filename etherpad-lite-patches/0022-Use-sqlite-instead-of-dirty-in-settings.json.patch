@@ -1,4 +1,4 @@
-From 6ea7da101d40ddaea0a6b496ce3c2d3abe0aac70 Mon Sep 17 00:00:00 2001
+From 58e7201a1bc3962c2a696d1594118c7af4dbf3a9 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 22:17:44 -0500
 Subject: [PATCH 22/22] Use sqlite instead of dirty, in settings.json
@@ -8,7 +8,7 @@ Subject: [PATCH 22/22] Use sqlite instead of dirty, in settings.json
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/settings.json b/settings.json
-index f0fd59ec..1d2479d0 100644
+index 02511ff2..e5a0a7ba 100644
 --- a/settings.json
 +++ b/settings.json
 @@ -196,9 +196,9 @@
