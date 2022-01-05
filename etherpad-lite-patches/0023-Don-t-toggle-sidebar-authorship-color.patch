@@ -1,0 +1,33 @@
+From 49741029612760c0dbb2ff1dd5e69350402e9d28 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Wed, 5 Jan 2022 12:35:39 -0500
+Subject: [PATCH 23/23] Don't toggle sidebar authorship color
+
+Only toggle the underlining color. I'm avoiding a bug with authorship avatar, and this turns out not to be a regression. See comment in commit for details.
+---
+ src/static/js/pad_editor.js | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/static/js/pad_editor.js b/src/static/js/pad_editor.js
+index d8c3ae5a..c6c5ba66 100644
+--- a/src/static/js/pad_editor.js
++++ b/src/static/js/pad_editor.js
+@@ -129,7 +129,14 @@ const padeditor = (() => {
+       v = getOption('showAuthorColors', true);
+       self.ace.setProperty('showsauthorcolors', v);
+       $('#chattext').toggleClass('authorColors', v);
+-      $('iframe[name="ace_outer"]').contents().find('#sidedivinner').toggleClass('authorColors', v);
++
++      // SANDSTORM EDIT:
++      // Making the "Authorship Colors" toggle switch not affect the color on the side of the document.
++      // Reason is that given how we implement the authorship avatar placement on the sidebar, turning off the authorColors
++      // class here somehow screws it up. We could take the time to fix it later. However, this happens to match the
++      // behavior of the previous version of the etherpad app, so I'm just going to put it off.
++      // $('iframe[name="ace_outer"]').contents().find('#sidedivinner').toggleClass('authorColors', v);
++
+       padutils.setCheckbox($('#options-colorscheck'), v);
+ 
+       // Override from parameters if true
+-- 
+2.20.1
+
