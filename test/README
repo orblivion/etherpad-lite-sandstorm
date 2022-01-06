@@ -1,0 +1,5 @@
+See bin/run.sh in etherpad repository for explanation of what this is for.
+
+dirty.db - Created by a very early version of the Etherpad Sandstorm app, running etherpad 1.3.0
+* Should have edits from the primary user, a different logged in user, and an anon user. (Importing in 2022, it does show up as three different users, but specific user ID not preserved. Just gonna call this a best-effort good-enough for such old grains)
+* Should have bold, italic, underline, striketru, numbered items, bullet items, and 3 levels of indentation.

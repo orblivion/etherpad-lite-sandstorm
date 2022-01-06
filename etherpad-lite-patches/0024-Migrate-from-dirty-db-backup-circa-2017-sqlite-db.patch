@@ -1,0 +1,162 @@
+From 0c8e04ed7d03903fcfc15ba42e3d80c714e8f26a Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 6 Jan 2022 16:11:54 -0500
+Subject: [PATCH 24/24] Migrate from dirty db, backup circa 2017 sqlite db
+
+---
+ settings.json            |  4 ++-
+ src/bin/run.sh           | 43 ++++++++++++++++++++++++
+ src/sandstorm-migrate.js | 72 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 118 insertions(+), 1 deletion(-)
+ create mode 100644 src/sandstorm-migrate.js
+
+diff --git a/settings.json b/settings.json
+index e5a0a7ba..135222e1 100644
+--- a/settings.json
++++ b/settings.json
+@@ -198,7 +198,9 @@
+ 
+   "dbType": "sqlite",
+   "dbSettings": {
+-    "filename": "var/sqlite.db"
++    /* IMPORTANT: If you change this, make sure to grep for this filename in
++    the codebase for other relevant changes. */
++    "filename": "var/sqlite3.1.db"
+   },
+ 
+   /*
+diff --git a/src/bin/run.sh b/src/bin/run.sh
+index 0bad9425..c8bf4b0e 100755
+--- a/src/bin/run.sh
++++ b/src/bin/run.sh
+@@ -40,6 +40,49 @@ elif [ ! -e cache ]; then
+   exit 1
+ fi
+ 
++# Database migrations and backups.
++#
++# Early in the history of this app we migrated from dirty to sqlite3. Since
++# then we've upgraded Etherpad which may or may not have schema/data
++# migrations.
++#
++# Our goal here is to accommodate old grains in newer apps:
++#
++# * Migrate from dirty to sqlite3, and back up the original in case of problem
++# * Back up sqlite3 between big Etherpad version jumps in case of any
++#   schema/data migration problems
++#
++# We determine the state of the grain's migration based on the name of the
++# database file:
++#
++# dirty.db     : Early-2015  Etherpad ?-?
++# sqlite3.db   : 2015-2022   Etherpad ?-1.6
++# sqlite3.1.db : 2022-Today  Etherpad 1.8-?
++#
++# If we have another jump later on where we are concerned about schema/data
++# migrations, we can back up sqlite3.1.db and create sqlite3.2.db, and so on.
++#
++# If we want to test these migrations, the test/ directory of the
++# etherpad-sandstorm git repository has test databases created by older versions
++# of the app.
++
++SCRIPTPATH=`pwd -P` # Should be Etherpad root
++if [ -e var/dirty.db ]; then
++  # Upgrade dirty.db to sqlite.
++  echo "Upgrading from dirty.db to sqlite..."
++  node $SCRIPTPATH/node_modules/ep_etherpad-lite/sandstorm-migrate.js || exit 1
++  gzip -c var/dirty.db > var/dirty-backup.db.gz || exit 1
++  rm -f var/dirty.db
++  rm -f var/minified_*  # Delete garbage we used to litter here.
++fi
++
++if [ -e var/sqlite3.db ]; then
++  echo "Backing up sqlite db from a previous version of this Sandstorm app that ran a rather older version of etherpad..."
++  cp var/sqlite3.db var/sqlite3.1.db
++  gzip -c var/sqlite3.db > var/sqlite3-backup.db.gz || exit 1
++  rm -f var/sqlite3.db
++fi
++
+ # Move to the node folder and start
+ log "Starting Etherpad..."
+ 
+diff --git a/src/sandstorm-migrate.js b/src/sandstorm-migrate.js
+new file mode 100644
+index 00000000..a3b5f6b7
+--- /dev/null
++++ b/src/sandstorm-migrate.js
+@@ -0,0 +1,72 @@
++// The first releases of Etherpad on Sandstorm unfortunately used dirty.db as
++// the database, because it at first appeared like a perfectly cromulent way to
++// store data for a single-document, single-process instance. Unfortunately, I
++// missed the fact that dirty.db is append-only, and as a result etherpad
++// documents have tended to get very large over time, as the same text is
++// repeatedly stored to the database over and over.
++//
++// So now we're switching to sqlite, which we should have done in the first
++// place. But we need to migrate old pads. So that's where this script comes
++// in.
++
++var ueberDB = require("ueberdb2");
++var dirtyDB = require("dirty");
++
++var dirty = new dirtyDB("var/dirty.db");
++
++// NOTE: This should refer to the *current* sqlite3 filename. See bin/run.sh
++// for explanation.
++var sqlite = new ueberDB.database("sqlite", {filename: "var/sqlite3.1.db"});
++
++var dirtyLoaded = false;
++var dirtyCount;
++dirty.on("load", function (count) {
++  dirtyCount = count;
++  dirtyLoaded = true;
++});
++dirty.on("error", function (err) {
++  console.error(err);
++  process.exit(1);
++});
++
++function sqliteInitialized(err) {
++  if (err) {
++    console.error(err);
++    process.exit(1);
++  }
++
++  if (dirtyLoaded) {
++    dirtyInitialized(dirtyCount);
++  } else {
++    dirty.on("load", dirtyInitialized);
++  }
++}
++
++function dirtyInitialized(count) {
++  dirty.forEach(function (key, val) {
++    sqlite.set(key, val);
++  });
++  
++  sqlite.doShutdown(done);
++}
++
++function done(err) {
++  if (err) {
++    console.error(err);
++    process.exit(1);
++  }
++
++  sqlite.close(closed);
++}
++
++function closed(err) {
++  if (err) {
++    console.error(err);
++    process.exit(1);
++  }
++  
++  process.exit(0);
++}
++
++sqlite.init(sqliteInitialized);
++
+-- 
+2.20.1
+
