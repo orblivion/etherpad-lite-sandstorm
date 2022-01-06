@@ -29,6 +29,7 @@ lib64/ld-linux-x86-64.so.2
 opt/app
 opt/app/.git/HEAD
 opt/app/.sandstorm/launcher.sh
+opt/app/basic-plugins
 opt/app/etherpad-lite
 opt/app/etherpad-lite/.git
 opt/app/etherpad-lite/.git/HEAD
@@ -5291,7 +5292,6 @@ opt/app/etherpad-lite/src/templates/export_html.html
 opt/app/etherpad-lite/src/templates/index.html
 opt/app/etherpad-lite/src/templates/pad.html
 opt/app/etherpad-lite/var
-opt/app/plugins
 proc/cpuinfo
 sandstorm-http-bridge
 sandstorm-http-bridge-config
