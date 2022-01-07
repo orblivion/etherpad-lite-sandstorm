@@ -21,3 +21,7 @@ Then run etherpad-lite once outside of sand Sandstorm to build the caching: run 
 ## Run within Sandstorm
 
 Run spk dev within .sandstorm/ to run it in Sandstorm.
+
+# License
+[Apache License v2](http://www.apache.org/licenses/LICENSE-2.0.html) for Etherpad
+[Creative Commons Attribution-Sharealike 3.0](https://creativecommons.org/licenses/by-sa/3.0/) for the Etherpad logo (by Marcel Klehr) used for the app icon
