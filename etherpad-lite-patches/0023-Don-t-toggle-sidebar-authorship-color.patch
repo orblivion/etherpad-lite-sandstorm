@@ -1,7 +1,7 @@
 From 49741029612760c0dbb2ff1dd5e69350402e9d28 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 5 Jan 2022 12:35:39 -0500
-Subject: [PATCH 23/24] Don't toggle sidebar authorship color
+Subject: [PATCH 23/25] Don't toggle sidebar authorship color
 
 Only toggle the underlining color. I'm avoiding a bug with authorship avatar, and this turns out not to be a regression. See comment in commit for details.
 ---

@@ -1,7 +1,7 @@
 From 384ae7c342cdb293a7c9281b49158fc97dbe3892 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:28:52 -0500
-Subject: [PATCH 20/24] Remove the embed toolbar
+Subject: [PATCH 20/25] Remove the embed toolbar
 
 ---
  settings.json | 4 +---
