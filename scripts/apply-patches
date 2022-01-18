@@ -2,6 +2,10 @@
 
 set -exuo pipefail
 
+# Make `git am` happy. Particularly useful on vagrant.
+export GIT_COMMITTER_EMAIL="robot@localhost"
+export GIT_COMMITTER_NAME="Robot"
+
 here="$(realpath $(dirname $0))"
 
 . "$here/config.sh"

@@ -1,7 +1,7 @@
-From 162a127f47e9dd3a1ffa0ae7529c837f2b45c817 Mon Sep 17 00:00:00 2001
+From a19e5ace28aa8f3abf1f32263845a6373c044cba Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 29 Oct 2021 15:28:53 -0400
-Subject: [PATCH 13/25] Use Sandstorm permissions header for readonly
+Subject: [PATCH 12/24] Use Sandstorm permissions header for readonly
 
 ---
  src/node/hooks/express/webaccess.js | 6 ++++++

@@ -1,7 +1,7 @@
-From 863e94200db9edcb98bf50dd902f1d4e0aee6171 Mon Sep 17 00:00:00 2001
+From 0c2a5c19cc71fe4612c39e118e180dcf1857b7a0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:27:46 -0400
-Subject: [PATCH 08/25] Pass full userInfo into setAuthorInfo() /
+Subject: [PATCH 07/24] Pass full userInfo into setAuthorInfo() /
  setAuthorStyle() hook.
 
 This allows the plugin to determine the author name and color in a sane way. Without this, ep_author_neat currently scrapes the DOM to find this information, which doesn't work sometimes.

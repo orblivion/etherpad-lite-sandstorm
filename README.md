@@ -8,9 +8,11 @@ Much of this will have been taken from [Kenton's previous version](https://githu
 
 **WARNING: Don't do this on your normal computer**. It will install things, etc. This is intended for people who prefer raw spk because they run QubesOS or something like that, where you can make throwaway VMs in your own way. Most people likely should use the vagrant-spk option.
 
-Firstly, this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
+1) this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
 
-Secondly, your user should have write access (without requiring sudo) to /var/.
+2) your user should have write access (without requiring sudo) to /var/.
+
+3) make sure your user isn't for some reason called "vagrant". A couple commands are vagrant-specific, and you may not want those commands to be run here.
 
 ## Build and run outside of Sandstorm
 

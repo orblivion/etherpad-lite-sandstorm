@@ -1,7 +1,7 @@
-From f68984a5eedc94a470882bd9b959cde93f6d751e Mon Sep 17 00:00:00 2001
+From aef75805242c237810a55f51426bfb56244dde6d Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 6 Jan 2022 16:11:54 -0500
-Subject: [PATCH 24/25] Migrate from dirty db, backup circa 2017 sqlite db
+Subject: [PATCH 23/24] Migrate from dirty db, backup circa 2017 sqlite db
 
 ---
  settings.json            |  4 ++-
@@ -26,10 +26,10 @@ index e5a0a7ba..135222e1 100644
  
    /*
 diff --git a/src/bin/run.sh b/src/bin/run.sh
-index 0bad9425..c8bf4b0e 100755
+index 91791088..ec9c6256 100755
 --- a/src/bin/run.sh
 +++ b/src/bin/run.sh
-@@ -40,6 +40,49 @@ elif [ ! -e cache ]; then
+@@ -41,6 +41,49 @@ elif [ ! -e cache ]; then
    exit 1
  fi
  

@@ -1,36 +1,47 @@
-From b57f443c92fae878c39497cdebed236a66559565 Mon Sep 17 00:00:00 2001
+From b9f4df0ff501481332ddcf05462e1b1881adc21a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
-Subject: [PATCH 03/25] perf: npm check for find plugin list in build.sh
+Subject: [PATCH 03/24] perf: npm check for find plugin list in build.sh
 
 This improves startup time substantially.
+
+Also set up capnp env (copying what Kenton did) and throw error if starting with sandstorm without the cache dir.
 ---
- src/bin/run.sh                         |  3 +++
- src/node/cachePluginDependenciesObj.js |  8 ++++++++
- src/static/js/pluginfw/plugins.js      | 12 ++++++++++--
- 3 files changed, 21 insertions(+), 2 deletions(-)
+ src/bin/run.sh                         | 12 ++++++
+ src/node/cachePluginDependenciesObj.js | 55 ++++++++++++++++++++++++++
+ src/static/js/pluginfw/plugins.js      | 21 ++--------
+ 3 files changed, 71 insertions(+), 17 deletions(-)
  create mode 100644 src/node/cachePluginDependenciesObj.js
 
 diff --git a/src/bin/run.sh b/src/bin/run.sh
-index d36d2c68..ba6d15f5 100755
+index d36d2c68..91791088 100755
 --- a/src/bin/run.sh
 +++ b/src/bin/run.sh
-@@ -29,6 +29,9 @@ fi
+@@ -29,6 +29,18 @@ fi
  # Prepare the environment
  #src/bin/installDeps.sh "$@" || exit 1
  
-+# TODO - do this like Kenton does, eventually
-+mkdir -p cache
++# Clear the cache directory so that we can refill it if running outside Sandstorm.
++if [ "${SANDSTORM:-no}" = no ]; then
++  # Load .capnp files from sandstorm installation. (In the Sandstorm sandbox, these are mapped
++  # to /usr/include.)
++  export NODE_PATH="/opt/sandstorm/latest/usr/include"
++elif [ ! -e cache ]; then
++  # TODO if we later implement running once outside Sandstorm to populate the
++  #   minification cache, we may want to update the error message here
++  echo "ERROR: cache directory missing (should be created by build.sh)" >&2
++  exit 1
++fi
 +
  # Move to the node folder and start
  log "Starting Etherpad..."
  
 diff --git a/src/node/cachePluginDependenciesObj.js b/src/node/cachePluginDependenciesObj.js
 new file mode 100644
-index 00000000..e322bfd4
+index 00000000..4dea6e7a
 --- /dev/null
 +++ b/src/node/cachePluginDependenciesObj.js
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,55 @@
 +#!/usr/bin/env node
 +
 +'use strict';
@@ -38,39 +49,86 @@ index 00000000..e322bfd4
 +// SANDSTORM - put the plugin list into cache/ during build.sh so it can be
 +// part of the spk
 +
-+require('../static/js/pluginfw/plugins').cachePackages()
-diff --git a/src/static/js/pluginfw/plugins.js b/src/static/js/pluginfw/plugins.js
-index 74fbbafc..7807dbcf 100644
---- a/src/static/js/pluginfw/plugins.js
-+++ b/src/static/js/pluginfw/plugins.js
-@@ -114,7 +114,8 @@ exports.update = async () => {
-   await callInit();
- };
- 
--exports.getPackages = async () => {
-+// SANDSTORM: Called during build.sh
-+exports.cachePackages = async () => {
-   logger.info('Running npm to get a list of installed plugins...');
-   // Notes:
-   //   * Do not pass `--prod` otherwise `npm ls` will fail if there is no `package.json`.
-@@ -130,9 +131,16 @@ exports.getPackages = async () => {
-     }
-     info.realPath = await fs.realpath(info.path);
-   }));
--  return dependencies;
++// Required by getPackages upstream/cachePackages here
++exports.prefix = 'ep_';
++
++// Avoid run_cmd, which requires settings etc etc
++const { spawn } = require('child_process')
++const runCmd = async (cmd) => {
++  const process = spawn(cmd[0], cmd.splice(1));
++
++  var out = ""
++
++  for await (const data of process.stdout) {
++    out = out + String(data)
++  };
++
++  return out
++}
++
++// Avoid importing log4js
++const logger = {info: console.log}
++
++const fs = require ('fs').promises
++
++// Trying to replicate existing getPackages code as much as I can. If that changes,
++// change this accordingly.
++const cachePackages = async () => {
++  console.log('Running npm to get a list of installed plugins...');
++  // Notes:
++  //   * Do not pass `--prod` otherwise `npm ls` will fail if there is no `package.json`.
++  //   * The `--no-production` flag is required (or the `NODE_ENV` environment variable must be
++  //     unset or set to `development`) because otherwise `npm ls` will not mention any packages
++  //     that are not included in `package.json` (which is expected to not exist).
++  const cmd = ['npm', 'ls', '--long', '--json', '--depth=0', '--no-production'];
++  const {dependencies = {}} = JSON.parse(await runCmd(cmd, {stdio: [null, 'string']}));
++  await Promise.all(Object.entries(dependencies).map(async ([pkg, info]) => {
++    //console.log('...')
++    //console.log(pkg)
++    //console.log(info)
++    if (!pkg.startsWith(exports.prefix)) {
++      delete dependencies[pkg];
++      return;
++    }
++    info.realPath = await fs.realpath(info.path);
++  }));
 +
 +  await fs.writeFile('cache/plugin-dependencies-obj', JSON.stringify(dependencies));
++};
++
++cachePackages()
+diff --git a/src/static/js/pluginfw/plugins.js b/src/static/js/pluginfw/plugins.js
+index 74fbbafc..bc8b4d49 100644
+--- a/src/static/js/pluginfw/plugins.js
++++ b/src/static/js/pluginfw/plugins.js
+@@ -115,23 +115,10 @@ exports.update = async () => {
  };
  
-+exports.getPackages = async () => {
+ exports.getPackages = async () => {
+-  logger.info('Running npm to get a list of installed plugins...');
+-  // Notes:
+-  //   * Do not pass `--prod` otherwise `npm ls` will fail if there is no `package.json`.
+-  //   * The `--no-production` flag is required (or the `NODE_ENV` environment variable must be
+-  //     unset or set to `development`) because otherwise `npm ls` will not mention any packages
+-  //     that are not included in `package.json` (which is expected to not exist).
+-  const cmd = ['npm', 'ls', '--long', '--json', '--depth=0', '--no-production'];
+-  const {dependencies = {}} = JSON.parse(await runCmd(cmd, {stdio: [null, 'string']}));
+-  await Promise.all(Object.entries(dependencies).map(async ([pkg, info]) => {
+-    if (!pkg.startsWith(exports.prefix)) {
+-      delete dependencies[pkg];
+-      return;
+-    }
+-    info.realPath = await fs.realpath(info.path);
+-  }));
+-  return dependencies;
+-};
 +  // SANDSTORM EDIT - Don't query npm at runtime (takes a few seconds) when
 +  // running inside SANDSTORM. Do it during build and cache the results.
 +  return JSON.parse(await fs.readFile('cache/plugin-dependencies-obj'))
 +}
-+
+ 
  const loadPlugin = async (packages, pluginName, plugins, parts) => {
    const pluginPath = path.resolve(packages[pluginName].path, 'ep.json');
-   try {
 -- 
 2.20.1
 
