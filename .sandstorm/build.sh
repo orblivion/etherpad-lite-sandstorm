@@ -13,7 +13,9 @@ cd etherpad-lite
 # TODO we could rely on package-lock.json for reproducibility. Though for
 # security we should make it easy to upgrade and update package-lock.json.
 
+# Offload startup time to build time
 ./bin/installDeps.sh
+node ./src/node/cachePluginDependenciesObj.js
 
 # sqlite is an optional dependency that must be installed seperately. For some
 # reason it is also missing this build dependency:
