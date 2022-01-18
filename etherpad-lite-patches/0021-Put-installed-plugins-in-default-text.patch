@@ -1,7 +1,7 @@
-From c74129ab79b18637e0b1383e2e774ae66b93147f Mon Sep 17 00:00:00 2001
+From e03e73724072b5691719b78dd160fbae076fc345 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:58:18 -0500
-Subject: [PATCH 21/26] Put installed plugins in default text
+Subject: [PATCH 21/25] Put installed plugins in default text
 
 ---
  settings.json | 2 +-
