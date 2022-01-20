@@ -1,7 +1,7 @@
-From a932c394a02748eaf377f1e13bf18eef19261ef0 Mon Sep 17 00:00:00 2001
+From dd1168b519e7d5b7c30b460d716b74ee07b67fc4 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:33:47 -0500
-Subject: [PATCH 15/24] Remove some logging
+Subject: [PATCH 15/25] Remove some logging
 
 ---
  src/node/db/DB.js         |  2 +-
