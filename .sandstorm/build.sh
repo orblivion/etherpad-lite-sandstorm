@@ -97,7 +97,7 @@ npm install $(cat ../basic-plugins)
 
 # This is only so that the diff below doesn't complain about nonexistent files.
 # /var/ is per-grain when we run, so this shouldn't have an effect on it.
-sudo mkdir /var/plugins-initialized
+sudo mkdir -p /var/plugins-initialized
 sudo chmod o+xwr /var/plugins-initialized
 
 # Etherpad tries to touch $plugin/.ep_initialized on first run,
