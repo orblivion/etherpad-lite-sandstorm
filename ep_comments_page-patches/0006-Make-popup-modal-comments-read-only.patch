@@ -1,7 +1,7 @@
-From 28e4f2fba9fe471108a7817c8e9109769c98860d Mon Sep 17 00:00:00 2001
+From b79071a7178e286447a2707b0a002f0017ed0602 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 16 Dec 2021 13:33:27 -0500
-Subject: [PATCH 6/6] Make popup modal comments read-only
+Subject: [PATCH 6/7] Make popup modal comments read-only
 
 This is basically the mobile interface. No buttons, no replying. Clicking the comment will dismiss it.
 

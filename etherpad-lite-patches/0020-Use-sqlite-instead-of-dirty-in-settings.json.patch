@@ -1,7 +1,7 @@
-From f33a72b6effaefd660d828d4e1bdb763b5afaa39 Mon Sep 17 00:00:00 2001
+From 275fbd9da3439d805422fe8ec747205f0875bb9e Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 22:17:44 -0500
-Subject: [PATCH 21/25] Use sqlite instead of dirty, in settings.json
+Subject: [PATCH 20/25] Use sqlite instead of dirty, in settings.json
 
 ---
  settings.json | 4 ++--

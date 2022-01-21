@@ -1,4 +1,4 @@
-From cf2f07095ffc5d87df2f352796f5c12d715a7bfc Mon Sep 17 00:00:00 2001
+From c8b4a0c4b9fcb3954535bd6bc492df1e591dbd2a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
 Subject: [PATCH 03/25] perf: npm check for find plugin list in build.sh

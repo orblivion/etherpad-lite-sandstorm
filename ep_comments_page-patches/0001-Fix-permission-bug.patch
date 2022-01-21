@@ -1,7 +1,7 @@
-From ada8ecc513c9821e8297c434ee3e8a68e1aa68f8 Mon Sep 17 00:00:00 2001
+From a72aa87b8db56f880b0e04b6b9c05e1c531588a5 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 20 Nov 2021 12:55:36 -0500
-Subject: [PATCH 1/6] Fix permission bug
+Subject: [PATCH 1/7] Fix permission bug
 
 Partial undo of e32ec365c78237a4c6ca740d8ffe8ee5421e3627. We don't want apool[0][0], we want numToAttribute[0][0]. Or so it seems and seems to work.
 ---

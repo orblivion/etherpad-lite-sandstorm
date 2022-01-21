@@ -1,7 +1,7 @@
-From 42decd8914d172c7c543e2334ed84de17e1af0f5 Mon Sep 17 00:00:00 2001
+From 645582775426ad79f30d678d7f28b21116bd49e7 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:41:54 -0500
-Subject: [PATCH 17/25] Don't minify during requests.
+Subject: [PATCH 16/25] Don't minify during requests.
 
 ---
  settings.json | 7 ++++++-

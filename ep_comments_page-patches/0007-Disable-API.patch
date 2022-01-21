@@ -1,0 +1,24 @@
+From 1396c7992573faddde3dfb48bcd7b13b752a027e Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 20 Jan 2022 19:27:22 -0500
+Subject: [PATCH 7/7] Disable API
+
+---
+ apiUtils.js | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/apiUtils.js b/apiUtils.js
+index 9ba92c5..01068a9 100644
+--- a/apiUtils.js
++++ b/apiUtils.js
+@@ -16,6 +16,7 @@ try {
+ // Checks if api key is correct and prepare response if it is not.
+ // Returns true if valid, false otherwise.
+ const validateApiKey = (fields, res) => {
++  return false;
+   let valid = true;
+ 
+   const apiKeyReceived = fields.apikey || fields.api_key;
+-- 
+2.20.1
+

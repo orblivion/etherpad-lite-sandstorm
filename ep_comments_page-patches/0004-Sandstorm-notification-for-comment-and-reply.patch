@@ -1,7 +1,7 @@
-From ea89c1c3f4ad9c3e3647bb73201722b1661530be Mon Sep 17 00:00:00 2001
+From 9f96c76be41f7b95425dbf23f8989957651ca3bb Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:33:54 -0500
-Subject: [PATCH 4/6] Sandstorm notification for comment and reply
+Subject: [PATCH 4/7] Sandstorm notification for comment and reply
 
 ---
  commentManager.js | 17 +++++++++++++++--

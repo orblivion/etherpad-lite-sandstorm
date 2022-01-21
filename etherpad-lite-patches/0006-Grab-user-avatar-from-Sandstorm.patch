@@ -1,4 +1,4 @@
-From 2cb98cbaf1ea73ead70a1ffd1604389e9a82b7dd Mon Sep 17 00:00:00 2001
+From f77b2eeaeedf83c3fe10896ed72fef139de6dae6 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 19:54:00 -0400
 Subject: [PATCH 06/25] Grab user avatar from Sandstorm

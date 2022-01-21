@@ -1,7 +1,7 @@
-From 71ee9d3e54b7e0955cdc707c42de02ef1192da42 Mon Sep 17 00:00:00 2001
+From 9a12d0928cde4c5d8dcfa09b0a297967243f6910 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:08:38 -0500
-Subject: [PATCH 2/6] Implement Sandstorm comment permission
+Subject: [PATCH 2/7] Implement Sandstorm comment permission
 
 ---
  index.js | 18 +++++++++++++++++-

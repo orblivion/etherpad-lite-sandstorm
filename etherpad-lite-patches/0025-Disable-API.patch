@@ -1,0 +1,45 @@
+From c31ae3ef61780acdec64b52ce58c53a9e2190612 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Thu, 20 Jan 2022 19:45:36 -0500
+Subject: [PATCH 25/25] Disable API
+
+---
+ src/node/handler/APIHandler.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/src/node/handler/APIHandler.js b/src/node/handler/APIHandler.js
+index 6bc6e537..cc2e8a8a 100644
+--- a/src/node/handler/APIHandler.js
++++ b/src/node/handler/APIHandler.js
+@@ -30,6 +30,10 @@ const createHTTPError = require('http-errors');
+ 
+ const apiHandlerLogger = log4js.getLogger('APIHandler');
+ 
++// SANDSTORM EDIT: We don't want an API, and we disable it explicitly
++// everywhere we see it. However, just in case a plugin implements an
++// API some day, we should have a proper randomly generated key.
++
+ // ensure we have an apikey
+ let apikey = null;
+ const apikeyFilename = absolutePaths.makeAbsolute(argv.apikey || './APIKEY.txt');
+@@ -148,6 +152,17 @@ exports.version = version;
+  * @res express response object
+  */
+ exports.handle = async function (apiVersion, functionName, fields, req, res) {
++  // SANDSTORM EDIT - Turning off API access completely
++  // NOTE: The earlier version of this API included what appeared to be an
++  // incomplete implementation of API permissions (including a typo in
++  // 'getRevisionsCount'). We assumed it was never used and didn't port it
++  // to this version. However if we want it for whatever reason, it can be
++  // found here:
++  //
++  // https://github.com/kentonv/etherpad-lite/commit/6150fe70e2856bbd3471e3a4d1a5109e97168dbd
++
++  throw new createHTTPError.Unauthorized('Etherpad API not supported for Sandstorm');
++
+   // say goodbye if this is an unknown API version
+   if (!(apiVersion in version)) {
+     throw new createHTTPError.NotFound('no such api version');
+-- 
+2.20.1
+
