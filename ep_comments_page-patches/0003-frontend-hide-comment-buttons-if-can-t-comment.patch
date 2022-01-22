@@ -1,4 +1,4 @@
-From 45c090421418ddb946e20cd7db02af0e9787d120 Mon Sep 17 00:00:00 2001
+From c380932a66d7da9f1e83eb108f075dc6f4a1e3ff Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:08:54 -0500
 Subject: [PATCH 3/7] frontend: hide comment buttons if can't comment

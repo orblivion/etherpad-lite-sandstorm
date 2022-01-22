@@ -1,14 +1,14 @@
-From 9a12d0928cde4c5d8dcfa09b0a297967243f6910 Mon Sep 17 00:00:00 2001
+From a8f6a0fa76984066f0929b37112ca5f6c2ba98ec Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:08:38 -0500
 Subject: [PATCH 2/7] Implement Sandstorm comment permission
 
 ---
- index.js | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+ index.js | 86 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 85 insertions(+), 1 deletion(-)
 
 diff --git a/index.js b/index.js
-index 9c3f63c..500dc80 100644
+index 9c3f63c..eaafeb5 100644
 --- a/index.js
 +++ b/index.js
 @@ -26,11 +26,23 @@ exports.padCopy = async (hookName, context) => {
@@ -36,12 +36,128 @@ index 9c3f63c..500dc80 100644
    }
    return callback();
  };
-@@ -114,6 +126,10 @@ exports.socketio = (hookName, args, cb) => {
+@@ -61,6 +73,15 @@ exports.socketio = (hookName, args, cb) => {
+ 
+     // On add events
+     socket.on('addComment', handler(async (data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       const content = data.comment;
+       const [commentId, comment] = await commentManager.addComment(padId, content);
+@@ -71,12 +92,30 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('deleteComment', handler(async (data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       await commentManager.deleteComment(padId, data.commentId, data.authorId);
+       socket.broadcast.to(padId).emit('commentDeleted', data.commentId);
+     }));
+ 
+     socket.on('revertChange', handler(async (data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       // Broadcast to all other users that this change was accepted.
+       // Note that commentId here can either be the commentId or replyId..
+@@ -85,6 +124,15 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('acceptChange', handler(async (data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       // Broadcast to all other users that this change was accepted.
+       // Note that commentId here can either be the commentId or replyId..
+@@ -93,6 +141,15 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('bulkAddComment', handler(async (padId, data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       padId = (await readOnlyManager.getIds(padId)).padId;
+       const [commentIds, comments] = await commentManager.bulkAddComments(padId, data);
+       socket.broadcast.to(padId).emit('pushAddCommentInBulk');
+@@ -100,6 +157,15 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('bulkAddCommentReplies', handler(async (padId, data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       padId = (await readOnlyManager.getIds(padId)).padId;
+       const [repliesId, replies] = await commentManager.bulkAddCommentReplies(padId, data);
+       socket.broadcast.to(padId).emit('pushAddCommentReply', repliesId, replies);
+@@ -107,6 +173,15 @@ exports.socketio = (hookName, args, cb) => {
+     }));
+ 
+     socket.on('updateCommentText', handler(async (data) => {
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
++      if (!sandstormCanComment(socket.client)){
++
++        return
++      }
+       const {commentId, commentText, authorId} = data;
+       const {padId} = await readOnlyManager.getIds(data.padId);
+       await commentManager.changeCommentText(padId, commentId, commentText, authorId);
+@@ -114,6 +189,15 @@ exports.socketio = (hookName, args, cb) => {
      }));
  
      socket.on('addCommentReply', handler(async (data) => {
-+      // SANDSTORM EDIT
++      // SANDSTORM EDIT - handleMessageSecurity works through Etherpad's normal
++      // socket message system and only handles a few messages for
++      // ep_comments_page, such as adding the comment attribute to the selected
++      // text. These socket handlers are independent of that, so we need to do
++      // our security here.
 +      if (!sandstormCanComment(socket.client)){
++
 +        return
 +      }
        const {padId} = await readOnlyManager.getIds(data.padId);

@@ -1,6 +1,6 @@
-From 9f96c76be41f7b95425dbf23f8989957651ca3bb Mon Sep 17 00:00:00 2001
+From 633972d4f66123d860673dd46fc6014f4250d8ec Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
-Date: Sun, 21 Nov 2021 16:33:54 -0500
+Date: Fri, 21 Jan 2022 23:00:25 -0500
 Subject: [PATCH 4/7] Sandstorm notification for comment and reply
 
 ---
@@ -53,11 +53,11 @@ index 1f707e3..9a9decf 100644
  };
  
 diff --git a/index.js b/index.js
-index 500dc80..13fe6a4 100644
+index eaafeb5..8f2c745 100644
 --- a/index.js
 +++ b/index.js
-@@ -75,7 +75,8 @@ exports.socketio = (hookName, args, cb) => {
-     socket.on('addComment', handler(async (data) => {
+@@ -84,7 +84,8 @@ exports.socketio = (hookName, args, cb) => {
+       }
        const {padId} = await readOnlyManager.getIds(data.padId);
        const content = data.comment;
 -      const [commentId, comment] = await commentManager.addComment(padId, content);
@@ -66,7 +66,7 @@ index 500dc80..13fe6a4 100644
        if (commentId != null && comment != null) {
          socket.broadcast.to(padId).emit('pushAddComment', commentId, comment);
          return [commentId, comment];
-@@ -131,7 +132,8 @@ exports.socketio = (hookName, args, cb) => {
+@@ -199,7 +200,8 @@ exports.socketio = (hookName, args, cb) => {
          return
        }
        const {padId} = await readOnlyManager.getIds(data.padId);

@@ -1,4 +1,4 @@
-From 807af220ced895e67e6b54ad0c52ce09ede07194 Mon Sep 17 00:00:00 2001
+From 5b791122c01b34196b78a2edf2447971cf1a9a7e Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 26 Nov 2021 17:24:51 -0500
 Subject: [PATCH 5/7] Click to show, mouseover to highlight, urls.

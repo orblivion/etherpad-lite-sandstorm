@@ -1,4 +1,4 @@
-From b79071a7178e286447a2707b0a002f0017ed0602 Mon Sep 17 00:00:00 2001
+From 1a6eecd92c5561c67aa5a8421ff254e96666db00 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 16 Dec 2021 13:33:27 -0500
 Subject: [PATCH 6/7] Make popup modal comments read-only
