@@ -20,9 +20,9 @@ It seems to crash the server.
 
 ## Font size not preserved in documents created with previous Etherpad Sandstorm app
 
-This can be seen by trying to open the included sqlite3 file in the test directory. Font size 8 and Font size 20 show up the same.
+This can be seen by trying to open the included sqlite3 file in the `test/` directory. Font size 8 and Font size 20 show up the same.
 
-Seems to be not Sandstorm specific, should confirm with totally fresh Etherpad. Of course should check with latest Etherpad.
+This seems to be not Sandstorm specific, but need to confirm with totally fresh Etherpad install. We should also check with latest Etherpad version.
 
 # Figure Out
 
