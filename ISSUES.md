@@ -90,7 +90,7 @@ Stuff that will probably just stick around.
 
 ## Avatars will obscure 5-digit line numbers
 
-Assuming you're crazy enough to make such a long file.
+We're (as of now) showing line numbers on the left (though this would be a change from the previous app version). Avatars are on the left as well, but further left. But, if you're crazy enough to have a 10,000+ line file, avatars will begin to obscure the left-most digits.
 
 # QA
 
