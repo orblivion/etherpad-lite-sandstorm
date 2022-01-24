@@ -80,7 +80,7 @@ is it related to any of the plugins? probly not.
 
 ## SESSIONKEY path
 
-I have a change to set SESSIONKEY.txt at /var/SESSIONKEY.txt explicitly. However I realized later that this may already be fixed by the symlink within rootfs.
+I have a patch to save SESSIONKEY.txt to /var/SESSIONKEY.txt explicitly. However, I realized later that this may already be covered by the symlink within rootfs.
 
 We should remove one fix or the other.
 
