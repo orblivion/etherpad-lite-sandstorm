@@ -61,6 +61,12 @@ Though:
 
 Assuming Etherpad isn't already on top of this. Though, we may not be packaging the very latest version of Etherpad every time (including this time).
 
+## Performance
+
+Minification? Caching?
+
+Also, there's somehting that happened after version 1.8.6 that made the "loading" screen come on and slow things down. I wonder if we can find out what it was and undo it. It was much faster without.
+
 # Warnings
 
 ## Check for any other browser console errors/warnings
