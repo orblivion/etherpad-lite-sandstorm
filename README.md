@@ -1,4 +1,4 @@
-WIP update for etherpad for sandstorm.
+WIP update for etherpad for sandstorm. [List of WIP issues](ISSUES.md) (hopefully to move to Github issues).
 
 NOTE: If you change the list of installed plugins, make sure to update the defaultPadText in settings.json
 
