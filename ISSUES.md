@@ -1,6 +1,6 @@
 # Bugs
 
-## Doesn't work for newer firefox
+## App Doesn't work for newer firefox
 
 See this comment, and followup discussion:
 
@@ -41,7 +41,7 @@ What happens when etherpad upgrades? Will we need to emulate that, whatever it i
 
 NODE_ENV=production runs faster and more secure apparently.
 
-## User package-lock.json
+## Use package-lock.json
 
 Use package-lock.json
 
