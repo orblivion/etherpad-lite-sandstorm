@@ -55,7 +55,7 @@ Though:
 
 * Etherpad seems to have it under version control and also in .gitignore. So I'm not sure whether we are already covered.
 * Make sure to consider both etherpad-lite/node_modules and etherpad-lite/src/node_modules
-* Have instructions for upgrading packages (security, etc) and re-saving package-lock
+* Have instructions for upgrading packages (security, etc) and re-saving package-lock, unless Etherpad project itself is generally on top of this
 
 ## npm audit
 
