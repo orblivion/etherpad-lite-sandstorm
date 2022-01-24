@@ -28,13 +28,15 @@ This seems to be not Sandstorm specific, but need to confirm with totally fresh 
 
 ## Consider how to handle ep_initialized
 
-node_modules/ep_<pluginname>/.ep_initialized seems to be created whenever you first run etherpad-lite with a given plugin. node_modules directory is part of the app directory, so our app can't write to it. Instead, we set it as a symlink to /var/plugins-initialized (within the grain directory), so each run can set these files.
+`node_modules/ep_<pluginname>/.ep_initialized` seems to be created for each plugin whenever you first run etherpad-lite. For us, `node_modules` is part of the app directory, so our app can't write to it at run time. Our solution for now: during build, we create a symlink from `node_modules/ep_<pluginname>.ep_initialized` to `/var/plugins-initialized/ep_<pluginname>` (which is within the grain directory), so each grain first run can set these files.
 
-Question: Why? I'm not sure what .ep_initialized does. Does etherpad change the plugin inside node_modules in any other way?
+Question: Why? I'm not sure what .ep_initialized does. Does this "initialization" happen within the app (i.e. `node_modules`) or within the grain (i.e. the database file)?
 
-If not, why can we not just write the files during build time to pretend the plugins have been initialized?
+If the initialization happens in the app, we could just try to commit the final result to the spk including the `.ep_initialized` files and skip the symlinks.
 
-What happens when etherpad upgrades? Will we need to emulate that, whatever it is, when we upgrade going forward? If we keep the current symlink system, should we be wiping /var/plugins-initialized for every upgrade?
+If the initialization happens in the grain, what happens during upgrades to the plugins? Does anything need to be "reinitialized"? I.e. should we be wiping `/var/plugins-initalized` every app upgrade?
+
+Neither option particularly makes sense to me.
 
 # Improvements
 
