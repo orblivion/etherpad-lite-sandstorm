@@ -59,6 +59,8 @@ Though:
 
 ## npm audit
 
+Assuming Etherpad isn't already on top of this. Though, we may not be packaging the very latest version of Etherpad every time (including this time).
+
 # Warnings
 
 ## Check for any other browser console errors/warnings
