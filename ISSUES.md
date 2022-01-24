@@ -6,7 +6,7 @@ See this comment, and followup discussion:
 
 https://github.com/sandstormports/community-project/issues/15#issuecomment-1017807955
 
-## Comment Delete button missing for comment-only users
+## "Delete Comment" button missing for users with comment-only permission
 
 (this is a regression)
 
