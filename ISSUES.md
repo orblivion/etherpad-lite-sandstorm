@@ -63,6 +63,8 @@ I'm not sure why it was done, but the app worked before and after the change.
 
 ## Comment notification links
 
+This is not a regression.
+
 It would be nice if clicking on a comment notification brought you to the specific comment.
 
 Each comment has its own link with a hash URL. Opening the grain with the hash will start the grain with that comment open. I think these links are even sent to the Sandstorm notification API. But, clicking on the notification just sends you to the normal grain URL.
@@ -96,9 +98,13 @@ Also, there's somehting that happened after version 1.8.6 that made the "loading
 
 # Warnings
 
-## Check for any other browser console errors/warnings
+## Console log error - `ep_author_neat` - UNSETTLED FUNCTION BUG IN HOOK FUNCTION
 
-## Check for any other sandstorm console errors/warnings
+For `acePostWriteDomLineHTML` and `aceEditEvent`
+
+`aceEditEvent` warning goes away if you `return cb()` in the place where it is missing a return value. BUT - upstream doesn't even do this. Is this right? Dangerous? Etc.
+
+`acePostWriteDomLineHTML` warning goes away if you `return cb()` at the end. However upstream it returns a timeout. Look into that.
 
 ## Console log error - require is not defined
 
@@ -108,6 +114,10 @@ https://stackoverflow.com/questions/19059580/client-on-node-js-uncaught-referenc
 lib/ep_etherpad-lite/static/js/ace2_common.js?callback=require.define&v=8624a65e:1
 
 is it related to any of the plugins? probly not.
+
+## Check for any other browser console errors/warnings
+
+## Check for any other sandstorm console errors/warnings
 
 # Cleanups
 
