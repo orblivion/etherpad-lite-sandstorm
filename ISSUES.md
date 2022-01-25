@@ -24,6 +24,16 @@ This can be seen by trying to open the included sqlite3 file in the `test/` dire
 
 This seems to be not Sandstorm specific, but need to confirm with totally fresh Etherpad install. We should also check with latest Etherpad version.
 
+## Sandstorm profile name change does not affect name in existing documents
+
+These are *not* a regression from the previous Etherpad app.
+
+If you create a document and change your Sandstorm profile name after, the document will not adopt this new name.
+
+But perhaps this is what we want? Etherpad has its own name change capability. If a Sandstorm user changes their name within Etherpad, we wouldn't want to overwrite it with their Sandstorm profile name after an app update with no warning.
+
+Separately: if you post a comment and change your Etherpad name, the name on the comment will not change (though new comments will have your new name). This is likely not Sandstorm related.
+
 # Figure Out
 
 ## Consider how to handle ep_initialized
