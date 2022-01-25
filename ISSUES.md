@@ -48,6 +48,17 @@ If the initialization happens in the grain, what happens during upgrades to the 
 
 Neither option particularly makes sense to me.
 
+## Socket Transport Protocols
+
+In `settings.json`, I set a setting that I saw [set in the previous app](https://github.com/kentonv/etherpad-lite/commit/162c607f1adda7586bd12d2b7254fbeb2dac1c09):
+
+```
+-  "socketTransportProtocols" : ["xhr-polling", "jsonp-polling", "htmlfile"],
++  "socketTransportProtocols" : ["websocket"],
+```
+
+I'm not sure why it was done, but the app worked before and after the change.
+
 # Improvements
 
 ## NODE_ENV=production
