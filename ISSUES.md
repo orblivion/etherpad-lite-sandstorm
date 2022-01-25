@@ -61,6 +61,12 @@ I'm not sure why it was done, but the app worked before and after the change.
 
 # Improvements
 
+## Comment notification links
+
+It would be nice if clicking on a comment notification brought you to the specific comment.
+
+Each comment has its own link with a hash URL. Opening the grain with the hash will start the grain with that comment open. I think these links are even sent to the Sandstorm notification API. But, clicking on the notification just sends you to the normal grain URL.
+
 ## NODE_ENV=production
 
 NODE_ENV=production runs faster and more secure apparently.
@@ -132,3 +138,5 @@ Is there such a thing as using ep_markdown creating changes in the file? If such
 Refreshing the page after.
 
 I had a note about old comments still appearing. I don't remember exactly what it was, but maybe worth a quick look.
+
+## Test on Mobile
