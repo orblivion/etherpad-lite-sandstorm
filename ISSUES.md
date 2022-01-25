@@ -46,7 +46,7 @@ If the initialization happens in the app, we could just try to commit the final 
 
 If the initialization happens in the grain, what happens during upgrades to the plugins? Does anything need to be "reinitialized"? I.e. should we be wiping `/var/plugins-initalized` every app upgrade?
 
-Neither option particularly makes sense to me.
+Neither option particularly makes sense to me. But it looks like in the previous version of the etherpad plugin, we did [the first of these two](https://github.com/ether/etherpad-lite/compare/9f51432175c55deb4da54075351dc870a0b35808...kentonv:sandstorm#diff-73c521a1bcbd7c52b7c1bb88c7be1dab29848b6c34e47823d13f57e43de93dc0R124):
 
 ## Socket Transport Protocols
 
