@@ -90,11 +90,27 @@ Though:
 
 Assuming Etherpad isn't already on top of this. Though, we may not be packaging the very latest version of Etherpad every time (including this time).
 
-## Performance
+## PDF Export
 
-Minification? Caching?
+In the previous app version, Kenton [tried to support pdf export](https://github.com/kentonv/etherpad-lite/commit/e67f2ec8a72476d7e9fa4f92caf7496cea00b87b) in the previous app version, but it made the spk massive and didn't work well.
 
-Also, there's somehting that happened after version 1.8.6 that made the "loading" screen come on and slow things down. I wonder if we can find out what it was and undo it. It was much faster without.
+But, perhaps there's a workaround. If we really don't care about this, it can be moved to "Known Limitations".
+
+## Performance - Minification/Caching
+
+## Performance - Loading Screen
+
+There's somehting that happened after version 1.8.6 that made the "loading" screen come on and slow things down. I wonder if we can find out what it was and undo it. It was much faster without.
+
+## Performance - Bypass Redirect
+
+Kenton [tried to directly load the pad page](https://github.com/kentonv/etherpad-lite/commit/e5d0f0d4ac479d6edd92138a19aa2f50a9ceb794) rather than going through a redirct, but ran into issues.
+
+But, perhaps there's a workaround. Then again, it's probably a small part of load time.
+
+## Performance - Server Side
+
+It seems that most of the load time happens on the server side before the "Loading" screen even comes up.
 
 # Warnings
 
