@@ -90,12 +90,6 @@ Though:
 
 Assuming Etherpad isn't already on top of this. Though, we may not be packaging the very latest version of Etherpad every time (including this time).
 
-## PDF Export
-
-In the previous app version, Kenton [tried to support pdf export](https://github.com/kentonv/etherpad-lite/commit/e67f2ec8a72476d7e9fa4f92caf7496cea00b87b) in the previous app version, but it made the spk massive and didn't work well.
-
-But, perhaps there's a workaround. If we really don't care about this, it can be moved to "Known Limitations".
-
 ## Performance - Minification/Caching
 
 ## Performance - Loading Screen
@@ -150,6 +144,12 @@ Stuff that will probably just stick around.
 ## Avatars will obscure 5-digit line numbers
 
 We're (as of now) showing line numbers on the left (though this would be a change from the previous app version). Avatars are on the left as well, but further left. But, if you're crazy enough to have a 10,000+ line file, avatars will begin to obscure the left-most digits.
+
+## PDF Export
+
+In the previous app version, Kenton [tried to support pdf export](https://github.com/kentonv/etherpad-lite/commit/e67f2ec8a72476d7e9fa4f92caf7496cea00b87b) in the previous app version, but it made the spk massive and didn't work well.
+
+But, perhaps there's a workaround if we really want this some day.
 
 # QA
 
