@@ -1,7 +1,7 @@
 From fbde014bd2c88fff78406b8574e84d48dcfe91ce Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 29 Oct 2021 12:52:17 -0400
-Subject: [PATCH 10/26] Make sure session key is unique per-grain
+Subject: [PATCH 10/27] Make sure session key is unique per-grain
 
 ---
  src/node/utils/Settings.js | 3 ++-

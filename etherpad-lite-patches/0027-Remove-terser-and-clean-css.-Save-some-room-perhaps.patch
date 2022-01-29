@@ -1,0 +1,86 @@
+From e5f9e61e1ae953666f71941bd7ae4fba51514659 Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Fri, 28 Jan 2022 23:05:56 -0500
+Subject: [PATCH 27/27] Remove terser and clean-css. Save some room, perhaps.
+
+---
+ src/node/utils/MinifyWorker.js |  5 +++--
+ src/package-lock.json          | 18 ------------------
+ src/package.json               |  2 --
+ 3 files changed, 3 insertions(+), 22 deletions(-)
+
+diff --git a/src/node/utils/MinifyWorker.js b/src/node/utils/MinifyWorker.js
+index 1ef6490e..fed91e6e 100644
+--- a/src/node/utils/MinifyWorker.js
++++ b/src/node/utils/MinifyWorker.js
+@@ -3,8 +3,9 @@
+  * Worker thread to minify JS & CSS files out of the main NodeJS thread
+  */
+ 
+-const CleanCSS = require('clean-css');
+-const Terser = require('terser');
++// SANDSTORM EDIT - remove minifying libraries. any minifying will be at runtime. ("minify": false in settings.json)
++const CleanCSS = undefined;
++const Terser = undefined;
+ const path = require('path');
+ const Threads = require('threads');
+ 
+diff --git a/src/package-lock.json b/src/package-lock.json
+index 04358c82..58d6dbd1 100644
+--- a/src/package-lock.json
++++ b/src/package-lock.json
+@@ -1139,14 +1139,6 @@
+       "integrity": "sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==",
+       "optional": true
+     },
+-    "clean-css": {
+-      "version": "4.2.3",
+-      "resolved": "https://registry.npmjs.org/clean-css/-/clean-css-4.2.3.tgz",
+-      "integrity": "sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA==",
+-      "requires": {
+-        "source-map": "~0.6.0"
+-      }
+-    },
+     "cliui": {
+       "version": "5.0.0",
+       "resolved": "https://registry.npmjs.org/cliui/-/cliui-5.0.0.tgz",
+@@ -8690,16 +8682,6 @@
+         }
+       }
+     },
+-    "terser": {
+-      "version": "4.8.0",
+-      "resolved": "https://registry.npmjs.org/terser/-/terser-4.8.0.tgz",
+-      "integrity": "sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==",
+-      "requires": {
+-        "commander": "^2.20.0",
+-        "source-map": "~0.6.1",
+-        "source-map-support": "~0.5.12"
+-      }
+-    },
+     "text-table": {
+       "version": "0.2.0",
+       "resolved": "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz",
+diff --git a/src/package.json b/src/package.json
+index 61c4cac1..d6f755e6 100644
+--- a/src/package.json
++++ b/src/package.json
+@@ -34,7 +34,6 @@
+     "async-stacktrace": "0.0.2",
+     "channels": "0.0.4",
+     "cheerio": "0.22.0",
+-    "clean-css": "4.2.3",
+     "cookie-parser": "1.4.5",
+     "cross-spawn": "^7.0.3",
+     "ejs": "^3.1.6",
+@@ -65,7 +64,6 @@
+     "security": "1.0.0",
+     "semver": "5.7.1",
+     "socket.io": "^2.4.1",
+-    "terser": "^4.7.0",
+     "threads": "^1.4.0",
+     "tiny-worker": "^2.3.0",
+     "tinycon": "0.6.8",
+-- 
+2.20.1
+
