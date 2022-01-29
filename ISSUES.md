@@ -32,7 +32,7 @@ If you create a document and change your Sandstorm profile name after, the docum
 
 But perhaps this is what we want? Etherpad has its own name change capability. If a Sandstorm user changes their name within Etherpad, we wouldn't want to overwrite it with their Sandstorm profile name after an app update with no warning.
 
-Separately: if you post a comment and change your Etherpad name, the name on the comment will not change (though new comments will have your new name). This is likely not Sandstorm related.
+Separately: if you post a comment and change your Etherpad name, the name on the comment will not change (though new comments will have your new name). This is likely not Sandstorm related. It makes sense if you look at the database. The database is one big key/value store, where each value is a json document. Each comment is one entry. Each comment entry (for some reason) contains both the user name and user id. Fixing this issue would require going through each comment and updating the username. (Perhaps this would be desired upstream, for that matter.)
 
 # Figure Out
 
