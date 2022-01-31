@@ -1,7 +1,7 @@
-From eb261979d08f4ffd1dfdfe0302777a6ed9d21873 Mon Sep 17 00:00:00 2001
+From efced79cda9b122eb531be7a70309a49757fea63 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 20 Nov 2021 13:15:46 -0500
-Subject: [PATCH 12/27] Add sandstormPermissions to clientVars
+Subject: [PATCH 12/28] Add sandstormPermissions to clientVars
 
 ---
  src/node/handler/PadMessageHandler.js | 5 +++++

@@ -1,7 +1,7 @@
-From ce41285c81910fb4f0f84217c5f368c142eb917e Mon Sep 17 00:00:00 2001
+From 3b4843f25daa264180d81f8a483cdf60342cf244 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 12:44:20 -0500
-Subject: [PATCH 24/27] Fix problems on modern Firefox
+Subject: [PATCH 24/28] Fix problems on modern Firefox
 
 I don't understand what the problem is, so I am selectively undoing the commit that introduced the issue.
 ---
