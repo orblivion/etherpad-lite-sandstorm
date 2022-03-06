@@ -145,7 +145,33 @@ const pkgdef :Spk.PackageDefinition = (
       ( sourcePath = "/",    # Then search the system root directory.
         hidePaths = [ "home", "proc", "sys",
                       "etc/passwd", "etc/hosts", "etc/host.conf",
-                      "etc/nsswitch.conf", "etc/resolv.conf" ]
+                      "etc/nsswitch.conf", "etc/resolv.conf",
+
+                      # These are related to bin, lib, and lib64 being symlinks. The same files
+                      #   under usr/bin, usr/lib, and usr/lib64 should stay around.
+                      # The symlinks themselves (bin, lib, and lib64) should also stay around
+                      "bin/bash",
+                      "bin/dash",
+                      "bin/mkdir",
+                      "bin/rm",
+                      "bin/sh",
+                      "etc/ld.so.cache",
+                      "etc/localtime",
+                      "etc/ssl/openssl.cnf",
+                      "lib/x86_64-linux-gnu/libc.so.6",
+                      "lib/x86_64-linux-gnu/libdl.so.2",
+                      "lib/x86_64-linux-gnu/libgcc_s.so.1",
+                      "lib/x86_64-linux-gnu/libm.so.6",
+                      "lib/x86_64-linux-gnu/libnsl.so.1",
+                      "lib/x86_64-linux-gnu/libnss_compat.so.2",
+                      "lib/x86_64-linux-gnu/libnss_files.so.2",
+                      "lib/x86_64-linux-gnu/libnss_nis.so.2",
+                      "lib/x86_64-linux-gnu/libpcre.so.3",
+                      "lib/x86_64-linux-gnu/libpcre.so.3.13.3",
+                      "lib/x86_64-linux-gnu/libpthread.so.0",
+                      "lib/x86_64-linux-gnu/libselinux.so.1",
+                      "lib64/ld-linux-x86-64.so.2"
+                    ]
         # You probably don't want the app pulling files from these places,
         # so we hide them. Note that /dev, /var, and /tmp are implicitly
         # hidden because Sandstorm itself provides them.
@@ -159,7 +185,7 @@ const pkgdef :Spk.PackageDefinition = (
   # `spk dev` will write a list of all the files your app uses to this file.
   # You should review it later, before shipping your app.
 
-  alwaysInclude = ["etherpad-lite/src", "etherpad-lite/node_modules", "etherpad-lite/cache"],
+  alwaysInclude = ["opt/app/etherpad-lite/src", "opt/app/etherpad-lite/node_modules", "opt/app/etherpad-lite/cache"],
   # Fill this list with more names of files or directories that should be
   # included in your package, even if not listed in sandstorm-files.list.
   # Use this to force-include stuff that you know you need but which may
