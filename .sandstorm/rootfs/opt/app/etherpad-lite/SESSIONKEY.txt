@@ -1,1 +1,1 @@
-/var/SESSIONKEY.txt
+/tmp/SESSIONKEY.txt

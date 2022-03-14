@@ -1,7 +1,7 @@
-From 6a9ea5e3d877ff3f4b77a53473e9fc4a85fc5e7b Mon Sep 17 00:00:00 2001
+From 5eecd6f8f5f9b3364f624bb62f680ec322c4eb72 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 18 Dec 2021 21:38:44 -0500
-Subject: [PATCH 13/28] Set SameSite=Lax for cookies.
+Subject: [PATCH 12/27] Set SameSite=Lax for cookies.
 
 This seemed to be required on Chrome.
 ---

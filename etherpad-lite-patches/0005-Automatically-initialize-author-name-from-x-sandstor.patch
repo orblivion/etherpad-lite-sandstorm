@@ -1,7 +1,7 @@
-From 0f30fa956ee5d8c4f61a24b7012ca0d850112e02 Mon Sep 17 00:00:00 2001
+From 6bbd15f8468cc983c12564b4f2ddc843b0e57173 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:33:40 -0400
-Subject: [PATCH 05/28] Automatically initialize author name from
+Subject: [PATCH 05/27] Automatically initialize author name from
  x-sandstorm-username
 
 ---

@@ -1,1 +1,1 @@
-/var/APIKEY.txt
+/tmp/APIKEY.txt

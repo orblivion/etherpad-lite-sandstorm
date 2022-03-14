@@ -32,8 +32,8 @@ set -euo pipefail
 export HOME=/var
 export NODE_ENV=production
 
-mkdir -p /var/plugins-initialized
-mkdir -p /var/etherpad-lite-var
+# Prefixing directories with `sandstorm-` just in case of a future name collision
+mkdir -p /var/sandstorm-plugins-initialized
 
 cd /opt/app/etherpad-lite
 ./bin/run.sh

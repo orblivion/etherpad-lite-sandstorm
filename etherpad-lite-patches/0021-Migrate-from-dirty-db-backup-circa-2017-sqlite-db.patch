@@ -1,13 +1,13 @@
-From c5293605cea4a4492e57cf85c6be17780d5218f1 Mon Sep 17 00:00:00 2001
+From 637ae65b9745b0180df53ae5294ad7fe40328dcb Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 6 Jan 2022 16:11:54 -0500
-Subject: [PATCH 22/28] Migrate from dirty db, backup circa 2017 sqlite db
+Subject: [PATCH 21/27] Migrate from dirty db, backup circa 2017 sqlite db
 
 ---
  settings.json            |  4 ++-
- src/bin/run.sh           | 43 ++++++++++++++++++++++++
+ src/bin/run.sh           | 49 +++++++++++++++++++++++++++
  src/sandstorm-migrate.js | 72 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 118 insertions(+), 1 deletion(-)
+ 3 files changed, 124 insertions(+), 1 deletion(-)
  create mode 100644 src/sandstorm-migrate.js
 
 diff --git a/settings.json b/settings.json
@@ -26,10 +26,10 @@ index e5a0a7ba..135222e1 100644
  
    /*
 diff --git a/src/bin/run.sh b/src/bin/run.sh
-index 91791088..ec9c6256 100755
+index 91791088..417a0a77 100755
 --- a/src/bin/run.sh
 +++ b/src/bin/run.sh
-@@ -41,6 +41,49 @@ elif [ ! -e cache ]; then
+@@ -41,6 +41,55 @@ elif [ ! -e cache ]; then
    exit 1
  fi
  
@@ -37,7 +37,7 @@ index 91791088..ec9c6256 100755
 +#
 +# Early in the history of this app we migrated from dirty to sqlite3. Since
 +# then we've upgraded Etherpad which may or may not have schema/data
-+# migrations.
++# migrations (assuming such a thing happens in Etherpad).
 +#
 +# Our goal here is to accommodate old grains in newer apps:
 +#
@@ -53,11 +53,18 @@ index 91791088..ec9c6256 100755
 +# sqlite3.1.db : 2022-Today  Etherpad 1.8-?
 +#
 +# If we have another jump later on where we are concerned about schema/data
-+# migrations, we can back up sqlite3.1.db and create sqlite3.2.db, and so on.
++# migrations, we can back up sqlite3.1.db and create sqlite3.2.db, and so on,
++# keeping the above table updated.
 +#
 +# If we want to test these migrations, the test/ directory of the
 +# etherpad-sandstorm git repository has test databases created by older versions
 +# of the app.
++#
++# Note: The working directory at this point is the Etherpad root
++# (/opt/app/etherpad-lite), not the grain root (/var). Also, the Etherpad var
++# directory (/opt/app/etherpad-lite/var) is mapped to /var for Sandstorm. Thus,
++# references to `var` (without the leading slash) end up referring to `/var`
++# and thus the grain root.
 +
 +SCRIPTPATH=`pwd -P` # Should be Etherpad root
 +if [ -e var/dirty.db ]; then
@@ -71,9 +78,8 @@ index 91791088..ec9c6256 100755
 +
 +if [ -e var/sqlite3.db ]; then
 +  echo "Backing up sqlite db from a previous version of this Sandstorm app that ran a rather older version of etherpad..."
-+  cp var/sqlite3.db var/sqlite3.1.db
 +  gzip -c var/sqlite3.db > var/sqlite3-backup.db.gz || exit 1
-+  rm -f var/sqlite3.db
++  mv var/sqlite3.db var/sqlite3.1.db
 +fi
 +
  # Move to the node folder and start

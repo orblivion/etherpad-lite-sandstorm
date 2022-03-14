@@ -1,7 +1,7 @@
-From 8b2be64865ac1517f44f2da4a160f454f67a1890 Mon Sep 17 00:00:00 2001
+From b51206d71399ed1e49d8ca94b860586cfed02e19 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 19:54:00 -0400
-Subject: [PATCH 06/28] Grab user avatar from Sandstorm
+Subject: [PATCH 06/27] Grab user avatar from Sandstorm
 
 ---
  src/node/db/AuthorManager.js          | 16 ++++++++++++++++

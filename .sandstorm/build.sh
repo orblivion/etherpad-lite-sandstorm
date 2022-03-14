@@ -97,17 +97,17 @@ npm install $(cat ../basic-plugins)
 
 # This is only so that the diff below doesn't complain about nonexistent files.
 # /var/ is per-grain when we run, so this shouldn't have an effect on it.
-sudo mkdir -p /var/plugins-initialized
-sudo chmod o+xwr /var/plugins-initialized
+sudo mkdir -p /var/sandstorm-plugins-initialized
+sudo chmod o+xwr /var/sandstorm-plugins-initialized
 
 # Etherpad tries to touch $plugin/.ep_initialized on first run,
 # so let's symlink that to somewhere writable:
 for plugin in $(cat ../basic-plugins; echo ep_author_neat; echo ep_comments_page); do
-	ln -sf /var/plugins-initialized/$plugin node_modules/$plugin/.ep_initialized
+	ln -sf /var/sandstorm-plugins-initialized/$plugin node_modules/$plugin/.ep_initialized
 
 	# Only so that the diff below doesn't complain about nonexistent files. /var/
 	# is per-grain when we run.
-	touch /var/plugins-initialized/$plugin
+	touch /var/sandstorm-plugins-initialized/$plugin
 done
 
 cd ..

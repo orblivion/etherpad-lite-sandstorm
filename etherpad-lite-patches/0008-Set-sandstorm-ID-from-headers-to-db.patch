@@ -1,7 +1,7 @@
-From cd82c6c733bb71d39841ed1cb24dc01c1629a67c Mon Sep 17 00:00:00 2001
+From 09d7a8aca788a0584afd08d7a40450acf4dcf731 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:53:20 -0400
-Subject: [PATCH 08/28] Set sandstorm ID from headers to db
+Subject: [PATCH 08/27] Set sandstorm ID from headers to db
 
 ---
  src/node/db/AuthorManager.js          | 15 +++++++++++++++

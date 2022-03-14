@@ -1,7 +1,7 @@
-From 92dc0e71cea7fc3589ec56ecef473dd82fcc386c Mon Sep 17 00:00:00 2001
+From 6899f038f39b34c3459105a531998e3c8470e2fc Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:36:36 -0500
-Subject: [PATCH 15/28] Commit settings.json.
+Subject: [PATCH 14/27] Commit settings.json.
 
 No changes, so we can see what changes are made on top of it.
 ---

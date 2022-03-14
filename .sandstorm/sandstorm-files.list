@@ -13,6 +13,7 @@ opt/app/etherpad-lite
 opt/app/etherpad-lite/.git
 opt/app/etherpad-lite/.git/HEAD
 opt/app/etherpad-lite/APIKEY.txt
+opt/app/etherpad-lite/SESSIONKEY.txt
 opt/app/etherpad-lite/bin
 opt/app/etherpad-lite/cache/plugin-dependencies-obj
 opt/app/etherpad-lite/node_modules
@@ -5016,6 +5017,7 @@ opt/app/etherpad-lite/src/node_modules/yeast
 opt/app/etherpad-lite/src/node_modules/yeast/README.md
 opt/app/etherpad-lite/src/node_modules/yeast/package.json
 opt/app/etherpad-lite/src/package.json
+opt/app/etherpad-lite/src/sandstorm-migrate.js
 opt/app/etherpad-lite/src/static/css/iframe_editor.css
 opt/app/etherpad-lite/src/static/css/lists_and_indents.css
 opt/app/etherpad-lite/src/static/css/pad.css
@@ -5133,6 +5135,7 @@ usr/bin/getconf
 usr/bin/gzip
 usr/bin/id
 usr/bin/mkdir
+usr/bin/mv
 usr/bin/node
 usr/bin/npm
 usr/bin/rm
