@@ -59,6 +59,16 @@ In `settings.json`, I set a setting that I saw [set in the previous app](https:/
 
 I'm not sure why it was done, but the app worked before and after the change.
 
+## Do I actually need all the hideFiles stuff under the symlink directories?
+
+There's a sort of bug that I and others found when doing `spk` packaging on systems with symlinks for `/bin -> /usr/bin`, `/lib -> /usr/lib`, and `/lib64 -> /usr/lib64`. Sometimes, if you use `bash` for instance, you'll get an entry for `/bin/bash` and `/usr/bin/bash`. This causes an error. The solution is to delete `/bin/bash` and keep `/bin/` and `/usr/bin/bash`:
+
+https://github.com/sandstorm-io/sandstorm/issues/3535
+
+Instead of manually deleting the files each time, I figured I'd add them to `hidePahts` in pkgdef. Wildcards don't seem to work, so I named them individually. They get automatically removed from `sandstorm-files.list` as expected.
+
+Here's what I'm trying to figure out: When I tried removing them from hidePaths (just experimenting), they didn't come back to `sandstorm-files.list`. Or so I recall. Why is that? Was there a fix to Sandstorm that prevents them from getting added now? If so, we should just remove those `hidePaths` lines.
+
 # Improvements
 
 ## Comment notification links
