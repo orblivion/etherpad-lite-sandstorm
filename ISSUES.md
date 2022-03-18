@@ -116,6 +116,10 @@ But, perhaps there's a workaround. Then again, it's probably a small part of loa
 
 It seems that most of the load time happens on the server side before the "Loading" screen even comes up.
 
+## SPK Size - /usr/lib/node_modules
+
+This is in sandstorm-files.list as of this writing. I wonder if there's a good reason for this...
+
 # Warnings
 
 ## Console log error - `ep_author_neat` - UNSETTLED FUNCTION BUG IN HOOK FUNCTION
