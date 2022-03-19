@@ -54,11 +54,11 @@ const pkgdef :Spk.PackageDefinition = (
 
       author = (
         contactEmail = "dan@danielkrol.com",
-        #pgpSignature = embed "path/to/pgp-signature",
+        pgpSignature = embed "pgp-signature-TODO",
         upstreamAuthor = "Etherpad Foundation",
       ),
 
-      #pgpKeyring = embed "path/to/pgp-keyring",
+      pgpKeyring = embed "pgp-keyring-TODO",
 
       description = (defaultText = embed "branding/description.md"),
       shortDescription = (defaultText = "Document editor"),
