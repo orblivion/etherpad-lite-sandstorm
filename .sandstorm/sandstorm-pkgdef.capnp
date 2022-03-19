@@ -68,7 +68,8 @@ const pkgdef :Spk.PackageDefinition = (
         (width = 1280, height = 614, png = embed "branding/screenshots/screenshot-1.png"),
         (width = 1280, height = 614, png = embed "branding/screenshots/screenshot-2.png"),
       ],
-      #changeLog = (defaultText = embed "path/to/sandstorm-specific/changelog.md"),
+
+      changeLog = (defaultText = embed "CHANGELOG.md"),
     ),
   ),
 
