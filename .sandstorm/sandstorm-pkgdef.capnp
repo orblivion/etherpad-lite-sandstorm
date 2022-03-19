@@ -83,32 +83,7 @@ const pkgdef :Spk.PackageDefinition = (
       ( sourcePath = "/",    # Then search the system root directory.
         hidePaths = [ "home", "proc", "sys",
                       "etc/passwd", "etc/hosts", "etc/host.conf",
-                      "etc/nsswitch.conf", "etc/resolv.conf",
-
-                      # These are related to bin, lib, and lib64 being symlinks. The same files
-                      #   under usr/bin, usr/lib, and usr/lib64 should stay around.
-                      # The symlinks themselves (bin, lib, and lib64) should also stay around
-                      "bin/bash",
-                      "bin/dash",
-                      "bin/mkdir",
-                      "bin/rm",
-                      "bin/sh",
-                      "etc/ld.so.cache",
-                      "etc/localtime",
-                      "etc/ssl/openssl.cnf",
-                      "lib/x86_64-linux-gnu/libc.so.6",
-                      "lib/x86_64-linux-gnu/libdl.so.2",
-                      "lib/x86_64-linux-gnu/libgcc_s.so.1",
-                      "lib/x86_64-linux-gnu/libm.so.6",
-                      "lib/x86_64-linux-gnu/libnsl.so.1",
-                      "lib/x86_64-linux-gnu/libnss_compat.so.2",
-                      "lib/x86_64-linux-gnu/libnss_files.so.2",
-                      "lib/x86_64-linux-gnu/libnss_nis.so.2",
-                      "lib/x86_64-linux-gnu/libpcre.so.3",
-                      "lib/x86_64-linux-gnu/libpcre.so.3.13.3",
-                      "lib/x86_64-linux-gnu/libpthread.so.0",
-                      "lib/x86_64-linux-gnu/libselinux.so.1",
-                      "lib64/ld-linux-x86-64.so.2"
+                      "etc/nsswitch.conf", "etc/resolv.conf"
                     ]
         # You probably don't want the app pulling files from these places,
         # so we hide them. Note that /dev, /var, and /tmp are implicitly
