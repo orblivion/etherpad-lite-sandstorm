@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# This checks that the default text for new Etherpad pads has the most up-to-date list of plugins
+
+set -exuo pipefail
+
+here="$(dirname $0)"
+
+cd "$here"
+
+grep defaultPadText etherpad-lite/settings.json | tr '\\' '\n' | tr ' ' '\n' | grep ep_ | sort > /tmp/plugins-in-settings
+(echo ep_comments_page; echo ep_author_neat; cat basic-plugins) | sort > /tmp/basic-plugins
+
+diff /tmp/plugins-in-settings /tmp/basic-plugins || (echo "Error: plugins list in settings.json:defaultPadText and basic-plugins do not match."; exit 1)

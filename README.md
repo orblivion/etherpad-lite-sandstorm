@@ -1,5 +1,3 @@
-NOTE: If you change the list of installed plugins, make sure to update the defaultPadText in settings.json
-
 # Status
 
 * See the [changelog](.sandstorm/CHANGELOG.md).
