@@ -48,12 +48,12 @@ const pkgdef :Spk.PackageDefinition = (
       ),
 
       website = "https://etherpad.org/",
-      codeUrl = "https://github.com/orblivion/etherpad-lite-sandstorm",
+      codeUrl = "https://github.com/sandstormports/etherpad-lite-sandstorm",
       license = (openSource = apache2),
       categories = [office, productivity],
 
       author = (
-        contactEmail = "dan@danielkrol.com",
+        contactEmail = "sandstorm-dev@googlegroups.com",
         pgpSignature = embed "pgp-signature-TODO",
         upstreamAuthor = "Etherpad Foundation",
       ),
