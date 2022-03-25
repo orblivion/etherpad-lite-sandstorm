@@ -4,9 +4,13 @@ NOTE: If you change the list of installed plugins, make sure to update the defau
 
 See the [changelog](.sandstorm/CHANGELOG.md).
 
+# Vagrant-spk packaging:
+
+There's a specific hack to get this to work for `vagrant-spk` that's significant enough to mention here. There is a problem installing with npm into a "synced folder". The workaround involves using a bind mount. See the long comment about this in [`.sandstorm/build.sh`](.sandstorm/build.sh).
+
 # Raw packaging:
 
-**WARNING: Don't do this on your normal computer**. It will install things, etc. This is intended for people who prefer raw spk because they run QubesOS or something like that, where you can make throwaway VMs in your own way. Most people likely should use the vagrant-spk option.
+**WARNING: Don't do this on your normal computer**. This package was designed to work with both `spk` (raw) packaging and `vagrant-spk` packaging. As such, the raw packaging version involves installing things, maybe changing important things on your system, etc. No promises here about what it won't do. This is intended for people who prefer raw spk because they run QubesOS or something like that, where on the one hand VirtualBox is difficult to run, but on the other hand you can make throwaway VMs in which to safely do raw packaging. Most people likely should use the `vagrant-spk` option.
 
 1) this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
 
@@ -22,7 +26,7 @@ Then run etherpad-lite once outside of sand Sandstorm to build the caching: run 
 
 ## Run within Sandstorm
 
-Run spk dev within .sandstorm/ to run it in Sandstorm.
+Run `spk dev` within the `.sandstorm/` directory to run it in Sandstorm.
 
 # License
 [Apache License v2](http://www.apache.org/licenses/LICENSE-2.0.html) for Etherpad
