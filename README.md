@@ -1,8 +1,9 @@
-WIP update for etherpad for sandstorm. [List of WIP issues](ISSUES.md) (hopefully to move to Github issues).
-
 NOTE: If you change the list of installed plugins, make sure to update the defaultPadText in settings.json
 
-See the [changelog](.sandstorm/CHANGELOG.md).
+# Status
+
+* See the [changelog](.sandstorm/CHANGELOG.md).
+* See the [List of WIP issues](ISSUES.md) (hopefully to move to Github issues at some point)
 
 # Vagrant-spk packaging:
 
