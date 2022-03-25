@@ -12,21 +12,31 @@ There's a specific hack to get this to work for `vagrant-spk` that's significant
 
 **WARNING: Don't do this on your normal computer**. This package was designed to work with both `spk` (raw) packaging and `vagrant-spk` packaging. As such, the raw packaging version involves installing things, maybe changing important things on your system, etc. No promises here about what it won't do. This is intended for people who prefer raw spk because they run QubesOS or something like that, where on the one hand VirtualBox is difficult to run, but on the other hand you can make throwaway VMs in which to safely do raw packaging. Most people likely should use the `vagrant-spk` option.
 
+## Setup
+
 1) this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
 
 2) your user should have write access (without requiring sudo) to /var/.
 
 3) make sure your user isn't for some reason called "vagrant". A couple commands are vagrant-specific, and you may not want those commands to be run here.
 
-## Build and run outside of Sandstorm
+## Building
 
-Building: run `sudo .sandstorm/setup.sh` and `.sandstorm/build.sh` manually.
-
-Then run etherpad-lite once outside of sand Sandstorm to build the caching: run `.sandstorm/launcher.sh` manually.
+* `sudo .sandstorm/setup.sh`
+* `.sandstorm/build.sh`
 
 ## Run within Sandstorm
 
-Run `spk dev` within the `.sandstorm/` directory to run it in Sandstorm.
+```
+cd .sandstorm/setup.sh
+spk dev
+```
+
+## Run outside of Sandstorm
+
+This could be useful in some cases for debugging and development. If we ever start saving the minified cache as part of the app, this may even become necessary.
+
+* `.sandstorm/launcher.sh`
 
 # License
 [Apache License v2](http://www.apache.org/licenses/LICENSE-2.0.html) for Etherpad
