@@ -13,7 +13,7 @@ There's a specific hack to get this to work for `vagrant-spk` that's significant
 
 ## Setup
 
-1) this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways. TODO (give known example).
+1) this repo needs to be checked out at /opt/app. Not as a symlink or anything like that, the real path has to be there. It affects how the app behaves at least in some ways.
 
 2) your user should have write access (without requiring sudo) to /var/.
 
@@ -27,7 +27,7 @@ There's a specific hack to get this to work for `vagrant-spk` that's significant
 ## Run within Sandstorm
 
 ```
-cd .sandstorm/setup.sh
+cd .sandstorm
 spk dev
 ```
 
