@@ -1,12 +1,16 @@
 # Sandstorm
 
 ## 2022-03-19
+ * Upgraded Etherpad to a much newer version. See here: https://github.com/sandstormports/etherpad-lite-sandstorm
+ * Started a new repository for this app, and recreated most existing Sandstorm changes on top of Etherpad, `ep_author_neat` and `ep_comments_page`
+ * Now using diff patches instead of forking upstream, for (hopeful) ease of upgrading in the future.
  * Upgraded to upstream Etherpad to 1.8.14
  * Upgraded to upstream `ep_comments_page` to v0.1.78
  * Upgraded other plugins probably.
- * Etherpad has upgraded so much that we started a new repository and recreated most existing Sandstorm changes on top of Etherpad, `ep_author_neat` and `ep_comments_page`.
- * Not saving minified file cache to the app for now (generating on startup within /tmp/), due to uncertainty of how to implement it correctly. However, it seems to make minimal difference at this point.
- * TODO - probably plenty more
+ * Reverted to generating minified file cache on startup within /tmp/ instead of saving to app, due to uncertainty of how to implement it correctly. However, it seems to make minimal difference at this point.
+ * Removed `ep_markdown`. Its behavior never made much sense, perhaps because of interaction with other plugins.
+ * Back up sqlite database on startup just in case when loading old grains.
+ * Probably a handful of other things I'm forgetting.
 
 ## 2017-03-07
  * Fixed lists (e.g. bullet lists, numbered lists) not being styled correctly.
