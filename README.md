@@ -2,8 +2,6 @@ WIP update for etherpad for sandstorm. [List of WIP issues](ISSUES.md) (hopefull
 
 NOTE: If you change the list of installed plugins, make sure to update the defaultPadText in settings.json
 
-Much of this will have been taken from [Kenton's previous version](https://github.com/kentonv/etherpad-lite).
-
 See the [changelog](.sandstorm/CHANGELOG.md).
 
 # Raw packaging:
@@ -29,3 +27,10 @@ Run spk dev within .sandstorm/ to run it in Sandstorm.
 # License
 [Apache License v2](http://www.apache.org/licenses/LICENSE-2.0.html) for Etherpad
 [Creative Commons Attribution-Sharealike 3.0](https://creativecommons.org/licenses/by-sa/3.0/) for the Etherpad logo (by Marcel Klehr) used for the app icon
+
+## Attributions
+
+Many of the Sandstorm-specific edits have been taken from Kenton's previous versions of:
+* [Etherpad Lite Sandstorm App](https://github.com/kentonv/etherpad-lite).
+* [`ep_author_neat`](https://github.com/kentonv/ep_author_neat).
+* [`ep_comments_page`](https://github.com/kentonv/ep_comments).
