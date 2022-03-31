@@ -33,7 +33,8 @@ export HOME=/var
 export NODE_ENV=production
 
 # Prefixing directories with `sandstorm-` just in case of a future name collision
-mkdir -p /var/sandstorm-plugins-initialized
+mkdir -p /var/sandstorm/plugins-initialized
+mkdir -p /var/sandstorm/keys
 
 cd /opt/app/etherpad-lite
 ./bin/run.sh

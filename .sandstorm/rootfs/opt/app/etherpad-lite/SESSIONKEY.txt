@@ -1,1 +1,1 @@
-/tmp/SESSIONKEY.txt
+/var/sandstorm/keys/SESSIONKEY.txt

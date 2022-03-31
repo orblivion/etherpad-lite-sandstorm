@@ -1,1 +1,1 @@
-/tmp/APIKEY.txt
+/var/sandstorm/keys/APIKEY.txt

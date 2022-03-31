@@ -38,7 +38,7 @@ Separately: if you post a comment and change your Etherpad name, the name on the
 
 ## Consider how to handle ep_initialized
 
-`node_modules/ep_<pluginname>/.ep_initialized` seems to be created for each plugin whenever you first run etherpad-lite. For us, `node_modules` is part of the app directory, so our app can't write to it at run time. Our solution for now: during build, we create a symlink from `node_modules/ep_<pluginname>.ep_initialized` to `/var/sandstorm-plugins-initialized/ep_<pluginname>` (which is within the grain directory), so each grain first run can set these files.
+`node_modules/ep_<pluginname>/.ep_initialized` seems to be created for each plugin whenever you first run etherpad-lite. For us, `node_modules` is part of the app directory, so our app can't write to it at run time. Our solution for now: during build, we create a symlink from `node_modules/ep_<pluginname>.ep_initialized` to `/var/sandstorm/plugins-initialized/ep_<pluginname>` (which is within the grain directory), so each grain first run can set these files.
 
 Question: Why? I'm not sure what .ep_initialized does. Does this "initialization" happen within the app (i.e. `node_modules`) or within the grain (i.e. the database file)?
 
