@@ -1,6 +1,7 @@
 # Sandstorm
 
 ## 2022-03-19
+
  * Upgraded Etherpad to a much newer version. See here: https://github.com/sandstormports/etherpad-lite-sandstorm
  * Started a new repository for this app, and recreated most existing Sandstorm changes on top of Etherpad, `ep_author_neat` and `ep_comments_page`
  * Now using diff patches instead of forking upstream, for (hopeful) ease of upgrading in the future.
@@ -197,7 +198,7 @@ Special mention: Thanks to Sauce Labs for additional testing tunnels to help us 
 * Fixed a regression in v1.8.8 that caused "Uncaught TypeError: Cannot read
   property '0' of undefined" with some plugins (#4885)
 * Less warnings in server console for supported element types on import.
-* Support Azure and other network share installations by using a 
+* Support Azure and other network share installations by using a
   more truthful relative path.
 
 ### Notable enhancements
