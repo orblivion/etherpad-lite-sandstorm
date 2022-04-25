@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Etherpad"),
 
-    appVersion = 23,  # Increment this for every release.
+    appVersion = 24,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "TODO"), # 1.8.14-2022-XX-XX unless we upgrade etherpad
+    appMarketingVersion = (defaultText = "1.8.14"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -127,7 +127,7 @@ const pkgdef :Spk.PackageDefinition = (
         (width = 1280, height = 614, png = embed "branding/screenshots/screenshot-1.png"),
         (width = 1280, height = 614, png = embed "branding/screenshots/screenshot-2.png"),
       ],
-      #changeLog = (defaultText = embed "path/to/sandstorm-specific/changelog.md"),
+      changeLog = (defaultText = embed "CHANGELOG.md"),
       # Documents the history of changes in Github-flavored markdown format (with the same restrictions
       # as govern `description`). We recommend formatting this with an H1 heading for each version
       # followed by a bullet list of changes.
