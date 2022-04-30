@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Etherpad"),
 
-    appVersion = 24,  # Increment this for every release.
+    appVersion = 25,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "1.8.14"),
+    appMarketingVersion = (defaultText = "1.8.14-1"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
