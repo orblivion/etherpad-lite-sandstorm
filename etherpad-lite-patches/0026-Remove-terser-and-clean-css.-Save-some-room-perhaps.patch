@@ -1,7 +1,7 @@
-From 717eb54f9320e9556473df6ee0d1fd7735ee6b39 Mon Sep 17 00:00:00 2001
+From 3872427ad544499b34092e5a827547ca1e465ae0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 28 Jan 2022 23:05:56 -0500
-Subject: [PATCH 26/27] Remove terser and clean-css. Save some room, perhaps.
+Subject: [PATCH 26/28] Remove terser and clean-css. Save some room, perhaps.
 
 ---
  src/node/utils/MinifyWorker.js |  5 +++--
@@ -82,5 +82,5 @@ index 61c4cac1..d6f755e6 100644
      "tiny-worker": "^2.3.0",
      "tinycon": "0.6.8",
 -- 
-2.20.1
+2.37.3
 

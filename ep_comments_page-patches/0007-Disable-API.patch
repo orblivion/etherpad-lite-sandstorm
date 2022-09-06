@@ -1,4 +1,4 @@
-From 62d26481cac0d85bb7587ff10a80045864e7f91a Mon Sep 17 00:00:00 2001
+From e8f1d8f3c6a363bc2c7820f522907deb0808ec6e Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 19:27:22 -0500
 Subject: [PATCH 7/7] Disable API
@@ -20,5 +20,5 @@ index 9ba92c5..01068a9 100644
  
    const apiKeyReceived = fields.apikey || fields.api_key;
 -- 
-2.20.1
+2.37.3
 

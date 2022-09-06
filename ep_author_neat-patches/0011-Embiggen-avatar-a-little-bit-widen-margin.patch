@@ -1,4 +1,4 @@
-From 7401f04daf97f67141f5d2f7acd02e0df48f77c4 Mon Sep 17 00:00:00 2001
+From d4045fc0e97716bd7a5fc6dba3626bd1654d4df7 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 31 Oct 2021 20:53:13 -0400
 Subject: [PATCH 11/12] Embiggen avatar a little bit, widen margin
@@ -33,5 +33,5 @@ index 612ded9..5e46915 100644
        z2$.top = "-8px";
        z2$.color = "transparent";
 -- 
-2.20.1
+2.37.3
 

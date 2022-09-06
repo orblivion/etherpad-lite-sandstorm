@@ -1,7 +1,7 @@
-From 6899f038f39b34c3459105a531998e3c8470e2fc Mon Sep 17 00:00:00 2001
+From c493ca80a47e4a5092efa49d00d0c08d3a7f5f3f Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:36:36 -0500
-Subject: [PATCH 14/27] Commit settings.json.
+Subject: [PATCH 14/28] Commit settings.json.
 
 No changes, so we can see what changes are made on top of it.
 ---
@@ -677,5 +677,5 @@ index 00000000..2d7f119a
 +  "enableAdminUITests": false
 +}
 -- 
-2.20.1
+2.37.3
 

@@ -1,7 +1,7 @@
-From 9f32e32486cdd453e5f41c12c18169e2fb64e5fb Mon Sep 17 00:00:00 2001
+From d368142656f4b6e7280a32eff420c6699a1276e1 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 20:25:42 -0500
-Subject: [PATCH 16/27] websocket for the only socket transport protocol in
+Subject: [PATCH 16/28] websocket for the only socket transport protocol in
  settings.json
 
 This was done in the previous version of the app, I'm not even sure why but it still works.
@@ -34,5 +34,5 @@ index 2d79ab9e..22bc1c98 100644
    "socketIo": {
      /*
 -- 
-2.20.1
+2.37.3
 

@@ -1,4 +1,4 @@
-From c1a6425bde5aae98425fa438f992154978f9a3f7 Mon Sep 17 00:00:00 2001
+From f27580bf235192131eb7f4892a2421462d279a69 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 18:34:04 -0800
 Subject: [PATCH 02/12] Use userInfo passed to setAuthorStyle() hook rather
@@ -57,5 +57,5 @@ index b3a5dda..5a56010 100644
 \ No newline at end of file
 +};
 -- 
-2.20.1
+2.37.3
 

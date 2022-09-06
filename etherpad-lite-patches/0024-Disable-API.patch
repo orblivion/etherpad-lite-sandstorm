@@ -1,7 +1,7 @@
-From 25d098301d85861a446d73456ef9009083dd5988 Mon Sep 17 00:00:00 2001
+From db9917a8ae5c5b68f7c8c57679b283baff06264a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 19:45:36 -0500
-Subject: [PATCH 24/27] Disable API
+Subject: [PATCH 24/28] Disable API
 
 ---
  src/node/handler/APIHandler.js | 15 +++++++++++++++
@@ -41,5 +41,5 @@ index 6bc6e537..cc2e8a8a 100644
    if (!(apiVersion in version)) {
      throw new createHTTPError.NotFound('no such api version');
 -- 
-2.20.1
+2.37.3
 

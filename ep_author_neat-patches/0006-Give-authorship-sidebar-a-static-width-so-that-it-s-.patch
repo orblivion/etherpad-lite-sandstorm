@@ -1,4 +1,4 @@
-From 98aaa8109f0d384bc0836dc56da9d1d0c8e33e61 Mon Sep 17 00:00:00 2001
+From d2cd7b799c2d50f2459af04c5d15321256ce70b1 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:11:05 -0800
 Subject: [PATCH 06/12] Give authorship sidebar a static width so that it's
@@ -25,5 +25,5 @@ index 46cdc4f..6d89c21 100644
    x$.borderRight = 'solid 0px ';
    x$.paddingRight = '5px';
 -- 
-2.20.1
+2.37.3
 

@@ -1,7 +1,7 @@
-From c3c359e66d258f41f21c2527691018910255af6e Mon Sep 17 00:00:00 2001
+From 55c0e9d875980c1cdf4e484cb68318ae5708f45c Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:41:54 -0500
-Subject: [PATCH 15/27] Don't minify during requests.
+Subject: [PATCH 15/28] Don't minify during requests.
 
 ---
  settings.json | 7 ++++++-
@@ -26,5 +26,5 @@ index 2d7f119a..2d79ab9e 100644
    /*
     * How long may clients use served javascript code (in seconds)?
 -- 
-2.20.1
+2.37.3
 

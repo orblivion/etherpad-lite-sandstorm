@@ -1,4 +1,4 @@
-From 5b791122c01b34196b78a2edf2447971cf1a9a7e Mon Sep 17 00:00:00 2001
+From ad1e2dd844b63517e67ad080a7c99820c6338023 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 26 Nov 2021 17:24:51 -0500
 Subject: [PATCH 5/7] Click to show, mouseover to highlight, urls.
@@ -294,5 +294,5 @@ index f1ad4d4..02da6da 100644
  
  // Collect Comments and link text content to the comments div
 -- 
-2.20.1
+2.37.3
 

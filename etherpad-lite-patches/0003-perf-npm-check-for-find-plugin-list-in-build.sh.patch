@@ -1,7 +1,7 @@
-From e03994288fd7eb815aee12379da7d51d03e5b897 Mon Sep 17 00:00:00 2001
+From bc399625a36bfe3cb77e7a7a1c7efbd4dd000089 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
-Subject: [PATCH 03/27] perf: npm check for find plugin list in build.sh
+Subject: [PATCH 03/28] perf: npm check for find plugin list in build.sh
 
 This improves startup time substantially.
 
@@ -130,5 +130,5 @@ index 74fbbafc..bc8b4d49 100644
  const loadPlugin = async (packages, pluginName, plugins, parts) => {
    const pluginPath = path.resolve(packages[pluginName].path, 'ep.json');
 -- 
-2.20.1
+2.37.3
 

@@ -1,4 +1,4 @@
-From 774069a00dbb953f63954ae2c9a831e8aaa1d6bb Mon Sep 17 00:00:00 2001
+From 9ece251212b170550111dc2174a58218524376f4 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:14:07 -0800
 Subject: [PATCH 09/12] When a paragraph with a primary author has some
@@ -26,5 +26,5 @@ index 45306e4..5857278 100644
      z1$ = outerDynamicCSS.selectorStyle("#sidedivinner.authorColors > div.primary-" + authorClass);
      z1$.borderRight = "solid 5px " + color;
 -- 
-2.20.1
+2.37.3
 

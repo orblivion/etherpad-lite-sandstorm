@@ -1,7 +1,7 @@
-From 5f23c7211a20d831cf5ef73e0a99d59b0779bce0 Mon Sep 17 00:00:00 2001
+From aebe72149ae8fd3e61bc5552ebea3254ff8d7a1a Mon Sep 17 00:00:00 2001
 From: Jason Paryani <github@jparyani.com>
 Date: Wed, 11 Jun 2014 14:48:50 -0700
-Subject: [PATCH 01/27] Change index to redirect to a document
+Subject: [PATCH 01/28] Change index to redirect to a document
 
 ---
  src/node/hooks/express/specialpages.js | 4 +++-
@@ -23,5 +23,5 @@ index 66ee0221..0a984f79 100644
  
    // serve javascript.html
 -- 
-2.20.1
+2.37.3
 

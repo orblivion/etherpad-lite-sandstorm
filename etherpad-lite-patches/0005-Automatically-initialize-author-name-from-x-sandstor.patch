@@ -1,7 +1,7 @@
-From 6bbd15f8468cc983c12564b4f2ddc843b0e57173 Mon Sep 17 00:00:00 2001
+From 139cd0fca1725b8bae50a703d3c7822d1ccc566a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:33:40 -0400
-Subject: [PATCH 05/27] Automatically initialize author name from
+Subject: [PATCH 05/28] Automatically initialize author name from
  x-sandstorm-username
 
 ---
@@ -32,5 +32,5 @@ index a1194ea9..1d3361a5 100644
    // load the pad-object from the database
    const pad = await padManager.getPad(padIds.padId);
 -- 
-2.20.1
+2.37.3
 

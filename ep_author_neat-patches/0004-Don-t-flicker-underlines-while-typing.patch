@@ -1,4 +1,4 @@
-From d2bd667ab9d017aa9d7ee4b82315977cb526397f Mon Sep 17 00:00:00 2001
+From 0863e34f087d2287d983ff9ff779b56841299318 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 19:18:57 -0800
 Subject: [PATCH 04/12] Don't flicker underlines while typing.
@@ -48,5 +48,5 @@ index 833f735..784d705 100644
  out$.aceEditEvent = aceEditEvent;
  function aceEditEvent(hook_name, context, cb){
 -- 
-2.20.1
+2.37.3
 
