@@ -10,14 +10,6 @@ https://github.com/sandstormports/community-project/issues/15#issuecomment-10178
 
 (this is a regression)
 
-## Pasting large amounts of multi-line text does not work
-
-It seems to crash the server.
-
-* Not sure if it's Sandstorm-only
-* Not sure if latest Etherpad (1.8.16) fixes it.
-* This is a regression from our previous app
-
 ## Font size not preserved in documents created with previous Etherpad Sandstorm app
 
 This can be seen by trying to open the included sqlite3 file in the `test/` directory. Font size 8 and Font size 20 show up the same.
