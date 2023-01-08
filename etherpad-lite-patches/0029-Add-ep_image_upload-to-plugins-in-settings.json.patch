@@ -1,0 +1,25 @@
+From 1d79ccb973efad39917df605fc5073c6ec9fd9bb Mon Sep 17 00:00:00 2001
+From: Ian Denhardt <ian@zenhack.net>
+Date: Sun, 8 Jan 2023 00:03:59 -0500
+Subject: [PATCH 29/29] Add ep_image_upload to plugins in settings.json
+
+---
+ settings.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/settings.json b/settings.json
+index ef46049e..7a9383af 100644
+--- a/settings.json
++++ b/settings.json
+@@ -224,7 +224,7 @@
+   /*
+    * The default text of a pad
+    */
+-  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n\nThis version of Etherpad includes the following plugins: ep_align ep_author_neat ep_comments_page ep_font_color ep_font_family ep_font_size ep_headings2 ep_print ep_spellcheck ep_sticky_attributes ep_subscript_and_superscript\n",
++  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n\nThis version of Etherpad includes the following plugins: ep_align ep_author_neat ep_comments_page ep_font_color ep_font_family ep_font_size ep_headings2 ep_image_upload ep_print ep_spellcheck ep_sticky_attributes ep_subscript_and_superscript\n",
+ 
+   /*
+    * Default Pad behavior.
+-- 
+2.39.0
+
