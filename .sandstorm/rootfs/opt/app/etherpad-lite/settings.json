@@ -224,7 +224,7 @@
   /*
    * The default text of a pad
    */
-  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n\nThis version of Etherpad includes the following plugins: ep_align ep_author_neat ep_comments_page ep_font_color ep_font_family ep_font_size ep_headings2 ep_image_upload ep_print ep_spellcheck ep_sticky_attributes ep_subscript_and_superscript\n",
+  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org",
 
   /*
    * Default Pad behavior.

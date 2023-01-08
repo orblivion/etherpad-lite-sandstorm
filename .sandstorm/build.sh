@@ -78,8 +78,6 @@ fi
 # For vagrant, this is now within the bind mounted /opt/app
 cd /opt/app/etherpad-lite
 
-../check-plugins-in-default-text
-
 export NODE_ENV=production
 
 # TODO we could rely on package-lock.json for reproducibility. Though for
