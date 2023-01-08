@@ -1,4 +1,4 @@
-From d893a64f58fd6bf97ce272fa09ec9d94eb3173a7 Mon Sep 17 00:00:00 2001
+From 39edc412e78ec72fd524c17693d364d5851186e0 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 20 Nov 2021 12:55:36 -0500
 Subject: [PATCH 1/7] Fix permission bug
@@ -24,5 +24,5 @@ index 0cf7a81..9c3f63c 100644
      return callback(true);
    }
 -- 
-2.37.3
+2.39.0
 

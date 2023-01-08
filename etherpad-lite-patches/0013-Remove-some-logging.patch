@@ -1,7 +1,7 @@
-From 280faab1afced2cd1dd2f0c8851de36cf9be1172 Mon Sep 17 00:00:00 2001
+From 3c26fc8fe301214bb0855c8b404ddeb9ce9623c7 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 4 Jan 2022 19:33:47 -0500
-Subject: [PATCH 13/28] Remove some logging
+Subject: [PATCH 13/21] Remove some logging
 
 ---
  src/node/db/DB.js         |  2 +-
@@ -56,5 +56,5 @@ index 351ab5bf..d4121945 100644
  
    if (env !== 'production') {
 -- 
-2.37.3
+2.39.0
 

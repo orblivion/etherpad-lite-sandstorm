@@ -1,4 +1,4 @@
-From 3c2e6c7b3119cb1c036b3bae5c10edefe312fc7e Mon Sep 17 00:00:00 2001
+From 2186dde0c5b3d8c3d1d14e9482dff49cb388c94d Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:08:54 -0500
 Subject: [PATCH 3/7] frontend: hide comment buttons if can't comment
@@ -32,5 +32,5 @@ index 7c0f6fd..f1ad4d4 100644
  
  // Init Etherpad plugin comment pads
 -- 
-2.37.3
+2.39.0
 

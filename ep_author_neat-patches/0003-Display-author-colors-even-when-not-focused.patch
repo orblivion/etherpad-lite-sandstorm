@@ -1,4 +1,4 @@
-From e6da7adda55150ee9f18da311f74b0789a2bd652 Mon Sep 17 00:00:00 2001
+From 5a33da97038e313256530627c94858b6274d4463 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 18:44:21 -0800
 Subject: [PATCH 03/12] Display author colors even when not focused.
@@ -51,5 +51,5 @@ index 5a56010..833f735 100644
    }
    return 1;
 -- 
-2.37.3
+2.39.0
 

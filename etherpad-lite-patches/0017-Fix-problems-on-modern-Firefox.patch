@@ -1,7 +1,7 @@
-From 7feb711afae237c354394c642c45c1b2a0bfd3c4 Mon Sep 17 00:00:00 2001
+From 40accd5d10da887200c7a210c8722e9170f29828 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 12:44:20 -0500
-Subject: [PATCH 23/28] Fix problems on modern Firefox
+Subject: [PATCH 17/21] Fix problems on modern Firefox
 
 I don't understand what the problem is, so I am selectively undoing the commit that introduced the issue.
 ---
@@ -139,5 +139,5 @@ index 3471f442..f4965e0d 100644
  
      // <head> tag
 -- 
-2.37.3
+2.39.0
 

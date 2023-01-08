@@ -1,4 +1,4 @@
-From 121e6a9da294f712760d702976d649d6406f9e35 Mon Sep 17 00:00:00 2001
+From 17bb4be926dd02c96eef2cc087d6a427f53e8909 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:14:28 -0800
 Subject: [PATCH 10/12] Remove dead debug code.
@@ -20,5 +20,5 @@ index 5857278..612ded9 100644
        z2$.backgroundSize = "contain";
        z2$.backgroundImage = "url('" + info.userInfo.avatarUrl + "')";
 -- 
-2.37.3
+2.39.0
 

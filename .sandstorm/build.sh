@@ -134,7 +134,9 @@ then
   #   to copy over node_modules incompletely.
   # 2) The build scripts above are controlled by etherpad. If they generate
   #   something other than node_modules, I don't want to miss it.
-  diff -r /opt/build/app/etherpad-lite /opt/app/etherpad-lite || (
+  # 3) ignore settings.json, which shows up due to seach path magic in the pkgdef.
+  diff -r /opt/build/app/etherpad-lite /opt/app/etherpad-lite \
+	  --exclude settings.json || (
     echo "Seems like something other than node_modules was built during install.";
     echo "build.sh should be updated to transfer these over to /opt/app";
     exit 1;

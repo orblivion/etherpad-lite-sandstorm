@@ -1,4 +1,4 @@
-From 72ddf3a9bb139ebadf85cbd07eb14f5d062f0741 Mon Sep 17 00:00:00 2001
+From 9eed9a3809dcd968b2945785601010e28bc7e3c4 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:13:31 -0800
 Subject: [PATCH 08/12] When a paragraph is majority-unattributed but has at
@@ -36,5 +36,5 @@ index 53be7a8..45306e4 100644
    mPA = 0;
    authorClass = null;
 -- 
-2.37.3
+2.39.0
 
