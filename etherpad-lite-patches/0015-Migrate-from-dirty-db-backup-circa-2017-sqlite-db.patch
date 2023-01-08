@@ -1,30 +1,14 @@
-From dcc78135ea0efcdbf989dcd6caca6668e76c0a8f Mon Sep 17 00:00:00 2001
+From ed6fabc6de7b3241dc91e2736bbf7662f39931c1 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 6 Jan 2022 16:11:54 -0500
-Subject: [PATCH 21/28] Migrate from dirty db, backup circa 2017 sqlite db
+Subject: [PATCH 15/21] Migrate from dirty db, backup circa 2017 sqlite db
 
 ---
- settings.json            |  4 ++-
  src/bin/run.sh           | 49 +++++++++++++++++++++++++++
  src/sandstorm-migrate.js | 72 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 124 insertions(+), 1 deletion(-)
+ 2 files changed, 121 insertions(+)
  create mode 100644 src/sandstorm-migrate.js
 
-diff --git a/settings.json b/settings.json
-index e5a0a7ba..135222e1 100644
---- a/settings.json
-+++ b/settings.json
-@@ -198,7 +198,9 @@
- 
-   "dbType": "sqlite",
-   "dbSettings": {
--    "filename": "var/sqlite.db"
-+    /* IMPORTANT: If you change this, make sure to grep for this filename in
-+    the codebase for other relevant changes. */
-+    "filename": "var/sqlite3.1.db"
-   },
- 
-   /*
 diff --git a/src/bin/run.sh b/src/bin/run.sh
 index 91791088..417a0a77 100755
 --- a/src/bin/run.sh
@@ -164,5 +148,5 @@ index 00000000..a3b5f6b7
 +sqlite.init(sqliteInitialized);
 +
 -- 
-2.37.3
+2.39.0
 

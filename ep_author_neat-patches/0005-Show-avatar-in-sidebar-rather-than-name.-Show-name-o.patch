@@ -1,4 +1,4 @@
-From 44ff09fd45cfd75ff189ef6f8c946b1b6e6fccb1 Mon Sep 17 00:00:00 2001
+From cc8096711dab2eebb18f2460639001f33a0586f0 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Mon, 14 Nov 2016 20:58:41 -0800
 Subject: [PATCH 05/12] Show avatar in sidebar rather than name. Show name on
@@ -80,5 +80,5 @@ index 784d705..46cdc4f 100644
      dynamicCSS.removeSelectorStyle(".authorColors span." + authorClass);
      parentDynamicCSS.removeSelectorStyle(authorSelector);
 -- 
-2.37.3
+2.39.0
 

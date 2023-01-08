@@ -1,7 +1,7 @@
-From bd5384a0bec85df46d221afacf6f6320d18b02a0 Mon Sep 17 00:00:00 2001
+From 0baa7e438d6b0b1db9d88ec81a5e5b6433ea2421 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:26:45 -0400
-Subject: [PATCH 02/28] Don't run installDeps on run.sh
+Subject: [PATCH 02/21] Don't run installDeps on run.sh
 
 Now we can use run.sh
 ---
@@ -22,5 +22,5 @@ index b655e963..d36d2c68 100755
  # Move to the node folder and start
  log "Starting Etherpad..."
 -- 
-2.37.3
+2.39.0
 

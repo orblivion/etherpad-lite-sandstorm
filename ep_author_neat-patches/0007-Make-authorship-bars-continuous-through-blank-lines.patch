@@ -1,4 +1,4 @@
-From d22593ea4d890bf38aada156ec5ef15b09097a21 Mon Sep 17 00:00:00 2001
+From 3a057b0101e819db368f73d177649cac679ff456 Mon Sep 17 00:00:00 2001
 From: Kenton Varda <kenton@sandstorm.io>
 Date: Wed, 16 Nov 2016 16:12:12 -0800
 Subject: [PATCH 07/12] Make authorship bars continuous through blank lines.
@@ -22,5 +22,5 @@ index 6d89c21..53be7a8 100644
      $authorContainer.addClass('concise');
    } else {
 -- 
-2.37.3
+2.39.0
 

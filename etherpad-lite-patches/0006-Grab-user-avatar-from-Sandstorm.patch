@@ -1,7 +1,7 @@
-From 7cc011f660bbf10be04d34b4cc07b890807b8339 Mon Sep 17 00:00:00 2001
+From f63e6c0c219c10bb26a15bbb0ae2b281f904026a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 19:54:00 -0400
-Subject: [PATCH 06/28] Grab user avatar from Sandstorm
+Subject: [PATCH 06/21] Grab user avatar from Sandstorm
 
 ---
  src/node/db/AuthorManager.js          | 16 ++++++++++++++++
@@ -151,5 +151,5 @@ index ec156eb4..a52351e6 100644
  
      const postAceInit = () => {
 -- 
-2.37.3
+2.39.0
 

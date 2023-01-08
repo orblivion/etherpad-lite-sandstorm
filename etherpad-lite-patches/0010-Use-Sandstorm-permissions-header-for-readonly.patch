@@ -1,7 +1,7 @@
-From 11d1eadf5c1f9ee37219f60af6ec174502fb5ed1 Mon Sep 17 00:00:00 2001
+From cbc873208afe0d599af3ac2e7acb584dceb73672 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 29 Oct 2021 15:28:53 -0400
-Subject: [PATCH 10/28] Use Sandstorm permissions header for readonly
+Subject: [PATCH 10/21] Use Sandstorm permissions header for readonly
 
 ---
  src/node/hooks/express/webaccess.js | 6 ++++++
@@ -25,5 +25,5 @@ index 8a183681..9dfb396c 100644
    if (!settings.requireAuthentication) return true;
    const {session: {user} = {}} = req;
 -- 
-2.37.3
+2.39.0
 

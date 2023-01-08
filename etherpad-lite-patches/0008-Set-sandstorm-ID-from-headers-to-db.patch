@@ -1,7 +1,7 @@
-From f8c188fe61a7bc110f80d93b4b5c0a1f1278300d Mon Sep 17 00:00:00 2001
+From 92ed2c061e3dae2ae638dfd203ea25c1c12034ad Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:53:20 -0400
-Subject: [PATCH 08/28] Set sandstorm ID from headers to db
+Subject: [PATCH 08/21] Set sandstorm ID from headers to db
 
 ---
  src/node/db/AuthorManager.js          | 15 +++++++++++++++
@@ -54,5 +54,5 @@ index d63f3c3a..0de27ca9 100644
      authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
      authorManager.setAuthorName(author, authorName);
 -- 
-2.37.3
+2.39.0
 

@@ -1,4 +1,4 @@
-From 31214b4cfbd3567e1bd47ddc65c12bd7b4468430 Mon Sep 17 00:00:00 2001
+From 2f5e78f39e230a85419f09ca31dc46870fde0109 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 21 Nov 2021 16:08:38 -0500
 Subject: [PATCH 2/7] Implement Sandstorm comment permission
@@ -164,5 +164,5 @@ index 9c3f63c..f20bdaf 100644
        const [replyId, reply] = await commentManager.addCommentReply(padId, data);
        reply.replyId = replyId;
 -- 
-2.37.3
+2.39.0
 
