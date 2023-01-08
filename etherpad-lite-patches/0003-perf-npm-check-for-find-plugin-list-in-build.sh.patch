@@ -1,7 +1,7 @@
-From 575b6cbeb0dda164d62b51f9578acb31f49d4f7c Mon Sep 17 00:00:00 2001
+From d980c2309e6658ac946f4101dcf36771ce1b2376 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
-Subject: [PATCH 03/21] perf: npm check for find plugin list in build.sh
+Subject: [PATCH 03/20] perf: npm check for find plugin list in build.sh
 
 This improves startup time substantially.
 
@@ -98,10 +98,10 @@ index 00000000..4dea6e7a
 +
 +cachePackages()
 diff --git a/src/static/js/pluginfw/plugins.js b/src/static/js/pluginfw/plugins.js
-index 74fbbafc..bc8b4d49 100644
+index a4a2df40..70bf8c32 100644
 --- a/src/static/js/pluginfw/plugins.js
 +++ b/src/static/js/pluginfw/plugins.js
-@@ -115,23 +115,10 @@ exports.update = async () => {
+@@ -102,23 +102,10 @@ exports.update = async () => {
  };
  
  exports.getPackages = async () => {

@@ -1,7 +1,7 @@
-From 8c596ec8b281ed8d391c9ddaf14bc8b67ff090b3 Mon Sep 17 00:00:00 2001
+From 60ddc035830456bd2917bfd7d6e8ab08ccd5623a Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:27:46 -0400
-Subject: [PATCH 07/21] Pass full userInfo into setAuthorInfo() /
+Subject: [PATCH 07/20] Pass full userInfo into setAuthorInfo() /
  setAuthorStyle() hook.
 
 This allows the plugin to determine the author name and color in a sane way. Without this, ep_author_neat currently scrapes the DOM to find this information, which doesn't work sometimes.
@@ -12,10 +12,10 @@ This allows the plugin to determine the author name and color in a sane way. Wit
  1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/src/static/js/collab_client.js b/src/static/js/collab_client.js
-index e507d6b0..434c76ce 100644
+index 849fff5f..6dcbfc36 100644
 --- a/src/static/js/collab_client.js
 +++ b/src/static/js/collab_client.js
-@@ -321,10 +321,10 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
+@@ -313,10 +313,10 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
    };
  
    const tellAceActiveAuthorInfo = (userInfo) => {
@@ -28,7 +28,7 @@ index e507d6b0..434c76ce 100644
      if (typeof colorId === 'number') {
        colorId = clientVars.colorPalette[colorId];
      }
-@@ -334,16 +334,18 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
+@@ -326,16 +326,18 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
        editor.setAuthorInfo(userId, {
          bgcolor: cssColor,
          fade: 0.5,
@@ -48,7 +48,7 @@ index e507d6b0..434c76ce 100644
    };
  
    const getConnectedUsers = () => valuesArray(userSet);
-@@ -351,7 +353,7 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
+@@ -343,7 +345,7 @@ const getCollabClient = (ace2editor, serverVars, initialUserInfo, options, _pad)
    const tellAceAboutHistoricalAuthors = (hadata) => {
      for (const [author, data] of Object.entries(hadata)) {
        if (!userSet[author]) {

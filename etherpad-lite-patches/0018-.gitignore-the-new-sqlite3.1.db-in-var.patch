@@ -1,7 +1,7 @@
-From c1d1e1200bdb6521ae8883cea706c44429efc3c5 Mon Sep 17 00:00:00 2001
+From 017d8e55fcf7f53a657258b37635c519ca0ab337 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 28 Jan 2022 22:54:23 -0500
-Subject: [PATCH 19/21] .gitignore the new sqlite3.1.db in var/
+Subject: [PATCH 18/20] .gitignore the new sqlite3.1.db in var/
 
 This is useful running outside of sandstorm. It generates this file and it annoyingly hangs out in the repo.
 ---

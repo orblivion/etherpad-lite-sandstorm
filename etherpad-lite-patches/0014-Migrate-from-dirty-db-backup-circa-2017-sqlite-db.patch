@@ -1,7 +1,7 @@
-From ed6fabc6de7b3241dc91e2736bbf7662f39931c1 Mon Sep 17 00:00:00 2001
+From 069dad3b7aaf1af32b0f8c861b099a930b412001 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 6 Jan 2022 16:11:54 -0500
-Subject: [PATCH 15/21] Migrate from dirty db, backup circa 2017 sqlite db
+Subject: [PATCH 14/20] Migrate from dirty db, backup circa 2017 sqlite db
 
 ---
  src/bin/run.sh           | 49 +++++++++++++++++++++++++++

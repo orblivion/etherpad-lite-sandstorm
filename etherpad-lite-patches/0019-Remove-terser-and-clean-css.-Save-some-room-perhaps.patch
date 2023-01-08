@@ -1,0 +1,49 @@
+From 12d9de979337046edc8e3224ed06ab3db9a7443c Mon Sep 17 00:00:00 2001
+From: Daniel Krol <orblivion@gmail.com>
+Date: Fri, 28 Jan 2022 23:05:56 -0500
+Subject: [PATCH 19/20] Remove terser and clean-css. Save some room, perhaps.
+
+---
+ src/node/utils/MinifyWorker.js | 5 +++--
+ src/package.json               | 2 --
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/src/node/utils/MinifyWorker.js b/src/node/utils/MinifyWorker.js
+index 364ecc96..d7c7cf87 100644
+--- a/src/node/utils/MinifyWorker.js
++++ b/src/node/utils/MinifyWorker.js
+@@ -3,8 +3,9 @@
+  * Worker thread to minify JS & CSS files out of the main NodeJS thread
+  */
+ 
+-const CleanCSS = require('clean-css');
+-const Terser = require('terser');
++// SANDSTORM EDIT - remove minifying libraries. any minifying will be at runtime. ("minify": false in settings.json)
++const CleanCSS = undefined;
++const Terser = undefined;
+ const fsp = require('fs').promises;
+ const path = require('path');
+ const Threads = require('threads');
+diff --git a/src/package.json b/src/package.json
+index c8b4e340..2012b797 100644
+--- a/src/package.json
++++ b/src/package.json
+@@ -31,7 +31,6 @@
+   ],
+   "dependencies": {
+     "async": "^3.2.1",
+-    "clean-css": "^5.2.1",
+     "cookie-parser": "1.4.5",
+     "cross-spawn": "^7.0.3",
+     "ejs": "^3.1.6",
+@@ -63,7 +62,6 @@
+     "security": "1.0.0",
+     "semver": "^7.3.5",
+     "socket.io": "^2.4.1",
+-    "terser": "^5.9.0",
+     "threads": "^1.7.0",
+     "tiny-worker": "^2.3.0",
+     "tinycon": "0.6.8",
+-- 
+2.39.0
+

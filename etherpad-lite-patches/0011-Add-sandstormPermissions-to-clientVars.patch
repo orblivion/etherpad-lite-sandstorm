@@ -1,17 +1,17 @@
-From e3ac4966a14f1092d16d5c4306f182fae0f550c0 Mon Sep 17 00:00:00 2001
+From 4f5b9fe6bda9eb5ead5870f7cb428918d572f1c4 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 20 Nov 2021 13:15:46 -0500
-Subject: [PATCH 11/21] Add sandstormPermissions to clientVars
+Subject: [PATCH 11/20] Add sandstormPermissions to clientVars
 
 ---
  src/node/handler/PadMessageHandler.js | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index be721d2c..0f770c43 100644
+index 879998a0..16ddd8ef 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
-@@ -1076,6 +1076,10 @@ const handleClientReady = async (socket, message, authorID) => {
+@@ -1001,6 +1001,10 @@ const handleClientReady = async (socket, message) => {
        return;
      }
  
@@ -19,16 +19,16 @@ index be721d2c..0f770c43 100644
 +      ? decodeURIComponent(socket.client.request.headers["x-sandstorm-permissions"]).split(",")
 +      : ["modify", "comment"];
 +
-     // Warning: never ever send padIds.padId to the client. If the
-     // client is read only you would open a security hole 1 swedish
-     // mile wide...
-@@ -1114,6 +1118,7 @@ const handleClientReady = async (socket, message, authorID) => {
+     // Warning: never ever send sessionInfo.padId to the client. If the client is read only you
+     // would open a security hole 1 swedish mile wide...
+     const clientVars = {
+@@ -1038,6 +1042,7 @@ const handleClientReady = async (socket, message) => {
        numConnectedUsers: roomSockets.length,
-       readOnlyId: padIds.readOnlyPadId,
+       readOnlyId: sessionInfo.readOnlyPadId,
        readonly: sessionInfo.readonly,
 +      sandstormPermissions,
        serverTimestamp: Date.now(),
-       userId: authorID,
+       userId: sessionInfo.author,
        abiwordAvailable: settings.abiwordAvailable(),
 -- 
 2.39.0

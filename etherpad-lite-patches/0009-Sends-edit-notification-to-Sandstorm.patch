@@ -1,7 +1,7 @@
-From d100c23f294f9de616f96a3f7a2bc4a448cbac9a Mon Sep 17 00:00:00 2001
+From 22427281e5f009b089ad55281428728ee7752e0e Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 21:24:10 -0400
-Subject: [PATCH 09/21] Sends "edit" notification to Sandstorm
+Subject: [PATCH 09/20] Sends "edit" notification to Sandstorm
 
 Requires change in pkgdef
 ---
@@ -11,21 +11,21 @@ Requires change in pkgdef
  create mode 100644 src/node/handler/SandstormHandler.js
 
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index 0de27ca9..be721d2c 100644
+index 436ee52f..879998a0 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
-@@ -39,6 +39,7 @@ const assert = require('assert').strict;
- const nodeify = require('nodeify');
+@@ -38,6 +38,7 @@ const stats = require('../stats');
+ const assert = require('assert').strict;
  const {RateLimiterMemory} = require('rate-limiter-flexible');
  const webaccess = require('../hooks/express/webaccess');
 +const sandstorm = require('./SandstormHandler.js');
  
  let rateLimiter;
- 
-@@ -272,6 +273,10 @@ exports.handleMessage = async (socket, message) => {
+ let socketio = null;
+@@ -307,6 +308,10 @@ exports.handleMessage = async (socket, message) => {
      } else if (message.data.type === 'USER_CHANGES') {
        stats.counter('pendingEdits').inc();
-       padChannels.emit(message.padId, {socket, message}); // add to pad queue
+       await padChannels.enqueue(thisSession.padId, {socket, message});
 +      // SANDSTORM EDIT
 +      if (process.env.SANDSTORM) {
 +        sandstorm.activity(socket.client.request.headers["x-sandstorm-session-id"], "edit");

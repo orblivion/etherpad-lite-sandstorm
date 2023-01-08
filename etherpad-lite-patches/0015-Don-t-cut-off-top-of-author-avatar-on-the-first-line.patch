@@ -1,7 +1,7 @@
-From 7ad435ea0174c37dc8a1d280205d603a2ebab5e5 Mon Sep 17 00:00:00 2001
+From fc140cedbc6ca96ed6432530eac1e87831c5f917 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 11 Jan 2022 13:40:43 -0500
-Subject: [PATCH 16/21] Don't cut off top of author avatar on the first line
+Subject: [PATCH 15/20] Don't cut off top of author avatar on the first line
 
 ---
  src/static/css/iframe_editor.css | 11 +++++++++++
