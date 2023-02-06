@@ -18,7 +18,7 @@ curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -qq nodejs git-core g++
 
 # Capnp dependencies
-apt-get install -qq libcapnp-dev
+apt-get install -qq libcapnp-dev make
 
 # Create a build directory to do npm installations. This is a workaround for a
 # vagrant problem. See: https://github.com/sandstorm-io/vagrant-spk/issues/320
