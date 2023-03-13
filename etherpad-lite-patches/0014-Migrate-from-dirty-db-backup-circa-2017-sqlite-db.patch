@@ -1,4 +1,4 @@
-From 069dad3b7aaf1af32b0f8c861b099a930b412001 Mon Sep 17 00:00:00 2001
+From ba167cb9b43e53120f8c34316ae81d5a303f9ca6 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 6 Jan 2022 16:11:54 -0500
 Subject: [PATCH 14/20] Migrate from dirty db, backup circa 2017 sqlite db
@@ -148,5 +148,5 @@ index 00000000..a3b5f6b7
 +sqlite.init(sqliteInitialized);
 +
 -- 
-2.39.0
+2.30.2
 

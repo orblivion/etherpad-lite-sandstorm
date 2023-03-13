@@ -1,4 +1,4 @@
-From d980c2309e6658ac946f4101dcf36771ce1b2376 Mon Sep 17 00:00:00 2001
+From 785a82b73c129e42f8654cb38eed5c425b8f419f Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sun, 3 Oct 2021 21:28:29 -0400
 Subject: [PATCH 03/20] perf: npm check for find plugin list in build.sh
@@ -130,5 +130,5 @@ index a4a2df40..70bf8c32 100644
  const loadPlugin = async (packages, pluginName, plugins, parts) => {
    const pluginPath = path.resolve(packages[pluginName].path, 'ep.json');
 -- 
-2.39.0
+2.30.2
 

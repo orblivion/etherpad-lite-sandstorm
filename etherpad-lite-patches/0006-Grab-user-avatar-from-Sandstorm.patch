@@ -1,13 +1,13 @@
-From 5bd1cea6f53d552213cc6ff25ac62518242a4d89 Mon Sep 17 00:00:00 2001
+From e7defbb40417558299d8d7b830b1cfde2382e792 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
-Date: Wed, 27 Oct 2021 19:54:00 -0400
+Date: Mon, 20 Mar 2023 15:10:32 -0400
 Subject: [PATCH 06/20] Grab user avatar from Sandstorm
 
 ---
  src/node/db/AuthorManager.js          | 16 ++++++++++++++++
- src/node/handler/PadMessageHandler.js | 22 +++++++++++++++++++++-
+ src/node/handler/PadMessageHandler.js | 26 ++++++++++++++++++++++++--
  src/static/js/pad.js                  |  1 +
- 3 files changed, 38 insertions(+), 1 deletion(-)
+ 3 files changed, 41 insertions(+), 2 deletions(-)
 
 diff --git a/src/node/db/AuthorManager.js b/src/node/db/AuthorManager.js
 index 2a354d42..a146fe5f 100644
@@ -37,7 +37,7 @@ index 2a354d42..a146fe5f 100644
   * Returns an array of all pads this author contributed to
   * @param {String} author The id of the author
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index a223ea3f..d85779f2 100644
+index 4ada7dc1..534bb966 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
 @@ -172,6 +172,7 @@ exports.handleDisconnect = async (socket) => {
@@ -73,22 +73,32 @@ index a223ea3f..d85779f2 100644
          // set a null name, when there is no name set. cause the client wants it null
          name: message.data.userInfo.name || null,
          colorId: message.data.userInfo.colorId,
-@@ -828,6 +833,14 @@ const handleClientReady = async (socket, message) => {
+@@ -832,13 +837,23 @@ const handleClientReady = async (socket, message) => {
+     authorName && authorManager.setAuthorName(sessionInfo.author, authorName),
+     authorColorId && authorManager.setAuthorColorId(sessionInfo.author, authorColorId),
+   ]);
+-  ({colorId: authorColorId, name: authorName} = await authorManager.getAuthor(sessionInfo.author));
++  let authorAvatarUrl
++  ({colorId: authorColorId, name: authorName, avatarUrl: authorAvatarUrl} = await authorManager.getAuthor(sessionInfo.author));
+ 
+   // SANDSTORM EDIT: Initialize author data from Sandstorm headers
    if (!authorName) {
      authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
+     authorManager.setAuthorName(sessionInfo.author, authorName);
    }
 +
-+  authorAvatarUrl = socket.client.request.headers['x-sandstorm-user-picture'] || null;
-+  if (authorAvatarUrl) {
-+    authorAvatarUrl = decodeURIComponent(authorAvatarUrl);
-+    if (value.avatarUrl !== authorAvatarUrl) {
-+      authorManager.setAuthorAvatarUrl(author, authorAvatarUrl);
++  let sandstormAvatarUrl = socket.client.request.headers['x-sandstorm-user-picture'] || null;
++  if (sandstormAvatarUrl) {
++    sandstormAvatarUrl = decodeURIComponent(sandstormAvatarUrl);
++    if (authorAvatarUrl !== sandstormAvatarUrl) {
++      authorAvatarUrl = sandstormAvatarUrl;
++      authorManager.setAuthorAvatarUrl(sessionInfo.author, authorAvatarUrl);
 +    }
 +  }
    // END SANDSTORM EDIT
  
-   if (authorColorId && !/^#(?:[0-9A-F]{3}){1,2}$/i.test(authorColorId)) {
-@@ -858,7 +871,11 @@ const handleClientReady = async (socket, message) => {
+   // load the pad-object from the database
+@@ -859,7 +874,11 @@ const handleClientReady = async (socket, message) => {
            'This is possibly related to https://github.com/ether/etherpad-lite/issues/2802');
      } else {
        // Filter author attribs (e.g. don't send author's pads to all clients)
@@ -101,7 +111,7 @@ index a223ea3f..d85779f2 100644
      }
    }));
  
-@@ -996,6 +1013,7 @@ const handleClientReady = async (socket, message) => {
+@@ -997,6 +1016,7 @@ const handleClientReady = async (socket, message) => {
        colorPalette: authorManager.getColorPalette(),
        clientIp: '127.0.0.1',
        userColor: authorColorId,
@@ -109,7 +119,7 @@ index a223ea3f..d85779f2 100644
        padId: sessionInfo.auth.padID,
        padOptions: settings.padOptions,
        padShortcutEnabled: settings.padShortcutEnabled,
-@@ -1065,6 +1083,7 @@ const handleClientReady = async (socket, message) => {
+@@ -1066,6 +1086,7 @@ const handleClientReady = async (socket, message) => {
          colorId: authorColorId,
          name: authorName,
          userId: sessionInfo.author,
@@ -117,7 +127,7 @@ index a223ea3f..d85779f2 100644
        },
      },
    });
-@@ -1103,6 +1122,7 @@ const handleClientReady = async (socket, message) => {
+@@ -1104,6 +1125,7 @@ const handleClientReady = async (socket, message) => {
            colorId: authorInfo.colorId,
            name: authorInfo.name,
            userId: authorId,
@@ -138,5 +148,5 @@ index 306c2b19..233b3f27 100644
  
      const postAceInit = () => {
 -- 
-2.39.0
+2.30.2
 

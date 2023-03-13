@@ -1,4 +1,4 @@
-From 4cf1589cdace8d1ae733d39398202b609e35bb44 Mon Sep 17 00:00:00 2001
+From 98c019fd7f5a7a1095b85d48316eb04d0ea4f587 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Mon, 31 Jan 2022 13:13:38 -0500
 Subject: [PATCH 20/20] Don't cache.
@@ -30,5 +30,5 @@ index 3cc4daf2..0b9aef10 100644
  
  const djb2Hash = (data) => {
 -- 
-2.39.0
+2.30.2
 

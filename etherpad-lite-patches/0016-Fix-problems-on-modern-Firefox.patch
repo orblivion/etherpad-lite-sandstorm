@@ -1,4 +1,4 @@
-From c7745868aacec4444f81239834b45932435c3ad7 Mon Sep 17 00:00:00 2001
+From 047e5c5427da21b3fd280dd5b96446b3d7ceba82 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 12:44:20 -0500
 Subject: [PATCH 16/20] Fix problems on modern Firefox
@@ -135,5 +135,5 @@ index b0a04257..3be9c45a 100644
  
      // <head> tag
 -- 
-2.39.0
+2.30.2
 

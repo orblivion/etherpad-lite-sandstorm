@@ -1,4 +1,4 @@
-From 60ddc035830456bd2917bfd7d6e8ab08ccd5623a Mon Sep 17 00:00:00 2001
+From e414f582f4dca7698176eaf4c1c4990a2f98444e Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:27:46 -0400
 Subject: [PATCH 07/20] Pass full userInfo into setAuthorInfo() /
@@ -58,5 +58,5 @@ index 849fff5f..6dcbfc36 100644
      }
    };
 -- 
-2.39.0
+2.30.2
 

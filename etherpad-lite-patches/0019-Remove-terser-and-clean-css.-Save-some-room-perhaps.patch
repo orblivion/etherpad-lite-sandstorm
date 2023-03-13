@@ -1,4 +1,4 @@
-From 12d9de979337046edc8e3224ed06ab3db9a7443c Mon Sep 17 00:00:00 2001
+From 1fe22cfe7fb5873ba9bdda375f1bf522a5d58d2b Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Fri, 28 Jan 2022 23:05:56 -0500
 Subject: [PATCH 19/20] Remove terser and clean-css. Save some room, perhaps.
@@ -45,5 +45,5 @@ index c8b4e340..2012b797 100644
      "tiny-worker": "^2.3.0",
      "tinycon": "0.6.8",
 -- 
-2.39.0
+2.30.2
 

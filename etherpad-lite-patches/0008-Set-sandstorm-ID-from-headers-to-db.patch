@@ -1,12 +1,12 @@
-From ad71c3108c3df448745c1f7a6702ce1ed63419c3 Mon Sep 17 00:00:00 2001
+From 425324da5137048372855b538efcca585a5c0a2c Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 27 Oct 2021 20:53:20 -0400
 Subject: [PATCH 08/20] Set sandstorm ID from headers to db
 
 ---
  src/node/db/AuthorManager.js          | 15 +++++++++++++++
- src/node/handler/PadMessageHandler.js |  8 ++++++++
- 2 files changed, 23 insertions(+)
+ src/node/handler/PadMessageHandler.js | 11 +++++++++--
+ 2 files changed, 24 insertions(+), 2 deletions(-)
 
 diff --git a/src/node/db/AuthorManager.js b/src/node/db/AuthorManager.js
 index a146fe5f..497fc422 100644
@@ -35,24 +35,29 @@ index a146fe5f..497fc422 100644
   * Returns the avatar URL of the author.
   * @param {String} author The id of the author
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index d85779f2..436ee52f 100644
+index 534bb966..08789e80 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
-@@ -830,6 +830,14 @@ const handleClientReady = async (socket, message) => {
-   let {colorId: authorColorId, name: authorName} = message.userInfo || {};
+@@ -837,10 +837,17 @@ const handleClientReady = async (socket, message) => {
+     authorName && authorManager.setAuthorName(sessionInfo.author, authorName),
+     authorColorId && authorManager.setAuthorColorId(sessionInfo.author, authorColorId),
+   ]);
+-  let authorAvatarUrl
+-  ({colorId: authorColorId, name: authorName, avatarUrl: authorAvatarUrl} = await authorManager.getAuthor(sessionInfo.author));
++  let authorSandstormId, authorAvatarUrl
++  ({colorId: authorColorId, name: authorName, sandstormId: authorSandstormId, avatarUrl: authorAvatarUrl} = await authorManager.getAuthor(sessionInfo.author));
  
-   // SANDSTORM EDIT: Initialize the author name from the Sandstorm display name.
-+
-+  if (!value.sandstormId) {
+   // SANDSTORM EDIT: Initialize author data from Sandstorm headers
++  if (!authorSandstormId) {
 +    const sandstormId = socket.client.request.headers["x-sandstorm-user-id"];
 +    if (sandstormId) {
-+      authorManager.setAuthorSandstormId(author, sandstormId);
++      authorManager.setAuthorSandstormId(sessionInfo.author, sandstormId);
 +    }
 +  }
 +
    if (!authorName) {
      authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
-   }
+     authorManager.setAuthorName(sessionInfo.author, authorName);
 -- 
-2.39.0
+2.30.2
 
