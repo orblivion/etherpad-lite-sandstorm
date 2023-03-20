@@ -91,8 +91,7 @@ export NODE_ENV=production
 # at some point.
 npm install @mapbox/node-pre-gyp
 
-# sqlite is an optional dependency that must be installed seperately. For some
-# reason it is also missing this build dependency:
+# sqlite is an optional dependency that must be installed seperately.
 npm install sqlite3
 
 # For some reason this ended up missing at some point. Maybe the node module
