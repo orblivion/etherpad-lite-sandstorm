@@ -1,7 +1,7 @@
-From c1c5aadf15d592a1000eb1913d8c0714fabcb076 Mon Sep 17 00:00:00 2001
+From cd39cee9f673dbb64216f09c1d9357894ff9db51 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Wed, 5 Jan 2022 12:35:39 -0500
-Subject: [PATCH 14/21] Don't toggle sidebar authorship color
+Subject: [PATCH 13/20] Don't toggle sidebar authorship color
 
 Only toggle the underlining color. I'm avoiding a bug with authorship avatar, and this turns out not to be a regression. See comment in commit for details.
 ---
@@ -9,10 +9,10 @@ Only toggle the underlining color. I'm avoiding a bug with authorship avatar, an
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/src/static/js/pad_editor.js b/src/static/js/pad_editor.js
-index d8c3ae5a..c6c5ba66 100644
+index e39f73fe..0723dee5 100644
 --- a/src/static/js/pad_editor.js
 +++ b/src/static/js/pad_editor.js
-@@ -129,7 +129,14 @@ const padeditor = (() => {
+@@ -126,7 +126,14 @@ const padeditor = (() => {
        v = getOption('showAuthorColors', true);
        self.ace.setProperty('showsauthorcolors', v);
        $('#chattext').toggleClass('authorColors', v);
@@ -29,5 +29,5 @@ index d8c3ae5a..c6c5ba66 100644
  
        // Override from parameters if true
 -- 
-2.39.0
+2.30.2
 

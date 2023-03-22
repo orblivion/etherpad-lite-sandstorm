@@ -85,10 +85,18 @@ export NODE_ENV=production
 
 ./bin/installDeps.sh
 
-# sqlite is an optional dependency that must be installed seperately. For some
-# reason it is also missing this build dependency:
+# Do we want this anymore? Why did we even have it? It's already a dependency of etherpad.
+# The etherpad upgrade from 1.8.14 to 1.8.18 moves its dependency on @mapbox/node-pre-gyp
+# from 0.11 to 1.0. Maybe 0.11 was too old a version? Maybe it's fine now? Let's experiment
+# at some point.
 npm install @mapbox/node-pre-gyp
+
+# sqlite is an optional dependency that must be installed seperately.
 npm install sqlite3
+
+# For some reason this ended up missing at some point. Maybe the node module
+# situation will right itself and we could remove it.
+npm install async-stacktrace
 
 # Install basic plugins (from npm)
 npm install $(cat ../basic-plugins)

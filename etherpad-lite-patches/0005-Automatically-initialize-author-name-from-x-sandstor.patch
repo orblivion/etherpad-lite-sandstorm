@@ -1,36 +1,39 @@
-From 7a7d7b16a0b016c584f2918b954d87906dea79dd Mon Sep 17 00:00:00 2001
+From 98064500c410d49a8486e8c1b7170e0a9d3c73e9 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Tue, 26 Oct 2021 21:33:40 -0400
-Subject: [PATCH 05/21] Automatically initialize author name from
+Subject: [PATCH 05/20] Automatically initialize author name from
  x-sandstorm-username
 
 ---
- src/node/handler/PadMessageHandler.js | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ src/node/handler/PadMessageHandler.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/src/node/handler/PadMessageHandler.js b/src/node/handler/PadMessageHandler.js
-index a1194ea9..1d3361a5 100644
+index c048c2fd..4ada7dc1 100644
 --- a/src/node/handler/PadMessageHandler.js
 +++ b/src/node/handler/PadMessageHandler.js
-@@ -901,7 +901,17 @@ const handleClientReady = async (socket, message, authorID) => {
-   assert(authorID);
-   const value = await authorManager.getAuthor(authorID);
-   const authorColorId = value.colorId;
--  const authorName = value.name;
-+  let authorName = value.name;
+@@ -823,6 +823,7 @@ const handleClientReady = async (socket, message) => {
+   await hooks.aCallAll('clientReady', message); // Deprecated due to awkward context.
+ 
+   let {colorId: authorColorId, name: authorName} = message.userInfo || {};
 +
-+  const session = sessioninfos[socket.id];
-+  const author = session.author;
-+
-+  // SANDSTORM EDIT: Initialize the author name from the Sandstorm display name.
+   if (authorColorId && !/^#(?:[0-9A-F]{3}){1,2}$/i.test(authorColorId)) {
+     messageLogger.warn(`Ignoring invalid colorId in CLIENT_READY message: ${authorColorId}`);
+     authorColorId = null;
+@@ -833,6 +834,13 @@ const handleClientReady = async (socket, message) => {
+   ]);
+   ({colorId: authorColorId, name: authorName} = await authorManager.getAuthor(sessionInfo.author));
+ 
++  // SANDSTORM EDIT: Initialize author data from Sandstorm headers
 +  if (!authorName) {
 +    authorName = decodeURIComponent(socket.client.request.headers["x-sandstorm-username"]);
-+    authorManager.setAuthorName(author, authorName);
++    authorManager.setAuthorName(sessionInfo.author, authorName);
 +  }
 +  // END SANDSTORM EDIT
- 
++
    // load the pad-object from the database
-   const pad = await padManager.getPad(padIds.padId);
+   const pad = await padManager.getPad(sessionInfo.padId);
+ 
 -- 
-2.39.0
+2.30.2
 

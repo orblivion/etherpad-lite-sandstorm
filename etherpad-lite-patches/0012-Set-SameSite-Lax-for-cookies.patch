@@ -1,7 +1,7 @@
-From 505a0f1c905eaa089aa31789e0f70c0cbdecf9a7 Mon Sep 17 00:00:00 2001
+From 63fb990bb6ee833d722f38304ac0aa09540fa7a5 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Sat, 18 Dec 2021 21:38:44 -0500
-Subject: [PATCH 12/21] Set SameSite=Lax for cookies.
+Subject: [PATCH 12/20] Set SameSite=Lax for cookies.
 
 This seemed to be required on Chrome.
 ---
@@ -9,18 +9,18 @@ This seemed to be required on Chrome.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/static/js/pad_utils.js b/src/static/js/pad_utils.js
-index 48f0624e..0179680a 100644
+index 9bea959d..1fa7232a 100644
 --- a/src/static/js/pad_utils.js
 +++ b/src/static/js/pad_utils.js
-@@ -391,7 +391,7 @@ if (typeof window !== 'undefined') {
-   //
-   // `Strict` is not used because it has few security benefits but significant usability drawbacks
-   // vs. `Lax`. See https://stackoverflow.com/q/41841880 for discussion.
--  exports.Cookies.defaults.sameSite = inThirdPartyIframe() ? 'None' : 'Lax';
-+  exports.Cookies.defaults.sameSite = 'Lax';
-   exports.Cookies.defaults.secure = window.location.protocol === 'https:';
+@@ -411,7 +411,7 @@ if (typeof window !== 'undefined') {
+     //
+     // `Strict` is not used because it has few security benefits but significant usability drawbacks
+     // vs. `Lax`. See https://stackoverflow.com/q/41841880 for discussion.
+-    sameSite: inThirdPartyIframe() ? 'None' : 'Lax',
++    sameSite: 'Lax',
+     secure: window.location.protocol === 'https:',
+   });
  }
- exports.randomString = randomString;
 -- 
-2.39.0
+2.30.2
 

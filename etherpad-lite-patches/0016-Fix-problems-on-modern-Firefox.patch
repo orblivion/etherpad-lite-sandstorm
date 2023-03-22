@@ -1,15 +1,15 @@
-From 40accd5d10da887200c7a210c8722e9170f29828 Mon Sep 17 00:00:00 2001
+From 047e5c5427da21b3fd280dd5b96446b3d7ceba82 Mon Sep 17 00:00:00 2001
 From: Daniel Krol <orblivion@gmail.com>
 Date: Thu, 20 Jan 2022 12:44:20 -0500
-Subject: [PATCH 17/21] Fix problems on modern Firefox
+Subject: [PATCH 16/20] Fix problems on modern Firefox
 
 I don't understand what the problem is, so I am selectively undoing the commit that introduced the issue.
 ---
- src/static/js/ace.js | 71 ++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 68 insertions(+), 3 deletions(-)
+ src/static/js/ace.js | 67 ++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 64 insertions(+), 3 deletions(-)
 
 diff --git a/src/static/js/ace.js b/src/static/js/ace.js
-index 3471f442..f4965e0d 100644
+index b0a04257..3be9c45a 100644
 --- a/src/static/js/ace.js
 +++ b/src/static/js/ace.js
 @@ -24,6 +24,25 @@
@@ -82,21 +82,19 @@ index 3471f442..f4965e0d 100644
    } finally {
      for (const cleanup of cleanups) cleanup();
    }
-@@ -198,7 +239,12 @@ const Ace2Editor = function () {
-     //   - Chrome never fires any events on the frame or document. Eventually the document's
-     //     readyState becomes 'complete' even though it never fires a readystatechange event.
+@@ -193,7 +234,10 @@ const Ace2Editor = function () {
      //   - Safari behaves like Chrome.
--    outerFrame.srcdoc = '<!DOCTYPE html>';
-+
-+     // SANDSTORM: see require('browser') above
+     // srcdoc is avoided because Firefox's Content Security Policy engine does not properly handle
+     // 'self' with nested srcdoc iframes: https://bugzilla.mozilla.org/show_bug.cgi?id=1721296
+-    outerFrame.src = '../static/empty.html';
++    // SANDSTORM: see require('browser') above
 +    if (!browser.firefox) {
-+      outerFrame.srcdoc = '<!DOCTYPE html>';
++      outerFrame.src = '../static/empty.html';
 +    }
-+
      info.frame = outerFrame;
      document.getElementById(containerId).appendChild(outerFrame);
      const outerWindow = outerFrame.contentWindow;
-@@ -212,6 +258,13 @@ const Ace2Editor = function () {
+@@ -207,6 +251,13 @@ const Ace2Editor = function () {
      const outerDocument = outerWindow.document;
  
      // <html> tag
@@ -110,21 +108,19 @@ index 3471f442..f4965e0d 100644
      outerDocument.documentElement.classList.add('outer-editor', 'outerdoc', ...skinVariants);
  
      // <head> tag
-@@ -241,7 +294,12 @@ const Ace2Editor = function () {
+@@ -240,7 +291,10 @@ const Ace2Editor = function () {
      innerFrame.allowTransparency = true; // for IE
      // The iframe MUST have a src or srcdoc property to avoid browser quirks. See the comment above
      // outerFrame.srcdoc.
--    innerFrame.srcdoc = '<!DOCTYPE html>';
-+
+-    innerFrame.src = 'empty.html';
 +    // SANDSTORM: see require('browser') above
 +    if (!browser.firefox) {
-+      innerFrame.srcdoc = '<!DOCTYPE html>';
++      innerFrame.src = 'empty.html';
 +    }
-+
-     innerFrame.ace_outerWin = outerWindow;
      outerDocument.body.insertBefore(innerFrame, outerDocument.body.firstChild);
      const innerWindow = innerFrame.contentWindow;
-@@ -255,6 +313,13 @@ const Ace2Editor = function () {
+ 
+@@ -253,6 +307,13 @@ const Ace2Editor = function () {
      const innerDocument = innerWindow.document;
  
      // <html> tag
@@ -139,5 +135,5 @@ index 3471f442..f4965e0d 100644
  
      // <head> tag
 -- 
-2.39.0
+2.30.2
 
