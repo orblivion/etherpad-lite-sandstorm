@@ -1,5 +1,9 @@
 # Sandstorm
 
+## 2023-11-16
+
+ * Added `ep_prefer_color_scheme` to implement automatic dark mode based on user preference set by the browser.
+
 ## 2022-03-19
 
  * Upgraded Etherpad to a much newer version. See here: https://github.com/sandstormports/etherpad-lite-sandstorm

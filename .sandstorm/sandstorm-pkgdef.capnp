@@ -19,9 +19,9 @@ const pkgdef :Spk.PackageDefinition = (
 
     appTitle = (defaultText = "Etherpad"),
 
-    appVersion = 28,  # Increment this for every release.
+    appVersion = 29,  # Increment this for every release.
 
-    appMarketingVersion = (defaultText = "1.8.18"),
+    appMarketingVersion = (defaultText = "1.8.18-1"),
     # Human-readable representation of appVersion. Should match the way you
     # identify versions of your app in documentation and marketing.
 
@@ -50,7 +50,7 @@ const pkgdef :Spk.PackageDefinition = (
       ),
 
       website = "https://etherpad.org/",
-      codeUrl = "https://github.com/sandstormports/etherpad-lite-sandstorm",
+      codeUrl = "https://github.com/sandstorm-org/etherpad-lite-sandstorm",
       license = (openSource = apache2),
       categories = [office, productivity],
 
