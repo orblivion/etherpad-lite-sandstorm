@@ -4,6 +4,7 @@ ep_font_family
 ep_font_size
 ep_headings2
 ep_image_upload
+ep_prefer_color_scheme
 ep_print
 ep_spellcheck
 ep_sticky_attributes
